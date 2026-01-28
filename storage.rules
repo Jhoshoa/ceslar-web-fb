@@ -1,0 +1,159 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ==========================================
+    // HELPER FUNCTIONS
+    // ==========================================
+
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if user is system admin
+    function isSystemAdmin() {
+      return isAuthenticated() &&
+        request.auth.token.systemRole == 'system_admin';
+    }
+
+    // Check if file is an image
+    function isImageFile() {
+      return request.resource.contentType.matches('image/.*');
+    }
+
+    // Check if file is a document (PDF, DOC, etc.)
+    function isDocumentFile() {
+      return request.resource.contentType.matches('application/pdf') ||
+        request.resource.contentType.matches('application/msword') ||
+        request.resource.contentType.matches('application/vnd.openxmlformats-officedocument.*');
+    }
+
+    // Check if file is audio
+    function isAudioFile() {
+      return request.resource.contentType.matches('audio/.*');
+    }
+
+    // Check if file is video
+    function isVideoFile() {
+      return request.resource.contentType.matches('video/.*');
+    }
+
+    // Validate file size (in bytes)
+    function isFileSizeValid(maxSizeMB) {
+      return request.resource.size < maxSizeMB * 1024 * 1024;
+    }
+
+    // ==========================================
+    // USER AVATARS
+    // ==========================================
+    match /users/{userId}/avatar/{fileName} {
+      // Anyone can view user avatars
+      allow read: if true;
+
+      // Users can upload their own avatar (images only, max 5MB)
+      allow write: if isAuthenticated() &&
+        request.auth.uid == userId &&
+        isImageFile() &&
+        isFileSizeValid(5);
+
+      // Users can delete their own avatar
+      allow delete: if isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // ==========================================
+    // CHURCH ASSETS
+    // ==========================================
+    match /churches/{churchId}/{assetType}/{fileName} {
+      // Anyone can read church assets (public)
+      allow read: if true;
+
+      // Only authenticated users with church admin role can write
+      // Note: Full validation happens in Cloud Functions
+      allow write: if isAuthenticated() &&
+        (isSystemAdmin() || request.auth.token.churchRoles[churchId] in ['admin', 'pastor']) &&
+        isImageFile() &&
+        isFileSizeValid(10);
+
+      allow delete: if isAuthenticated() &&
+        (isSystemAdmin() || request.auth.token.churchRoles[churchId] in ['admin', 'pastor']);
+    }
+
+    // ==========================================
+    // SERMON MEDIA
+    // ==========================================
+    match /sermons/{sermonId}/{fileName} {
+      // Anyone can read sermon media
+      allow read: if true;
+
+      // Only authenticated users can upload sermon content
+      // Size limit: 100MB for video, 50MB for audio, 10MB for images
+      allow write: if isAuthenticated() &&
+        ((isAudioFile() && isFileSizeValid(50)) ||
+         (isVideoFile() && isFileSizeValid(100)) ||
+         (isImageFile() && isFileSizeValid(10)));
+
+      allow delete: if isAuthenticated();
+    }
+
+    // ==========================================
+    // EVENT IMAGES
+    // ==========================================
+    match /events/{eventId}/{fileName} {
+      // Anyone can read event images
+      allow read: if true;
+
+      // Authenticated users can upload event images (max 10MB)
+      allow write: if isAuthenticated() &&
+        isImageFile() &&
+        isFileSizeValid(10);
+
+      allow delete: if isAuthenticated();
+    }
+
+    // ==========================================
+    // MINISTRY IMAGES
+    // ==========================================
+    match /ministries/{ministryId}/{fileName} {
+      // Anyone can read ministry images
+      allow read: if true;
+
+      // Authenticated users can upload ministry images (max 10MB)
+      allow write: if isAuthenticated() &&
+        isImageFile() &&
+        isFileSizeValid(10);
+
+      allow delete: if isAuthenticated();
+    }
+
+    // ==========================================
+    // GENERAL UPLOADS (Temporary/Processing)
+    // ==========================================
+    match /uploads/{userId}/{allPaths=**} {
+      // Users can read their own uploads
+      allow read: if isAuthenticated() && request.auth.uid == userId;
+
+      // Users can upload to their own folder
+      allow write: if isAuthenticated() &&
+        request.auth.uid == userId &&
+        isFileSizeValid(50);
+
+      allow delete: if isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // ==========================================
+    // DOCUMENTS (For resources, bulletins, etc.)
+    // ==========================================
+    match /documents/{documentType}/{fileName} {
+      // Anyone can read documents (public resources)
+      allow read: if true;
+
+      // Only admins can upload documents
+      allow write: if isSystemAdmin() &&
+        (isDocumentFile() || isImageFile()) &&
+        isFileSizeValid(25);
+
+      allow delete: if isSystemAdmin();
+    }
+  }
+}

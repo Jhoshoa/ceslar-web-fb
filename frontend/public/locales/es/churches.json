@@ -1,0 +1,53 @@
+{
+  "title": "Iglesias",
+  "subtitle": "Encuentra una iglesia cerca de ti",
+  "searchPlaceholder": "Buscar iglesias...",
+  "filters": {
+    "country": "País",
+    "level": "Nivel",
+    "all": "Todos"
+  },
+  "levels": {
+    "headquarters": "Sede Central",
+    "country": "Nacional",
+    "department": "Departamental",
+    "province": "Provincial",
+    "local": "Local"
+  },
+  "card": {
+    "members": "{{count}} miembros",
+    "services": "Servicios",
+    "viewDetails": "Ver detalles",
+    "joinChurch": "Unirse"
+  },
+  "detail": {
+    "about": "Acerca de",
+    "location": "Ubicación",
+    "contact": "Contacto",
+    "leadership": "Liderazgo",
+    "schedule": "Horarios de Culto",
+    "events": "Eventos",
+    "sermons": "Sermones",
+    "ministries": "Ministerios",
+    "joinChurch": "Unirse a esta iglesia",
+    "alreadyMember": "Ya eres miembro",
+    "pendingRequest": "Solicitud pendiente"
+  },
+  "join": {
+    "title": "Solicitar membresía",
+    "message": "¿Deseas enviar una solicitud de membresía a {{churchName}}?",
+    "success": "Solicitud enviada exitosamente",
+    "error": "Error al enviar solicitud"
+  },
+  "schedule": {
+    "sunday": "Domingo",
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado"
+  },
+  "noChurches": "No se encontraron iglesias",
+  "featured": "Iglesias destacadas"
+}

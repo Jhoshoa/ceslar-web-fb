@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # Firebase Emulators
+  firebase-emulators:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.emulators
+    container_name: ceslar-firebase-emulators
+    ports:
+      - "4000:4000"   # Emulator UI
+      - "5001:5001"   # Functions
+      - "8080:8080"   # Firestore
+      - "9099:9099"   # Auth
+      - "9199:9199"   # Storage
+      - "8085:8085"   # Pub/Sub
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/functions/node_modules
+      - ./emulator-data:/app/emulator-data
+    environment:
+      - FIREBASE_TOKEN=${FIREBASE_TOKEN:-}
+      - GCLOUD_PROJECT=ceslar-church-platform
+    working_dir: /app
+    command: >
+      firebase emulators:start
+      --import=/app/emulator-data
+      --export-on-exit=/app/emulator-data
+    networks:
+      - ceslar-network
+
+  # Frontend Development Server
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend.dev
+    container_name: ceslar-frontend-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5001/ceslar-church-platform/southamerica-east1/api
+      - VITE_FIREBASE_PROJECT_ID=ceslar-church-platform
+      - VITE_USE_EMULATORS=true
+    working_dir: /app
+    command: npm run dev -- --host 0.0.0.0
+    depends_on:
+      - firebase-emulators
+    networks:
+      - ceslar-network
+
+networks:
+  ceslar-network:
+    driver: bridge
+
+volumes:
+  emulator-data:

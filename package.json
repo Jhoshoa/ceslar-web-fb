@@ -1,0 +1,32 @@
+{
+  "name": "ceslar-web-firebase",
+  "version": "1.0.0",
+  "description": "Cristo Es La Respuesta - Firebase Platform",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "functions"
+  ],
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../functions && npm install",
+    "dev": "concurrently \"npm run emulators\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "emulators": "firebase emulators:start --import=./emulator-data --export-on-exit=./emulator-data",
+    "emulators:ui": "firebase emulators:start --import=./emulator-data --export-on-exit=./emulator-data",
+    "build": "cd frontend && npm run build",
+    "deploy": "firebase deploy",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:rules": "firebase deploy --only firestore:rules,storage",
+    "lint": "cd frontend && npm run lint && cd ../functions && npm run lint",
+    "seed": "cd functions && npm run seed",
+    "seed:force": "cd functions && npm run seed:force",
+    "seed:clear": "cd functions && npm run seed:clear",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

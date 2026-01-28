@@ -1,0 +1,53 @@
+{
+  "title": "Churches",
+  "subtitle": "Find a church near you",
+  "searchPlaceholder": "Search churches...",
+  "filters": {
+    "country": "Country",
+    "level": "Level",
+    "all": "All"
+  },
+  "levels": {
+    "headquarters": "Headquarters",
+    "country": "National",
+    "department": "Department",
+    "province": "Provincial",
+    "local": "Local"
+  },
+  "card": {
+    "members": "{{count}} members",
+    "services": "Services",
+    "viewDetails": "View details",
+    "joinChurch": "Join"
+  },
+  "detail": {
+    "about": "About",
+    "location": "Location",
+    "contact": "Contact",
+    "leadership": "Leadership",
+    "schedule": "Service Schedule",
+    "events": "Events",
+    "sermons": "Sermons",
+    "ministries": "Ministries",
+    "joinChurch": "Join this church",
+    "alreadyMember": "You're already a member",
+    "pendingRequest": "Request pending"
+  },
+  "join": {
+    "title": "Request membership",
+    "message": "Do you want to send a membership request to {{churchName}}?",
+    "success": "Request sent successfully",
+    "error": "Error sending request"
+  },
+  "schedule": {
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday"
+  },
+  "noChurches": "No churches found",
+  "featured": "Featured churches"
+}

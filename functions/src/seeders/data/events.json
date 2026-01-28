@@ -1,0 +1,184 @@
+[
+  {
+    "title": {
+      "es": "Conferencia Nacional de Pastores 2026",
+      "en": "National Pastors Conference 2026",
+      "pt": "Conferencia Nacional de Pastores 2026"
+    },
+    "slug": "conferencia-nacional-pastores-2026",
+    "description": {
+      "es": "Conferencia anual para pastores y lideres de todas las iglesias Cristo Es La Respuesta. Tres dias de capacitacion, adoracion y comunion.",
+      "en": "Annual conference for pastors and leaders of all Cristo Es La Respuesta churches. Three days of training, worship, and fellowship.",
+      "pt": "Conferencia anual para pastores e lideres de todas as igrejas Cristo E a Resposta. Tres dias de capacitacao, adoracao e comunhao."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "churchSlug": "sede-internacional",
+    "type": "conference",
+    "status": "published",
+    "startDate": "2026-03-15T09:00:00-04:00",
+    "endDate": "2026-03-17T18:00:00-04:00",
+    "timezone": "America/La_Paz",
+    "location": {
+      "name": "Auditorio Central",
+      "address": "Av. 6 de Agosto #1234, La Paz",
+      "coordinates": { "latitude": -16.4897, "longitude": -68.1193 },
+      "isOnline": false
+    },
+    "registration": {
+      "required": true,
+      "maxAttendees": 500,
+      "currentAttendees": 0,
+      "deadline": "2026-03-10T23:59:59-04:00",
+      "fee": { "amount": 50, "currency": "BOB" }
+    },
+    "coverImage": null,
+    "isFeatured": true,
+    "isPublic": true
+  },
+  {
+    "title": {
+      "es": "Culto Especial de Semana Santa",
+      "en": "Special Easter Service",
+      "pt": "Culto Especial de Semana Santa"
+    },
+    "slug": "culto-semana-santa-2026",
+    "description": {
+      "es": "Celebremos juntos la resurreccion de nuestro Senor Jesucristo con un culto especial lleno de alabanza y adoracion.",
+      "en": "Let's celebrate together the resurrection of our Lord Jesus Christ with a special service full of praise and worship.",
+      "pt": "Vamos celebrar juntos a ressurreicao do nosso Senhor Jesus Cristo com um culto especial cheio de louvor e adoracao."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "churchSlug": "sede-internacional",
+    "type": "special_event",
+    "status": "published",
+    "startDate": "2026-04-05T09:00:00-04:00",
+    "endDate": "2026-04-05T13:00:00-04:00",
+    "timezone": "America/La_Paz",
+    "location": {
+      "name": "Templo Principal",
+      "address": "Av. 6 de Agosto #1234, La Paz",
+      "coordinates": { "latitude": -16.4897, "longitude": -68.1193 },
+      "isOnline": true,
+      "onlineUrl": "https://youtube.com/@ceslar/live"
+    },
+    "registration": {
+      "required": false,
+      "maxAttendees": null,
+      "currentAttendees": 0
+    },
+    "coverImage": null,
+    "isFeatured": true,
+    "isPublic": true
+  },
+  {
+    "title": {
+      "es": "Campamento de Jovenes 2026",
+      "en": "Youth Camp 2026",
+      "pt": "Acampamento de Jovens 2026"
+    },
+    "slug": "campamento-jovenes-2026",
+    "description": {
+      "es": "Un fin de semana de aventura, compañerismo y crecimiento espiritual para jovenes de 15 a 25 anos.",
+      "en": "A weekend of adventure, fellowship, and spiritual growth for youth ages 15-25.",
+      "pt": "Um fim de semana de aventura, companheirismo e crescimento espiritual para jovens de 15 a 25 anos."
+    },
+    "churchId": "sopocachi-local",
+    "churchName": "Cristo Es La Respuesta - Sopocachi",
+    "churchSlug": "sopocachi",
+    "type": "camp",
+    "status": "published",
+    "startDate": "2026-06-20T08:00:00-04:00",
+    "endDate": "2026-06-22T17:00:00-04:00",
+    "timezone": "America/La_Paz",
+    "location": {
+      "name": "Campamento El Refugio",
+      "address": "Km 45 Carretera a los Yungas",
+      "coordinates": { "latitude": -16.35, "longitude": -68.05 },
+      "isOnline": false
+    },
+    "registration": {
+      "required": true,
+      "maxAttendees": 80,
+      "currentAttendees": 0,
+      "deadline": "2026-06-15T23:59:59-04:00",
+      "fee": { "amount": 150, "currency": "BOB" }
+    },
+    "coverImage": null,
+    "isFeatured": false,
+    "isPublic": true
+  },
+  {
+    "title": {
+      "es": "Taller de Liderazgo Cristiano",
+      "en": "Christian Leadership Workshop",
+      "pt": "Oficina de Lideranca Crista"
+    },
+    "slug": "taller-liderazgo-2026",
+    "description": {
+      "es": "Taller practico de liderazgo para lideres de celulas y ministerios. Aprende principios biblicos para liderar con excelencia.",
+      "en": "Practical leadership workshop for cell and ministry leaders. Learn biblical principles for leading with excellence.",
+      "pt": "Oficina pratica de lideranca para lideres de celulas e ministerios. Aprenda principios biblicos para liderar com excelencia."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "churchSlug": "sede-internacional",
+    "type": "workshop",
+    "status": "published",
+    "startDate": "2026-02-22T14:00:00-04:00",
+    "endDate": "2026-02-22T18:00:00-04:00",
+    "timezone": "America/La_Paz",
+    "location": {
+      "name": "Salon de Conferencias",
+      "address": "Av. 6 de Agosto #1234, La Paz",
+      "coordinates": { "latitude": -16.4897, "longitude": -68.1193 },
+      "isOnline": true,
+      "onlineUrl": "https://zoom.us/meeting/ceslar-liderazgo"
+    },
+    "registration": {
+      "required": true,
+      "maxAttendees": 50,
+      "currentAttendees": 0,
+      "deadline": "2026-02-20T23:59:59-04:00"
+    },
+    "coverImage": null,
+    "isFeatured": false,
+    "isPublic": true
+  },
+  {
+    "title": {
+      "es": "Noche de Alabanza y Adoracion",
+      "en": "Praise and Worship Night",
+      "pt": "Noite de Louvor e Adoracao"
+    },
+    "slug": "noche-alabanza-febrero-2026",
+    "description": {
+      "es": "Una noche dedicada a la presencia de Dios a traves de la musica y la adoracion. Ven y experimenta la gloria de Dios.",
+      "en": "An evening dedicated to God's presence through music and worship. Come and experience the glory of God.",
+      "pt": "Uma noite dedicada a presenca de Deus atraves da musica e adoracao. Venha e experimente a gloria de Deus."
+    },
+    "churchId": "cochabamba-department",
+    "churchName": "Cristo Es La Respuesta - Cochabamba",
+    "churchSlug": "cochabamba",
+    "type": "special_event",
+    "status": "published",
+    "startDate": "2026-02-28T19:00:00-04:00",
+    "endDate": "2026-02-28T22:00:00-04:00",
+    "timezone": "America/La_Paz",
+    "location": {
+      "name": "Templo Cochabamba",
+      "address": "Av. America #1234, Cochabamba",
+      "coordinates": { "latitude": -17.3895, "longitude": -66.1568 },
+      "isOnline": false
+    },
+    "registration": {
+      "required": false,
+      "maxAttendees": null,
+      "currentAttendees": 0
+    },
+    "coverImage": null,
+    "isFeatured": true,
+    "isPublic": true
+  }
+]

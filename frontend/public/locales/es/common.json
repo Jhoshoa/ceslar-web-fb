@@ -1,0 +1,151 @@
+{
+  "app": {
+    "name": "Cristo Es La Respuesta",
+    "tagline": "Una red de iglesias unidas por la fe"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Nosotros",
+    "doctrine": "Doctrina",
+    "churches": "Iglesias",
+    "events": "Eventos",
+    "sermons": "Sermones",
+    "ministries": "Ministerios",
+    "contact": "Contacto",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar Sesión",
+    "profile": "Mi Perfil",
+    "myChurches": "Mis Iglesias",
+    "settings": "Configuración",
+    "admin": "Administración"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "update": "Actualizar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "viewAll": "Ver todo",
+    "viewMore": "Ver más",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "close": "Cerrar",
+    "noResults": "No se encontraron resultados",
+    "required": "Requerido",
+    "optional": "Opcional",
+    "all": "Todos",
+    "none": "Ninguno",
+    "select": "Seleccionar",
+    "language": "Idioma"
+  },
+  "home": {
+    "hero": {
+      "title": "Cristo Es La Respuesta",
+      "subtitle": "Una red de iglesias unidas por la fe en toda Sudamérica",
+      "description": "Somos una comunidad de fe dedicada a compartir el amor de Cristo y transformar vidas a través de la palabra de Dios.",
+      "cta": "Encuentra una Iglesia",
+      "secondary": "Ver Sermones"
+    },
+    "about": {
+      "title": "Nuestra Misión",
+      "subtitle": "Guiados por el amor de Dios, nos dedicamos a servir y transformar vidas",
+      "faith": {
+        "title": "Fe Viva",
+        "description": "Cultivamos una fe activa que transforma vidas y comunidades"
+      },
+      "word": {
+        "title": "La Palabra",
+        "description": "Enseñamos las escrituras como fundamento de vida"
+      },
+      "community": {
+        "title": "Comunidad",
+        "description": "Formamos una familia unida en Cristo"
+      },
+      "service": {
+        "title": "Servicio",
+        "description": "Servimos a nuestra comunidad con amor y dedicación"
+      }
+    },
+    "churches": {
+      "title": "Nuestras Iglesias",
+      "subtitle": "Encuentra una iglesia cerca de ti y únete a nuestra familia"
+    },
+    "events": {
+      "title": "Próximos Eventos",
+      "subtitle": "No te pierdas nuestras actividades y reuniones especiales"
+    },
+    "sermons": {
+      "title": "Últimos Sermones",
+      "subtitle": "Escucha la palabra de Dios y alimenta tu espíritu"
+    },
+    "ministries": {
+      "title": "Nuestros Ministerios",
+      "subtitle": "Descubre cómo puedes servir y crecer en nuestra comunidad"
+    },
+    "cta": {
+      "title": "¿Listo para dar el siguiente paso?",
+      "subtitle": "Únete a nuestra familia y descubre el propósito que Dios tiene para tu vida",
+      "register": "Regístrate Ahora",
+      "contact": "Contáctanos"
+    },
+    "social": {
+      "title": "Síguenos en las redes"
+    },
+    "stats": {
+      "churches": "Iglesias",
+      "members": "Miembros",
+      "countries": "Países"
+    }
+  },
+  "footer": {
+    "description": "Cristo Es La Respuesta - Una red de iglesias unidas por la fe, comprometidas con llevar el evangelio y el amor de Cristo a toda Sudamérica.",
+    "quickLinks": "Enlaces",
+    "resources": "Recursos",
+    "contact": "Contacto",
+    "followUs": "Síguenos",
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "madeWith": "Hecho con",
+    "forChurch": "para la iglesia"
+  },
+  "validation": {
+    "required": "Este campo es requerido",
+    "email": "Ingresa un email válido",
+    "minLength": "Mínimo {{min}} caracteres",
+    "maxLength": "Máximo {{max}} caracteres",
+    "passwordMatch": "Las contraseñas no coinciden",
+    "invalidFormat": "Formato inválido"
+  },
+  "notifications": {
+    "success": "Operación exitosa",
+    "error": "Ha ocurrido un error",
+    "saved": "Guardado exitosamente",
+    "deleted": "Eliminado exitosamente",
+    "updated": "Actualizado exitosamente"
+  },
+  "table": {
+    "actions": "Acciones",
+    "noData": "No hay datos disponibles",
+    "rowsPerPage": "Filas por página",
+    "of": "de"
+  },
+  "dialog": {
+    "confirmDelete": "¿Estás seguro de que deseas eliminar?",
+    "confirmAction": "¿Estás seguro de que deseas continuar?",
+    "unsavedChanges": "Tienes cambios sin guardar. ¿Deseas continuar?"
+  }
+}

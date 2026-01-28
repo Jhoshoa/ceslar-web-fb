@@ -1,0 +1,240 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ==========================================
+    // HELPER FUNCTIONS
+    // ==========================================
+
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if user owns the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Check if user is a system administrator
+    function isSystemAdmin() {
+      return isAuthenticated() &&
+        request.auth.token.systemRole == 'system_admin';
+    }
+
+    // Get user's role for a specific church
+    function getChurchRole(churchId) {
+      return isAuthenticated() ?
+        request.auth.token.churchRoles[churchId] : null;
+    }
+
+    // Check if user has one of the specified roles for a church
+    function hasChurchRole(churchId, roles) {
+      return isAuthenticated() &&
+        getChurchRole(churchId) in roles;
+    }
+
+    // Check if user is admin or pastor for a church
+    function isChurchAdmin(churchId) {
+      let role = getChurchRole(churchId);
+      return isSystemAdmin() || role == 'admin' || role == 'pastor';
+    }
+
+    // Check if user is a member of a church (any role)
+    function isChurchMember(churchId) {
+      return getChurchRole(churchId) != null;
+    }
+
+    // Check if user is church leadership (admin, pastor, leader, staff)
+    function isChurchLeadership(churchId) {
+      let role = getChurchRole(churchId);
+      return isSystemAdmin() || role in ['admin', 'pastor', 'leader', 'staff'];
+    }
+
+    // Validate that required fields exist
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    // ==========================================
+    // USERS COLLECTION
+    // ==========================================
+    match /users/{userId} {
+      // Users can read their own profile, admins can read any
+      allow read: if isOwner(userId) || isSystemAdmin();
+
+      // Users can create their own profile
+      allow create: if isOwner(userId);
+
+      // Users can update their own profile, admins can update any
+      allow update: if isOwner(userId) || isSystemAdmin();
+
+      // Only system admins can delete users
+      allow delete: if isSystemAdmin();
+    }
+
+    // ==========================================
+    // CHURCHES COLLECTION
+    // ==========================================
+    match /churches/{churchId} {
+      // Anyone can read church information (public)
+      allow read: if true;
+
+      // Only system admins can create churches
+      allow create: if isSystemAdmin();
+
+      // Church admins and system admins can update
+      allow update: if isChurchAdmin(churchId);
+
+      // Only system admins can delete churches
+      allow delete: if isSystemAdmin();
+
+      // Leadership subcollection
+      match /leadership/{leaderId} {
+        // Anyone can read leadership info (public)
+        allow read: if true;
+
+        // Only church admins can manage leadership
+        allow write: if isChurchAdmin(churchId);
+      }
+
+      // Members subcollection
+      match /members/{memberId} {
+        // Church members can read member list, admins can read any
+        allow read: if isChurchMember(churchId) || isSystemAdmin();
+
+        // Authenticated users can request membership (create their own)
+        allow create: if isAuthenticated() && request.auth.uid == memberId;
+
+        // Members can update their own, church admins can update any
+        allow update: if isOwner(memberId) || isChurchAdmin(churchId);
+
+        // Only church admins can delete members
+        allow delete: if isChurchAdmin(churchId);
+      }
+    }
+
+    // ==========================================
+    // EVENTS COLLECTION
+    // ==========================================
+    match /events/{eventId} {
+      // Public events can be read by anyone, private events by members
+      allow read: if resource.data.isPublic == true ||
+        isChurchMember(resource.data.churchId) ||
+        isSystemAdmin();
+
+      // Authenticated users can create events
+      allow create: if isAuthenticated();
+
+      // Church admins and event creators can update
+      allow update: if isChurchAdmin(resource.data.churchId) ||
+        (isAuthenticated() && resource.data.createdBy == request.auth.uid);
+
+      // Only church admins can delete
+      allow delete: if isChurchAdmin(resource.data.churchId);
+
+      // Registrations subcollection
+      match /registrations/{userId} {
+        // Users can read their own registration, church admins can read all
+        allow read: if isOwner(userId) ||
+          isChurchAdmin(get(/databases/$(database)/documents/events/$(eventId)).data.churchId);
+
+        // Users can create their own registration
+        allow create: if isOwner(userId);
+
+        // Users can update their own, church admins can update any
+        allow update: if isOwner(userId) ||
+          isChurchAdmin(get(/databases/$(database)/documents/events/$(eventId)).data.churchId);
+
+        // Users can cancel their own registration
+        allow delete: if isOwner(userId);
+      }
+    }
+
+    // ==========================================
+    // SERMONS COLLECTION
+    // ==========================================
+    match /sermons/{sermonId} {
+      // Published sermons are public, unpublished only for church admins
+      allow read: if resource.data.isPublished == true ||
+        isChurchAdmin(resource.data.churchId);
+
+      // Authenticated users can create sermons
+      allow create: if isAuthenticated();
+
+      // Church admins and sermon creators can update
+      allow update: if isChurchAdmin(resource.data.churchId) ||
+        (isAuthenticated() && resource.data.createdBy == request.auth.uid);
+
+      // Only church admins can delete
+      allow delete: if isChurchAdmin(resource.data.churchId);
+    }
+
+    // ==========================================
+    // MINISTRIES COLLECTION
+    // ==========================================
+    match /ministries/{ministryId} {
+      // Anyone can read ministries (public)
+      allow read: if true;
+
+      // Only church admins can manage ministries
+      allow create: if isAuthenticated() && isChurchAdmin(request.resource.data.churchId);
+      allow update: if isChurchAdmin(resource.data.churchId);
+      allow delete: if isChurchAdmin(resource.data.churchId);
+    }
+
+    // ==========================================
+    // QUESTIONS COLLECTION (Admin only write)
+    // ==========================================
+    match /questions/{questionId} {
+      // Anyone can read questions (for registration forms)
+      allow read: if true;
+
+      // Only system admins can manage questions
+      allow write: if isSystemAdmin();
+    }
+
+    // ==========================================
+    // QUESTION CATEGORIES COLLECTION
+    // ==========================================
+    match /questionCategories/{categoryId} {
+      // Anyone can read categories
+      allow read: if true;
+
+      // Only system admins can manage categories
+      allow write: if isSystemAdmin();
+    }
+
+    // ==========================================
+    // PRAYER REQUESTS COLLECTION
+    // ==========================================
+    match /prayerRequests/{requestId} {
+      // Public requests visible to all, church-only to members
+      allow read: if resource.data.visibility == 'public' ||
+        (resource.data.visibility == 'church_members' && isChurchMember(resource.data.churchId)) ||
+        (resource.data.visibility == 'leaders_only' && isChurchLeadership(resource.data.churchId)) ||
+        isSystemAdmin();
+
+      // Anyone can create prayer requests (including anonymous)
+      allow create: if true;
+
+      // Only the submitter or church admins can update
+      allow update: if (isAuthenticated() && resource.data.submittedBy == request.auth.uid) ||
+        isChurchAdmin(resource.data.churchId);
+
+      // Only system admins can delete
+      allow delete: if isSystemAdmin();
+    }
+
+    // ==========================================
+    // COUNTERS COLLECTION (Read-only for clients)
+    // ==========================================
+    match /counters/{counterId} {
+      // Anyone can read counters
+      allow read: if true;
+
+      // Only Cloud Functions can write (no client writes)
+      allow write: if false;
+    }
+  }
+}

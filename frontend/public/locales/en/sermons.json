@@ -1,0 +1,44 @@
+{
+  "title": "Sermons",
+  "subtitle": "Listen to the word of God",
+  "searchPlaceholder": "Search sermons...",
+  "filters": {
+    "category": "Category",
+    "speaker": "Speaker",
+    "church": "Church",
+    "all": "All"
+  },
+  "categories": {
+    "faith": "Faith",
+    "family": "Family",
+    "prayer": "Prayer",
+    "salvation": "Salvation",
+    "worship": "Worship",
+    "evangelism": "Evangelism",
+    "discipleship": "Discipleship",
+    "leadership": "Leadership",
+    "other": "Other"
+  },
+  "card": {
+    "duration": "{{minutes}} min",
+    "views": "{{count}} views",
+    "watch": "Watch",
+    "listen": "Listen",
+    "download": "Download"
+  },
+  "detail": {
+    "about": "Description",
+    "speaker": "Speaker",
+    "date": "Date",
+    "duration": "Duration",
+    "scripture": "Scripture",
+    "notes": "Notes",
+    "resources": "Resources",
+    "share": "Share",
+    "related": "Related sermons"
+  },
+  "noSermons": "No sermons available",
+  "latest": "Latest sermons",
+  "featured": "Featured sermons",
+  "popular": "Most viewed"
+}

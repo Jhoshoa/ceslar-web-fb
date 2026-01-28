@@ -1,0 +1,176 @@
+[
+  {
+    "name": {
+      "es": "Ministerio de Jovenes",
+      "en": "Youth Ministry",
+      "pt": "Ministerio de Jovens"
+    },
+    "slug": "jovenes",
+    "description": {
+      "es": "Ministerio dedicado a guiar a los jovenes en su caminar con Cristo a traves de actividades, estudios biblicos y compañerismo.",
+      "en": "Ministry dedicated to guiding young people in their walk with Christ through activities, Bible studies, and fellowship.",
+      "pt": "Ministerio dedicado a guiar os jovens em sua caminhada com Cristo atraves de atividades, estudos biblicos e companheirismo."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "type": "youth",
+    "scope": "local",
+    "leaderName": "Carlos Mamani",
+    "coLeaders": [],
+    "meetingSchedule": {
+      "day": "saturday",
+      "time": "16:00",
+      "endTime": "18:00",
+      "frequency": "weekly"
+    },
+    "coverImage": null,
+    "contactEmail": "jovenes@ceslar.org",
+    "memberCount": 45,
+    "isActive": true
+  },
+  {
+    "name": {
+      "es": "Ministerio de Mujeres",
+      "en": "Women's Ministry",
+      "pt": "Ministerio de Mulheres"
+    },
+    "slug": "mujeres",
+    "description": {
+      "es": "Espacio de crecimiento espiritual y apoyo mutuo para mujeres de todas las edades. Estudios biblicos, conferencias y servicio comunitario.",
+      "en": "A space for spiritual growth and mutual support for women of all ages. Bible studies, conferences, and community service.",
+      "pt": "Espaco de crescimento espiritual e apoio mutuo para mulheres de todas as idades. Estudos biblicos, conferencias e servico comunitario."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "type": "women",
+    "scope": "local",
+    "leaderName": "Ana Rodriguez",
+    "coLeaders": ["Patricia Condori"],
+    "meetingSchedule": {
+      "day": "tuesday",
+      "time": "10:00",
+      "endTime": "12:00",
+      "frequency": "weekly"
+    },
+    "coverImage": null,
+    "contactEmail": "mujeres@ceslar.org",
+    "memberCount": 60,
+    "isActive": true
+  },
+  {
+    "name": {
+      "es": "Ministerio de Varones",
+      "en": "Men's Ministry",
+      "pt": "Ministerio de Homens"
+    },
+    "slug": "varones",
+    "description": {
+      "es": "Ministerio enfocado en fortalecer a los hombres en su rol como lideres espirituales en sus hogares e iglesia.",
+      "en": "Ministry focused on strengthening men in their role as spiritual leaders in their homes and church.",
+      "pt": "Ministerio focado em fortalecer os homens em seu papel como lideres espirituais em seus lares e igreja."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "type": "men",
+    "scope": "local",
+    "leaderName": "Miguel Quispe",
+    "coLeaders": [],
+    "meetingSchedule": {
+      "day": "saturday",
+      "time": "07:00",
+      "endTime": "09:00",
+      "frequency": "biweekly"
+    },
+    "coverImage": null,
+    "contactEmail": "varones@ceslar.org",
+    "memberCount": 35,
+    "isActive": true
+  },
+  {
+    "name": {
+      "es": "Ministerio de Ninos",
+      "en": "Children's Ministry",
+      "pt": "Ministerio de Criancas"
+    },
+    "slug": "ninos",
+    "description": {
+      "es": "Ensenando a los ninos los valores del Reino de Dios a traves de actividades ludicas, canciones y lecciones biblicas adaptadas.",
+      "en": "Teaching children the values of God's Kingdom through playful activities, songs, and adapted Bible lessons.",
+      "pt": "Ensinando as criancas os valores do Reino de Deus atraves de atividades ludicas, cancoes e licoes biblicas adaptadas."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "type": "children",
+    "scope": "local",
+    "leaderName": "Laura Fernandez",
+    "coLeaders": ["Sofia Castillo", "Rosa Mendoza"],
+    "meetingSchedule": {
+      "day": "sunday",
+      "time": "10:00",
+      "endTime": "12:00",
+      "frequency": "weekly"
+    },
+    "coverImage": null,
+    "contactEmail": "ninos@ceslar.org",
+    "memberCount": 55,
+    "isActive": true
+  },
+  {
+    "name": {
+      "es": "Ministerio de Alabanza",
+      "en": "Worship Ministry",
+      "pt": "Ministerio de Louvor"
+    },
+    "slug": "alabanza",
+    "description": {
+      "es": "Equipo de musicos y cantantes dedicados a la alabanza y adoracion en cada servicio y evento especial.",
+      "en": "Team of musicians and singers dedicated to praise and worship in every service and special event.",
+      "pt": "Equipe de musicos e cantores dedicados ao louvor e adoracao em cada culto e evento especial."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "type": "worship",
+    "scope": "local",
+    "leaderName": "David Salazar",
+    "coLeaders": ["Esther Vargas"],
+    "meetingSchedule": {
+      "day": "friday",
+      "time": "19:00",
+      "endTime": "21:00",
+      "frequency": "weekly"
+    },
+    "coverImage": null,
+    "contactEmail": "alabanza@ceslar.org",
+    "memberCount": 20,
+    "isActive": true
+  },
+  {
+    "name": {
+      "es": "Ministerio de Jovenes Sopocachi",
+      "en": "Sopocachi Youth Ministry",
+      "pt": "Ministerio de Jovens Sopocachi"
+    },
+    "slug": "jovenes-sopocachi",
+    "description": {
+      "es": "Ministerio juvenil de la iglesia de Sopocachi, impactando la vida de los jovenes del barrio.",
+      "en": "Youth ministry of the Sopocachi church, impacting the lives of young people in the neighborhood.",
+      "pt": "Ministerio juvenil da igreja de Sopocachi, impactando a vida dos jovens do bairro."
+    },
+    "churchId": "sopocachi-local",
+    "churchName": "Cristo Es La Respuesta - Sopocachi",
+    "type": "youth",
+    "scope": "local",
+    "leaderName": "Carlos Mamani",
+    "coLeaders": [],
+    "meetingSchedule": {
+      "day": "thursday",
+      "time": "19:00",
+      "endTime": "20:30",
+      "frequency": "weekly"
+    },
+    "coverImage": null,
+    "contactEmail": "jovenes.sopocachi@ceslar.org",
+    "memberCount": 25,
+    "isActive": true
+  }
+]

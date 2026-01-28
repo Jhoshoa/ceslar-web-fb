@@ -1,0 +1,151 @@
+{
+  "app": {
+    "name": "Cristo É A Resposta",
+    "tagline": "Uma rede de igrejas unidas pela fé"
+  },
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "doctrine": "Doutrina",
+    "churches": "Igrejas",
+    "events": "Eventos",
+    "sermons": "Sermões",
+    "ministries": "Ministérios",
+    "contact": "Contato",
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "logout": "Sair",
+    "profile": "Meu Perfil",
+    "myChurches": "Minhas Igrejas",
+    "settings": "Configurações",
+    "admin": "Administração"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "retry": "Tentar novamente",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "create": "Criar",
+    "update": "Atualizar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "viewAll": "Ver todos",
+    "viewMore": "Ver mais",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "confirm": "Confirmar",
+    "yes": "Sim",
+    "no": "Não",
+    "close": "Fechar",
+    "noResults": "Nenhum resultado encontrado",
+    "required": "Obrigatório",
+    "optional": "Opcional",
+    "all": "Todos",
+    "none": "Nenhum",
+    "select": "Selecionar",
+    "language": "Idioma"
+  },
+  "home": {
+    "hero": {
+      "title": "Cristo É A Resposta",
+      "subtitle": "Uma rede de igrejas unidas pela fé em toda América do Sul",
+      "description": "Somos uma comunidade de fé dedicada a compartilhar o amor de Cristo e transformar vidas através da palavra de Deus.",
+      "cta": "Encontrar uma Igreja",
+      "secondary": "Ver Sermões"
+    },
+    "about": {
+      "title": "Nossa Missão",
+      "subtitle": "Guiados pelo amor de Deus, nos dedicamos a servir e transformar vidas",
+      "faith": {
+        "title": "Fé Viva",
+        "description": "Cultivamos uma fé ativa que transforma vidas e comunidades"
+      },
+      "word": {
+        "title": "A Palavra",
+        "description": "Ensinamos as escrituras como fundamento de vida"
+      },
+      "community": {
+        "title": "Comunidade",
+        "description": "Formamos uma família unida em Cristo"
+      },
+      "service": {
+        "title": "Serviço",
+        "description": "Servimos nossa comunidade com amor e dedicação"
+      }
+    },
+    "churches": {
+      "title": "Nossas Igrejas",
+      "subtitle": "Encontre uma igreja perto de você e junte-se à nossa família"
+    },
+    "events": {
+      "title": "Próximos Eventos",
+      "subtitle": "Não perca nossas atividades e reuniões especiais"
+    },
+    "sermons": {
+      "title": "Últimos Sermões",
+      "subtitle": "Ouça a palavra de Deus e alimente seu espírito"
+    },
+    "ministries": {
+      "title": "Nossos Ministérios",
+      "subtitle": "Descubra como você pode servir e crescer em nossa comunidade"
+    },
+    "cta": {
+      "title": "Pronto para dar o próximo passo?",
+      "subtitle": "Junte-se à nossa família e descubra o propósito que Deus tem para sua vida",
+      "register": "Cadastre-se Agora",
+      "contact": "Fale Conosco"
+    },
+    "social": {
+      "title": "Siga-nos nas redes sociais"
+    },
+    "stats": {
+      "churches": "Igrejas",
+      "members": "Membros",
+      "countries": "Países"
+    }
+  },
+  "footer": {
+    "description": "Cristo É A Resposta - Uma rede de igrejas unidas pela fé, comprometidas em levar o evangelho e o amor de Cristo a toda América do Sul.",
+    "quickLinks": "Links",
+    "resources": "Recursos",
+    "contact": "Contato",
+    "followUs": "Siga-nos",
+    "rights": "Todos os direitos reservados.",
+    "privacy": "Privacidade",
+    "terms": "Termos",
+    "madeWith": "Feito com",
+    "forChurch": "para a igreja"
+  },
+  "validation": {
+    "required": "Este campo é obrigatório",
+    "email": "Digite um email válido",
+    "minLength": "Mínimo {{min}} caracteres",
+    "maxLength": "Máximo {{max}} caracteres",
+    "passwordMatch": "As senhas não coincidem",
+    "invalidFormat": "Formato inválido"
+  },
+  "notifications": {
+    "success": "Operação bem-sucedida",
+    "error": "Ocorreu um erro",
+    "saved": "Salvo com sucesso",
+    "deleted": "Excluído com sucesso",
+    "updated": "Atualizado com sucesso"
+  },
+  "table": {
+    "actions": "Ações",
+    "noData": "Nenhum dado disponível",
+    "rowsPerPage": "Linhas por página",
+    "of": "de"
+  },
+  "dialog": {
+    "confirmDelete": "Tem certeza que deseja excluir?",
+    "confirmAction": "Tem certeza que deseja continuar?",
+    "unsavedChanges": "Você tem alterações não salvas. Deseja continuar?"
+  }
+}

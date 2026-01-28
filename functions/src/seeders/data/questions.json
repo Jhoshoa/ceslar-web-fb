@@ -1,0 +1,193 @@
+{
+  "categories": [
+    {
+      "id": "personal",
+      "name": {
+        "es": "Informacion Personal",
+        "en": "Personal Information",
+        "pt": "Informacao Pessoal"
+      },
+      "description": {
+        "es": "Datos basicos para conocerle mejor",
+        "en": "Basic information to get to know you better",
+        "pt": "Informacoes basicas para conhece-lo melhor"
+      },
+      "order": 1
+    },
+    {
+      "id": "spiritual",
+      "name": {
+        "es": "Vida Espiritual",
+        "en": "Spiritual Life",
+        "pt": "Vida Espiritual"
+      },
+      "description": {
+        "es": "Sobre su caminar con Dios",
+        "en": "About your walk with God",
+        "pt": "Sobre sua caminhada com Deus"
+      },
+      "order": 2
+    },
+    {
+      "id": "interests",
+      "name": {
+        "es": "Intereses y Servicio",
+        "en": "Interests and Service",
+        "pt": "Interesses e Servico"
+      },
+      "description": {
+        "es": "Areas en las que le gustaria servir o participar",
+        "en": "Areas where you would like to serve or participate",
+        "pt": "Areas em que gostaria de servir ou participar"
+      },
+      "order": 3
+    }
+  ],
+  "questions": [
+    {
+      "categoryId": "personal",
+      "questionText": {
+        "es": "Como se entero de nuestra iglesia?",
+        "en": "How did you hear about our church?",
+        "pt": "Como voce soube da nossa igreja?"
+      },
+      "questionType": "select",
+      "options": [
+        { "value": "friend", "labels": { "es": "Amigo o familiar", "en": "Friend or family", "pt": "Amigo ou familiar" }, "order": 1 },
+        { "value": "social_media", "labels": { "es": "Redes sociales", "en": "Social media", "pt": "Redes sociais" }, "order": 2 },
+        { "value": "google", "labels": { "es": "Busqueda en internet", "en": "Internet search", "pt": "Busca na internet" }, "order": 3 },
+        { "value": "walk_by", "labels": { "es": "Pase por la iglesia", "en": "Walked by the church", "pt": "Passei pela igreja" }, "order": 4 },
+        { "value": "event", "labels": { "es": "Un evento", "en": "An event", "pt": "Um evento" }, "order": 5 },
+        { "value": "other", "labels": { "es": "Otro", "en": "Other", "pt": "Outro" }, "order": 6 }
+      ],
+      "validation": { "isRequired": true },
+      "targetAudience": "new_members",
+      "scope": "global",
+      "order": 1
+    },
+    {
+      "categoryId": "personal",
+      "questionText": {
+        "es": "Cual es su estado civil?",
+        "en": "What is your marital status?",
+        "pt": "Qual e o seu estado civil?"
+      },
+      "questionType": "radio",
+      "options": [
+        { "value": "single", "labels": { "es": "Soltero/a", "en": "Single", "pt": "Solteiro/a" }, "order": 1 },
+        { "value": "married", "labels": { "es": "Casado/a", "en": "Married", "pt": "Casado/a" }, "order": 2 },
+        { "value": "divorced", "labels": { "es": "Divorciado/a", "en": "Divorced", "pt": "Divorciado/a" }, "order": 3 },
+        { "value": "widowed", "labels": { "es": "Viudo/a", "en": "Widowed", "pt": "Viuvo/a" }, "order": 4 }
+      ],
+      "validation": { "isRequired": false },
+      "targetAudience": "all",
+      "scope": "global",
+      "order": 2
+    },
+    {
+      "categoryId": "personal",
+      "questionText": {
+        "es": "Tiene hijos? Cuantos?",
+        "en": "Do you have children? How many?",
+        "pt": "Tem filhos? Quantos?"
+      },
+      "questionType": "text",
+      "options": [],
+      "validation": { "isRequired": false, "maxLength": 50 },
+      "targetAudience": "all",
+      "scope": "global",
+      "order": 3
+    },
+    {
+      "categoryId": "spiritual",
+      "questionText": {
+        "es": "Ha aceptado a Jesus como su Salvador?",
+        "en": "Have you accepted Jesus as your Savior?",
+        "pt": "Voce aceitou Jesus como seu Salvador?"
+      },
+      "questionType": "radio",
+      "options": [
+        { "value": "yes", "labels": { "es": "Si", "en": "Yes", "pt": "Sim" }, "order": 1 },
+        { "value": "no", "labels": { "es": "No", "en": "No", "pt": "Nao" }, "order": 2 },
+        { "value": "not_sure", "labels": { "es": "No estoy seguro/a", "en": "Not sure", "pt": "Nao tenho certeza" }, "order": 3 }
+      ],
+      "validation": { "isRequired": true },
+      "targetAudience": "all",
+      "scope": "global",
+      "order": 1
+    },
+    {
+      "categoryId": "spiritual",
+      "questionText": {
+        "es": "Ha sido bautizado/a en agua?",
+        "en": "Have you been baptized in water?",
+        "pt": "Voce foi batizado/a em agua?"
+      },
+      "questionType": "radio",
+      "options": [
+        { "value": "yes", "labels": { "es": "Si", "en": "Yes", "pt": "Sim" }, "order": 1 },
+        { "value": "no", "labels": { "es": "No", "en": "No", "pt": "Nao" }, "order": 2 },
+        { "value": "interested", "labels": { "es": "No, pero me interesa", "en": "No, but I'm interested", "pt": "Nao, mas tenho interesse" }, "order": 3 }
+      ],
+      "validation": { "isRequired": false },
+      "targetAudience": "all",
+      "scope": "global",
+      "order": 2
+    },
+    {
+      "categoryId": "spiritual",
+      "questionText": {
+        "es": "Cuanto tiempo lleva asistiendo a una iglesia cristiana?",
+        "en": "How long have you been attending a Christian church?",
+        "pt": "Ha quanto tempo voce frequenta uma igreja crista?"
+      },
+      "questionType": "select",
+      "options": [
+        { "value": "first_time", "labels": { "es": "Primera vez", "en": "First time", "pt": "Primeira vez" }, "order": 1 },
+        { "value": "less_than_year", "labels": { "es": "Menos de un ano", "en": "Less than a year", "pt": "Menos de um ano" }, "order": 2 },
+        { "value": "1_3_years", "labels": { "es": "1 a 3 anos", "en": "1 to 3 years", "pt": "1 a 3 anos" }, "order": 3 },
+        { "value": "3_5_years", "labels": { "es": "3 a 5 anos", "en": "3 to 5 years", "pt": "3 a 5 anos" }, "order": 4 },
+        { "value": "more_than_5", "labels": { "es": "Mas de 5 anos", "en": "More than 5 years", "pt": "Mais de 5 anos" }, "order": 5 }
+      ],
+      "validation": { "isRequired": false },
+      "targetAudience": "new_members",
+      "scope": "global",
+      "order": 3
+    },
+    {
+      "categoryId": "interests",
+      "questionText": {
+        "es": "En que areas le gustaria servir?",
+        "en": "In which areas would you like to serve?",
+        "pt": "Em quais areas voce gostaria de servir?"
+      },
+      "questionType": "checkbox",
+      "options": [
+        { "value": "worship", "labels": { "es": "Alabanza y adoracion", "en": "Worship and praise", "pt": "Louvor e adoracao" }, "order": 1 },
+        { "value": "children", "labels": { "es": "Ministerio de ninos", "en": "Children's ministry", "pt": "Ministerio de criancas" }, "order": 2 },
+        { "value": "youth", "labels": { "es": "Ministerio de jovenes", "en": "Youth ministry", "pt": "Ministerio de jovens" }, "order": 3 },
+        { "value": "hospitality", "labels": { "es": "Hospitalidad y ujieres", "en": "Hospitality and ushers", "pt": "Hospitalidade e recepcionistas" }, "order": 4 },
+        { "value": "tech", "labels": { "es": "Sonido y multimedia", "en": "Sound and multimedia", "pt": "Som e multimidia" }, "order": 5 },
+        { "value": "outreach", "labels": { "es": "Evangelismo", "en": "Outreach", "pt": "Evangelismo" }, "order": 6 }
+      ],
+      "validation": { "isRequired": false },
+      "targetAudience": "all",
+      "scope": "global",
+      "order": 1
+    },
+    {
+      "categoryId": "interests",
+      "questionText": {
+        "es": "Tiene alguna peticion de oracion?",
+        "en": "Do you have any prayer requests?",
+        "pt": "Voce tem algum pedido de oracao?"
+      },
+      "questionType": "textarea",
+      "options": [],
+      "validation": { "isRequired": false, "maxLength": 500 },
+      "targetAudience": "all",
+      "scope": "global",
+      "order": 2
+    }
+  ]
+}

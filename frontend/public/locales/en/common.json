@@ -1,0 +1,151 @@
+{
+  "app": {
+    "name": "Christ Is The Answer",
+    "tagline": "A network of churches united by faith"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "doctrine": "Doctrine",
+    "churches": "Churches",
+    "events": "Events",
+    "sermons": "Sermons",
+    "ministries": "Ministries",
+    "contact": "Contact",
+    "login": "Sign In",
+    "register": "Sign Up",
+    "logout": "Sign Out",
+    "profile": "My Profile",
+    "myChurches": "My Churches",
+    "settings": "Settings",
+    "admin": "Administration"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "update": "Update",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "viewAll": "View all",
+    "viewMore": "View more",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "noResults": "No results found",
+    "required": "Required",
+    "optional": "Optional",
+    "all": "All",
+    "none": "None",
+    "select": "Select",
+    "language": "Language"
+  },
+  "home": {
+    "hero": {
+      "title": "Christ Is The Answer",
+      "subtitle": "A network of churches united by faith across South America",
+      "description": "We are a faith community dedicated to sharing the love of Christ and transforming lives through the word of God.",
+      "cta": "Find a Church",
+      "secondary": "Watch Sermons"
+    },
+    "about": {
+      "title": "Our Mission",
+      "subtitle": "Guided by God's love, we are dedicated to serving and transforming lives",
+      "faith": {
+        "title": "Living Faith",
+        "description": "We cultivate an active faith that transforms lives and communities"
+      },
+      "word": {
+        "title": "The Word",
+        "description": "We teach the scriptures as the foundation of life"
+      },
+      "community": {
+        "title": "Community",
+        "description": "We form a family united in Christ"
+      },
+      "service": {
+        "title": "Service",
+        "description": "We serve our community with love and dedication"
+      }
+    },
+    "churches": {
+      "title": "Our Churches",
+      "subtitle": "Find a church near you and join our family"
+    },
+    "events": {
+      "title": "Upcoming Events",
+      "subtitle": "Don't miss our activities and special gatherings"
+    },
+    "sermons": {
+      "title": "Latest Sermons",
+      "subtitle": "Listen to the word of God and nourish your spirit"
+    },
+    "ministries": {
+      "title": "Our Ministries",
+      "subtitle": "Discover how you can serve and grow in our community"
+    },
+    "cta": {
+      "title": "Ready to take the next step?",
+      "subtitle": "Join our family and discover the purpose God has for your life",
+      "register": "Register Now",
+      "contact": "Contact Us"
+    },
+    "social": {
+      "title": "Follow us on social media"
+    },
+    "stats": {
+      "churches": "Churches",
+      "members": "Members",
+      "countries": "Countries"
+    }
+  },
+  "footer": {
+    "description": "Christ Is The Answer - A network of churches united by faith, committed to bringing the gospel and the love of Christ to all of South America.",
+    "quickLinks": "Links",
+    "resources": "Resources",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "madeWith": "Made with",
+    "forChurch": "for the church"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Enter a valid email",
+    "minLength": "Minimum {{min}} characters",
+    "maxLength": "Maximum {{max}} characters",
+    "passwordMatch": "Passwords don't match",
+    "invalidFormat": "Invalid format"
+  },
+  "notifications": {
+    "success": "Operation successful",
+    "error": "An error occurred",
+    "saved": "Saved successfully",
+    "deleted": "Deleted successfully",
+    "updated": "Updated successfully"
+  },
+  "table": {
+    "actions": "Actions",
+    "noData": "No data available",
+    "rowsPerPage": "Rows per page",
+    "of": "of"
+  },
+  "dialog": {
+    "confirmDelete": "Are you sure you want to delete?",
+    "confirmAction": "Are you sure you want to continue?",
+    "unsavedChanges": "You have unsaved changes. Do you want to continue?"
+  }
+}

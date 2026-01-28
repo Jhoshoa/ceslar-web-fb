@@ -1,0 +1,60 @@
+{
+  "title": "Eventos",
+  "subtitle": "Não perca nossas atividades",
+  "searchPlaceholder": "Buscar eventos...",
+  "filters": {
+    "type": "Tipo",
+    "status": "Status",
+    "church": "Igreja",
+    "all": "Todos"
+  },
+  "types": {
+    "service": "Culto",
+    "conference": "Conferência",
+    "retreat": "Retiro",
+    "workshop": "Workshop",
+    "concert": "Show",
+    "outreach": "Evangelismo",
+    "meeting": "Reunião",
+    "other": "Outro"
+  },
+  "status": {
+    "upcoming": "Próximo",
+    "ongoing": "Em andamento",
+    "completed": "Concluído",
+    "cancelled": "Cancelado"
+  },
+  "card": {
+    "date": "Data",
+    "time": "Horário",
+    "location": "Local",
+    "attendees": "{{count}} participantes",
+    "register": "Inscrever-se",
+    "registered": "Inscrito",
+    "full": "Vagas esgotadas",
+    "viewDetails": "Ver detalhes"
+  },
+  "detail": {
+    "about": "Sobre o evento",
+    "schedule": "Programação",
+    "location": "Localização",
+    "organizer": "Organizador",
+    "registration": "Inscrição",
+    "maxAttendees": "Vagas máximas",
+    "currentAttendees": "Inscritos",
+    "deadline": "Prazo de inscrição",
+    "fee": "Custo",
+    "free": "Gratuito"
+  },
+  "register": {
+    "title": "Inscrever-se no evento",
+    "message": "Deseja se inscrever em {{eventName}}?",
+    "success": "Você se inscreveu com sucesso",
+    "cancel": "Cancelar inscrição",
+    "cancelSuccess": "Inscrição cancelada",
+    "error": "Erro ao se inscrever"
+  },
+  "noEvents": "Nenhum evento programado",
+  "upcoming": "Próximos eventos",
+  "past": "Eventos passados"
+}

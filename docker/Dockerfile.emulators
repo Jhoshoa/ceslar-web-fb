@@ -1,0 +1,36 @@
+# Firebase Emulators Dockerfile
+FROM node:20-bookworm
+
+# Install Java 21 (required for Firestore emulator)
+RUN apt-get update && apt-get install -y \
+    wget \
+    apt-transport-https \
+    gnupg \
+    && wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null \
+    && echo "deb https://packages.adoptium.net/artifactory/deb bookworm main" | tee /etc/apt/sources.list.d/adoptium.list \
+    && apt-get update \
+    && apt-get install -y temurin-21-jre \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Firebase CLI globally
+RUN npm install -g firebase-tools
+
+# Create app directory
+WORKDIR /app
+
+# Copy package files for functions
+COPY functions/package*.json ./functions/
+
+# Install functions dependencies
+RUN cd functions && npm install
+
+# Copy Firebase configuration files
+COPY firebase.json .firebaserc ./
+COPY firestore.rules storage.rules firestore.indexes.json ./
+
+# Expose emulator ports
+EXPOSE 4000 5001 8080 9099 9199 8085
+
+# Default command
+CMD ["firebase", "emulators:start"]

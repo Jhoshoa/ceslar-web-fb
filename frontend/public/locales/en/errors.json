@@ -1,0 +1,38 @@
+{
+  "general": {
+    "title": "Error",
+    "message": "An unexpected error occurred",
+    "tryAgain": "Try again",
+    "goHome": "Go home"
+  },
+  "network": {
+    "title": "Connection error",
+    "message": "Could not connect to the server",
+    "offline": "No internet connection"
+  },
+  "auth": {
+    "unauthorized": "You don't have permission to access this resource",
+    "sessionExpired": "Your session has expired. Please sign in again",
+    "forbidden": "Access denied"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "The page you're looking for doesn't exist",
+    "code": "404"
+  },
+  "serverError": {
+    "title": "Server error",
+    "message": "A server error occurred",
+    "code": "500"
+  },
+  "validation": {
+    "title": "Validation error",
+    "message": "Please fix the errors in the form"
+  },
+  "api": {
+    "fetchError": "Error fetching data",
+    "createError": "Error creating",
+    "updateError": "Error updating",
+    "deleteError": "Error deleting"
+  }
+}

@@ -1,0 +1,141 @@
+[
+  {
+    "email": "admin@ceslar.org",
+    "password": "Admin123!",
+    "displayName": "Admin Sistema",
+    "firstName": "Admin",
+    "lastName": "Sistema",
+    "photoURL": null,
+    "phoneNumber": "+591 71234567",
+    "systemRole": "system_admin",
+    "churchRoles": {
+      "headquarters": "admin"
+    },
+    "permissions": ["read:all", "write:all", "delete:all", "admin:all"],
+    "churchMemberships": [
+      {
+        "churchId": "headquarters",
+        "churchName": "Cristo Es La Respuesta - Sede Internacional",
+        "churchSlug": "sede-internacional",
+        "role": "admin",
+        "status": "approved"
+      }
+    ],
+    "preferences": {
+      "language": "es",
+      "theme": "light",
+      "emailNotifications": true,
+      "smsNotifications": false,
+      "newsletter": true
+    }
+  },
+  {
+    "email": "pastor@ceslar.org",
+    "password": "Pastor123!",
+    "displayName": "Pastor Juan Perez",
+    "firstName": "Juan",
+    "lastName": "Perez",
+    "photoURL": null,
+    "phoneNumber": "+591 72345678",
+    "systemRole": "user",
+    "churchRoles": {
+      "headquarters": "pastor"
+    },
+    "permissions": ["read:all", "write:church", "manage:members"],
+    "churchMemberships": [
+      {
+        "churchId": "headquarters",
+        "churchName": "Cristo Es La Respuesta - Sede Internacional",
+        "churchSlug": "sede-internacional",
+        "role": "pastor",
+        "status": "approved"
+      }
+    ],
+    "preferences": {
+      "language": "es",
+      "theme": "light",
+      "emailNotifications": true,
+      "smsNotifications": true,
+      "newsletter": true
+    }
+  },
+  {
+    "email": "member@ceslar.org",
+    "password": "Member123!",
+    "displayName": "Maria Garcia",
+    "firstName": "Maria",
+    "lastName": "Garcia",
+    "photoURL": null,
+    "phoneNumber": "+591 73456789",
+    "systemRole": "user",
+    "churchRoles": {
+      "headquarters": "member"
+    },
+    "permissions": ["read:public"],
+    "churchMemberships": [
+      {
+        "churchId": "headquarters",
+        "churchName": "Cristo Es La Respuesta - Sede Internacional",
+        "churchSlug": "sede-internacional",
+        "role": "member",
+        "status": "approved"
+      }
+    ],
+    "preferences": {
+      "language": "es",
+      "theme": "light",
+      "emailNotifications": true,
+      "smsNotifications": false,
+      "newsletter": true
+    }
+  },
+  {
+    "email": "leader@ceslar.org",
+    "password": "Leader123!",
+    "displayName": "Carlos Mamani",
+    "firstName": "Carlos",
+    "lastName": "Mamani",
+    "photoURL": null,
+    "phoneNumber": "+591 74567890",
+    "systemRole": "user",
+    "churchRoles": {
+      "sopocachi-local": "leader"
+    },
+    "permissions": ["read:all", "write:church"],
+    "churchMemberships": [
+      {
+        "churchId": "sopocachi-local",
+        "churchName": "Cristo Es La Respuesta - Sopocachi",
+        "churchSlug": "sopocachi",
+        "role": "leader",
+        "status": "approved"
+      }
+    ],
+    "preferences": {
+      "language": "es",
+      "theme": "dark",
+      "emailNotifications": true,
+      "smsNotifications": false,
+      "newsletter": true
+    }
+  },
+  {
+    "email": "visitor@ceslar.org",
+    "password": "Visitor123!",
+    "displayName": "Ana Torres",
+    "firstName": "Ana",
+    "lastName": "Torres",
+    "photoURL": null,
+    "systemRole": "user",
+    "churchRoles": {},
+    "permissions": ["read:public"],
+    "churchMemberships": [],
+    "preferences": {
+      "language": "en",
+      "theme": "light",
+      "emailNotifications": false,
+      "smsNotifications": false,
+      "newsletter": false
+    }
+  }
+]

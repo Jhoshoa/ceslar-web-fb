@@ -1,0 +1,131 @@
+{
+  "title": "Painel de Administração",
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Bem-vindo, {{name}}",
+    "stats": {
+      "users": "Usuários",
+      "churches": "Igrejas",
+      "events": "Eventos",
+      "sermons": "Sermões"
+    },
+    "recentActivity": "Atividade recente",
+    "quickActions": "Ações rápidas"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Usuários",
+    "churches": "Igrejas",
+    "events": "Eventos",
+    "sermons": "Sermões",
+    "ministries": "Ministérios",
+    "questions": "Questionário",
+    "memberships": "Membresias",
+    "settings": "Configurações"
+  },
+  "users": {
+    "title": "Gestão de Usuários",
+    "create": "Criar usuário",
+    "edit": "Editar usuário",
+    "columns": {
+      "name": "Nome",
+      "email": "Email",
+      "role": "Função",
+      "status": "Status",
+      "createdAt": "Cadastrado"
+    },
+    "roles": {
+      "system_admin": "Administrador do Sistema",
+      "user": "Usuário"
+    },
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    }
+  },
+  "churches": {
+    "title": "Gestão de Igrejas",
+    "create": "Criar igreja",
+    "edit": "Editar igreja",
+    "columns": {
+      "name": "Nome",
+      "level": "Nível",
+      "country": "País",
+      "members": "Membros",
+      "status": "Status"
+    }
+  },
+  "events": {
+    "title": "Gestão de Eventos",
+    "create": "Criar evento",
+    "edit": "Editar evento",
+    "columns": {
+      "title": "Título",
+      "church": "Igreja",
+      "date": "Data",
+      "type": "Tipo",
+      "status": "Status",
+      "attendees": "Inscritos"
+    }
+  },
+  "sermons": {
+    "title": "Gestão de Sermões",
+    "create": "Criar sermão",
+    "edit": "Editar sermão",
+    "columns": {
+      "title": "Título",
+      "speaker": "Pregador",
+      "category": "Categoria",
+      "date": "Data",
+      "views": "Visualizações"
+    }
+  },
+  "ministries": {
+    "title": "Gestão de Ministérios",
+    "create": "Criar ministério",
+    "edit": "Editar ministério",
+    "columns": {
+      "name": "Nome",
+      "church": "Igreja",
+      "type": "Tipo",
+      "members": "Membros",
+      "status": "Status"
+    }
+  },
+  "questions": {
+    "title": "Questionário de Cadastro",
+    "categories": "Categorias",
+    "createCategory": "Criar categoria",
+    "createQuestion": "Criar pergunta",
+    "types": {
+      "text": "Texto",
+      "textarea": "Texto longo",
+      "select": "Seleção",
+      "multiselect": "Seleção múltipla",
+      "radio": "Escolha única",
+      "checkbox": "Caixa de seleção",
+      "date": "Data",
+      "number": "Número"
+    }
+  },
+  "memberships": {
+    "title": "Solicitações de Membresia",
+    "pending": "Pendentes",
+    "approved": "Aprovadas",
+    "rejected": "Rejeitadas",
+    "approve": "Aprovar",
+    "reject": "Rejeitar",
+    "columns": {
+      "user": "Usuário",
+      "church": "Igreja",
+      "requestedAt": "Solicitado",
+      "status": "Status"
+    }
+  },
+  "settings": {
+    "title": "Configurações",
+    "general": "Geral",
+    "security": "Segurança",
+    "notifications": "Notificações"
+  }
+}

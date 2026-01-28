@@ -1,0 +1,60 @@
+{
+  "title": "Events",
+  "subtitle": "Don't miss our activities",
+  "searchPlaceholder": "Search events...",
+  "filters": {
+    "type": "Type",
+    "status": "Status",
+    "church": "Church",
+    "all": "All"
+  },
+  "types": {
+    "service": "Service",
+    "conference": "Conference",
+    "retreat": "Retreat",
+    "workshop": "Workshop",
+    "concert": "Concert",
+    "outreach": "Outreach",
+    "meeting": "Meeting",
+    "other": "Other"
+  },
+  "status": {
+    "upcoming": "Upcoming",
+    "ongoing": "Ongoing",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "card": {
+    "date": "Date",
+    "time": "Time",
+    "location": "Location",
+    "attendees": "{{count}} attendees",
+    "register": "Register",
+    "registered": "Registered",
+    "full": "Full",
+    "viewDetails": "View details"
+  },
+  "detail": {
+    "about": "About the event",
+    "schedule": "Schedule",
+    "location": "Location",
+    "organizer": "Organizer",
+    "registration": "Registration",
+    "maxAttendees": "Maximum capacity",
+    "currentAttendees": "Registered",
+    "deadline": "Registration deadline",
+    "fee": "Cost",
+    "free": "Free"
+  },
+  "register": {
+    "title": "Register for event",
+    "message": "Do you want to register for {{eventName}}?",
+    "success": "You've registered successfully",
+    "cancel": "Cancel registration",
+    "cancelSuccess": "Registration cancelled",
+    "error": "Error registering"
+  },
+  "noEvents": "No events scheduled",
+  "upcoming": "Upcoming events",
+  "past": "Past events"
+}

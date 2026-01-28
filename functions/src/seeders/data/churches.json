@@ -1,0 +1,329 @@
+[
+  {
+    "id": "headquarters",
+    "name": "Cristo Es La Respuesta - Sede Internacional",
+    "slug": "sede-internacional",
+    "level": "headquarters",
+    "parentChurchId": null,
+    "isHeadquarters": true,
+    "isFeatured": true,
+    "country": "Bolivia",
+    "countryCode": "BO",
+    "department": "La Paz",
+    "province": "Murillo",
+    "city": "La Paz",
+    "address": "Av. 6 de Agosto #1234",
+    "coordinates": {
+      "latitude": -16.4897,
+      "longitude": -68.1193
+    },
+    "phone": "+591 2 1234567",
+    "email": "contacto@ceslar.org",
+    "website": "https://cristoeslarespuesta.org",
+    "socialMedia": {
+      "facebook": "https://facebook.com/ceslar",
+      "instagram": "https://instagram.com/ceslar",
+      "youtube": "https://youtube.com/@ceslar"
+    },
+    "description": {
+      "es": "Sede internacional del ministerio Cristo Es La Respuesta, dedicada a llevar el evangelio a todas las naciones.",
+      "en": "International headquarters of Cristo Es La Respuesta ministry, dedicated to bringing the gospel to all nations.",
+      "pt": "Sede internacional do ministerio Cristo E a Resposta, dedicada a levar o evangelho a todas as nacoes."
+    },
+    "serviceSchedule": [
+      {
+        "day": "sunday",
+        "time": "10:00",
+        "endTime": "12:00",
+        "type": "main_service",
+        "name": {
+          "es": "Servicio Dominical",
+          "en": "Sunday Service",
+          "pt": "Culto Dominical"
+        }
+      },
+      {
+        "day": "wednesday",
+        "time": "19:00",
+        "endTime": "21:00",
+        "type": "bible_study",
+        "name": {
+          "es": "Estudio Biblico",
+          "en": "Bible Study",
+          "pt": "Estudo Biblico"
+        }
+      },
+      {
+        "day": "friday",
+        "time": "19:30",
+        "endTime": "21:30",
+        "type": "prayer_meeting",
+        "name": {
+          "es": "Reunion de Oracion",
+          "en": "Prayer Meeting",
+          "pt": "Reuniao de Oracao"
+        }
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "bolivia-country",
+    "name": "Cristo Es La Respuesta - Bolivia",
+    "slug": "bolivia",
+    "level": "country",
+    "parentChurchId": "headquarters",
+    "isHeadquarters": false,
+    "isFeatured": true,
+    "country": "Bolivia",
+    "countryCode": "BO",
+    "department": "La Paz",
+    "city": "La Paz",
+    "address": "Calle Comercio #456",
+    "coordinates": {
+      "latitude": -16.495,
+      "longitude": -68.133
+    },
+    "phone": "+591 2 2345678",
+    "email": "bolivia@ceslar.org",
+    "description": {
+      "es": "Sede nacional de Cristo Es La Respuesta en Bolivia, coordinando todas las iglesias del pais.",
+      "en": "National headquarters of Cristo Es La Respuesta in Bolivia, coordinating all churches in the country.",
+      "pt": "Sede nacional de Cristo E a Resposta na Bolivia, coordenando todas as igrejas do pais."
+    },
+    "serviceSchedule": [
+      {
+        "day": "sunday",
+        "time": "09:00",
+        "endTime": "11:00",
+        "type": "main_service",
+        "name": {
+          "es": "Servicio Dominical",
+          "en": "Sunday Service",
+          "pt": "Culto Dominical"
+        }
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "lapaz-department",
+    "name": "Cristo Es La Respuesta - La Paz",
+    "slug": "la-paz",
+    "level": "department",
+    "parentChurchId": "bolivia-country",
+    "isHeadquarters": false,
+    "isFeatured": false,
+    "country": "Bolivia",
+    "countryCode": "BO",
+    "department": "La Paz",
+    "city": "La Paz",
+    "address": "Av. Mariscal Santa Cruz #789",
+    "coordinates": {
+      "latitude": -16.497,
+      "longitude": -68.131
+    },
+    "phone": "+591 2 3456789",
+    "email": "lapaz@ceslar.org",
+    "description": {
+      "es": "Iglesia departamental de La Paz, supervisando las iglesias provinciales y locales del departamento.",
+      "en": "Departmental church of La Paz, overseeing provincial and local churches in the department.",
+      "pt": "Igreja departamental de La Paz, supervisionando as igrejas provinciais e locais do departamento."
+    },
+    "serviceSchedule": [
+      {
+        "day": "sunday",
+        "time": "10:00",
+        "endTime": "12:00",
+        "type": "main_service",
+        "name": {
+          "es": "Servicio Dominical",
+          "en": "Sunday Service",
+          "pt": "Culto Dominical"
+        }
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "murillo-province",
+    "name": "Cristo Es La Respuesta - Murillo",
+    "slug": "murillo",
+    "level": "province",
+    "parentChurchId": "lapaz-department",
+    "isHeadquarters": false,
+    "isFeatured": false,
+    "country": "Bolivia",
+    "countryCode": "BO",
+    "department": "La Paz",
+    "province": "Murillo",
+    "city": "La Paz",
+    "address": "Calle Potosi #321",
+    "coordinates": {
+      "latitude": -16.501,
+      "longitude": -68.125
+    },
+    "description": {
+      "es": "Iglesia provincial de la provincia Murillo en el departamento de La Paz.",
+      "en": "Provincial church of Murillo province in the department of La Paz.",
+      "pt": "Igreja provincial da provincia Murillo no departamento de La Paz."
+    },
+    "status": "active"
+  },
+  {
+    "id": "sopocachi-local",
+    "name": "Cristo Es La Respuesta - Sopocachi",
+    "slug": "sopocachi",
+    "level": "local",
+    "parentChurchId": "murillo-province",
+    "isHeadquarters": false,
+    "isFeatured": true,
+    "country": "Bolivia",
+    "countryCode": "BO",
+    "department": "La Paz",
+    "province": "Murillo",
+    "city": "La Paz",
+    "address": "Calle Fernando Guachalla #567, Sopocachi",
+    "coordinates": {
+      "latitude": -16.513,
+      "longitude": -68.124
+    },
+    "phone": "+591 2 4567890",
+    "email": "sopocachi@ceslar.org",
+    "description": {
+      "es": "Iglesia local en el barrio de Sopocachi, La Paz. Una comunidad vibrante de fe y amor.",
+      "en": "Local church in the Sopocachi neighborhood, La Paz. A vibrant community of faith and love.",
+      "pt": "Igreja local no bairro de Sopocachi, La Paz. Uma comunidade vibrante de fe e amor."
+    },
+    "serviceSchedule": [
+      {
+        "day": "sunday",
+        "time": "10:30",
+        "endTime": "12:30",
+        "type": "main_service",
+        "name": {
+          "es": "Servicio Dominical",
+          "en": "Sunday Service",
+          "pt": "Culto Dominical"
+        }
+      },
+      {
+        "day": "thursday",
+        "time": "19:00",
+        "endTime": "20:30",
+        "type": "youth_meeting",
+        "name": {
+          "es": "Reunion de Jovenes",
+          "en": "Youth Meeting",
+          "pt": "Reuniao de Jovens"
+        }
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "elealto-local",
+    "name": "Cristo Es La Respuesta - El Alto",
+    "slug": "el-alto",
+    "level": "local",
+    "parentChurchId": "murillo-province",
+    "isHeadquarters": false,
+    "isFeatured": false,
+    "country": "Bolivia",
+    "countryCode": "BO",
+    "department": "La Paz",
+    "province": "Murillo",
+    "city": "El Alto",
+    "address": "Av. Juan Pablo II #890, Ciudad Satelite",
+    "coordinates": {
+      "latitude": -16.509,
+      "longitude": -68.195
+    },
+    "phone": "+591 2 5678901",
+    "email": "elalto@ceslar.org",
+    "description": {
+      "es": "Iglesia local en la ciudad de El Alto, sirviendo a la comunidad con amor y dedicacion.",
+      "en": "Local church in El Alto city, serving the community with love and dedication.",
+      "pt": "Igreja local na cidade de El Alto, servindo a comunidade com amor e dedicacao."
+    },
+    "serviceSchedule": [
+      {
+        "day": "sunday",
+        "time": "09:00",
+        "endTime": "11:00",
+        "type": "main_service",
+        "name": {
+          "es": "Servicio Dominical",
+          "en": "Sunday Service",
+          "pt": "Culto Dominical"
+        }
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "cochabamba-department",
+    "name": "Cristo Es La Respuesta - Cochabamba",
+    "slug": "cochabamba",
+    "level": "department",
+    "parentChurchId": "bolivia-country",
+    "isHeadquarters": false,
+    "isFeatured": true,
+    "country": "Bolivia",
+    "countryCode": "BO",
+    "department": "Cochabamba",
+    "city": "Cochabamba",
+    "address": "Av. America #1234",
+    "coordinates": {
+      "latitude": -17.3895,
+      "longitude": -66.1568
+    },
+    "phone": "+591 4 1234567",
+    "email": "cochabamba@ceslar.org",
+    "description": {
+      "es": "Iglesia departamental de Cochabamba, el corazon de Bolivia.",
+      "en": "Departmental church of Cochabamba, the heart of Bolivia.",
+      "pt": "Igreja departamental de Cochabamba, o coracao da Bolivia."
+    },
+    "serviceSchedule": [
+      {
+        "day": "sunday",
+        "time": "10:00",
+        "endTime": "12:00",
+        "type": "main_service",
+        "name": {
+          "es": "Servicio Dominical",
+          "en": "Sunday Service",
+          "pt": "Culto Dominical"
+        }
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "id": "santacruz-department",
+    "name": "Cristo Es La Respuesta - Santa Cruz",
+    "slug": "santa-cruz",
+    "level": "department",
+    "parentChurchId": "bolivia-country",
+    "isHeadquarters": false,
+    "isFeatured": false,
+    "country": "Bolivia",
+    "countryCode": "BO",
+    "department": "Santa Cruz",
+    "city": "Santa Cruz de la Sierra",
+    "address": "Av. Cristo Redentor #567",
+    "coordinates": {
+      "latitude": -17.7833,
+      "longitude": -63.1821
+    },
+    "phone": "+591 3 1234567",
+    "email": "santacruz@ceslar.org",
+    "description": {
+      "es": "Iglesia departamental de Santa Cruz, la ciudad mas grande de Bolivia.",
+      "en": "Departmental church of Santa Cruz, Bolivia's largest city.",
+      "pt": "Igreja departamental de Santa Cruz, a maior cidade da Bolivia."
+    },
+    "status": "active"
+  }
+]

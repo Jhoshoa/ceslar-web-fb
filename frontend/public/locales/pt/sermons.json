@@ -1,0 +1,44 @@
+{
+  "title": "Sermões",
+  "subtitle": "Ouça a palavra de Deus",
+  "searchPlaceholder": "Buscar sermões...",
+  "filters": {
+    "category": "Categoria",
+    "speaker": "Pregador",
+    "church": "Igreja",
+    "all": "Todos"
+  },
+  "categories": {
+    "faith": "Fé",
+    "family": "Família",
+    "prayer": "Oração",
+    "salvation": "Salvação",
+    "worship": "Adoração",
+    "evangelism": "Evangelismo",
+    "discipleship": "Discipulado",
+    "leadership": "Liderança",
+    "other": "Outro"
+  },
+  "card": {
+    "duration": "{{minutes}} min",
+    "views": "{{count}} visualizações",
+    "watch": "Assistir",
+    "listen": "Ouvir",
+    "download": "Baixar"
+  },
+  "detail": {
+    "about": "Descrição",
+    "speaker": "Pregador",
+    "date": "Data",
+    "duration": "Duração",
+    "scripture": "Texto bíblico",
+    "notes": "Notas",
+    "resources": "Recursos",
+    "share": "Compartilhar",
+    "related": "Sermões relacionados"
+  },
+  "noSermons": "Nenhum sermão disponível",
+  "latest": "Últimos sermões",
+  "featured": "Sermões em destaque",
+  "popular": "Mais vistos"
+}

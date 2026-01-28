@@ -1,0 +1,172 @@
+[
+  {
+    "title": {
+      "es": "El Poder de la Fe",
+      "en": "The Power of Faith",
+      "pt": "O Poder da Fe"
+    },
+    "slug": "el-poder-de-la-fe",
+    "description": {
+      "es": "Un mensaje poderoso sobre como la fe puede mover montanas y transformar nuestras vidas segun la Palabra de Dios.",
+      "en": "A powerful message about how faith can move mountains and transform our lives according to God's Word.",
+      "pt": "Uma mensagem poderosa sobre como a fe pode mover montanhas e transformar nossas vidas segundo a Palavra de Deus."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "speakerName": "Pastor Juan Perez",
+    "category": "faith",
+    "date": "2026-01-12T10:00:00-04:00",
+    "duration": 45,
+    "scripture": "Hebreos 11:1-6",
+    "videoUrl": null,
+    "audioUrl": null,
+    "thumbnailUrl": null,
+    "youtubeId": null,
+    "resources": [],
+    "notes": {
+      "es": "1. La fe es la certeza de lo que se espera\n2. Sin fe es imposible agradar a Dios\n3. La fe activa produce resultados",
+      "en": "1. Faith is the substance of things hoped for\n2. Without faith it is impossible to please God\n3. Active faith produces results",
+      "pt": "1. A fe e a certeza do que se espera\n2. Sem fe e impossivel agradar a Deus\n3. A fe ativa produz resultados"
+    },
+    "tags": ["fe", "confianza", "hebreos"],
+    "viewCount": 152,
+    "isPublished": true,
+    "isFeatured": true
+  },
+  {
+    "title": {
+      "es": "Viviendo en Comunidad",
+      "en": "Living in Community",
+      "pt": "Vivendo em Comunidade"
+    },
+    "slug": "viviendo-en-comunidad",
+    "description": {
+      "es": "La importancia de la comunidad cristiana y como edificarnos mutuamente en amor y unidad.",
+      "en": "The importance of Christian community and how to build each other up in love and unity.",
+      "pt": "A importancia da comunidade crista e como nos edificarmos mutuamente em amor e unidade."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "speakerName": "Pastor Juan Perez",
+    "category": "community",
+    "date": "2026-01-05T10:00:00-04:00",
+    "duration": 38,
+    "scripture": "Hechos 2:42-47",
+    "videoUrl": null,
+    "audioUrl": null,
+    "thumbnailUrl": null,
+    "youtubeId": null,
+    "resources": [],
+    "notes": {
+      "es": "1. La iglesia primitiva: un modelo de comunidad\n2. Cuatro pilares: ensenanza, comunion, pan, oracion\n3. El resultado: crecimiento y favor",
+      "en": "1. The early church: a model of community\n2. Four pillars: teaching, fellowship, breaking bread, prayer\n3. The result: growth and favor",
+      "pt": "1. A igreja primitiva: um modelo de comunidade\n2. Quatro pilares: ensino, comunhao, partir do pao, oracao\n3. O resultado: crescimento e favor"
+    },
+    "tags": ["comunidad", "iglesia", "hechos"],
+    "viewCount": 98,
+    "isPublished": true,
+    "isFeatured": false
+  },
+  {
+    "title": {
+      "es": "La Gracia Transformadora",
+      "en": "Transforming Grace",
+      "pt": "A Graca Transformadora"
+    },
+    "slug": "la-gracia-transformadora",
+    "description": {
+      "es": "Descubriendo la profundidad de la gracia de Dios y su poder para transformar completamente nuestras vidas.",
+      "en": "Discovering the depth of God's grace and its power to completely transform our lives.",
+      "pt": "Descobrindo a profundidade da graca de Deus e seu poder para transformar completamente nossas vidas."
+    },
+    "churchId": "sopocachi-local",
+    "churchName": "Cristo Es La Respuesta - Sopocachi",
+    "speakerName": "Carlos Mamani",
+    "category": "grace",
+    "date": "2026-01-19T10:30:00-04:00",
+    "duration": 42,
+    "scripture": "Efesios 2:1-10",
+    "videoUrl": null,
+    "audioUrl": null,
+    "thumbnailUrl": null,
+    "youtubeId": null,
+    "resources": [],
+    "notes": {
+      "es": "1. Muertos en pecado, vivos en Cristo\n2. Por gracia sois salvos\n3. Creados para buenas obras",
+      "en": "1. Dead in sin, alive in Christ\n2. By grace you are saved\n3. Created for good works",
+      "pt": "1. Mortos em pecado, vivos em Cristo\n2. Pela graca sois salvos\n3. Criados para boas obras"
+    },
+    "tags": ["gracia", "salvacion", "efesios"],
+    "viewCount": 67,
+    "isPublished": true,
+    "isFeatured": true
+  },
+  {
+    "title": {
+      "es": "El Fruto del Espiritu Santo",
+      "en": "The Fruit of the Holy Spirit",
+      "pt": "O Fruto do Espirito Santo"
+    },
+    "slug": "fruto-del-espiritu-santo",
+    "description": {
+      "es": "Explorando las nueve caracteristicas del fruto del Espiritu y como cultivarlas en nuestra vida diaria.",
+      "en": "Exploring the nine characteristics of the fruit of the Spirit and how to cultivate them in our daily lives.",
+      "pt": "Explorando as nove caracteristicas do fruto do Espirito e como cultiva-las em nossa vida diaria."
+    },
+    "churchId": "headquarters",
+    "churchName": "Cristo Es La Respuesta - Sede Internacional",
+    "speakerName": "Pastor Juan Perez",
+    "category": "holy_spirit",
+    "date": "2025-12-29T10:00:00-04:00",
+    "duration": 50,
+    "scripture": "Galatas 5:22-26",
+    "videoUrl": null,
+    "audioUrl": null,
+    "thumbnailUrl": null,
+    "youtubeId": null,
+    "resources": [],
+    "notes": {
+      "es": "1. Amor, gozo, paz\n2. Paciencia, benignidad, bondad\n3. Fe, mansedumbre, templanza\n4. Cultivar vs. producir: obra del Espiritu",
+      "en": "1. Love, joy, peace\n2. Patience, kindness, goodness\n3. Faithfulness, gentleness, self-control\n4. Cultivating vs. producing: the Spirit's work",
+      "pt": "1. Amor, alegria, paz\n2. Paciencia, benignidade, bondade\n3. Fe, mansidao, temperanca\n4. Cultivar vs. produzir: obra do Espirito"
+    },
+    "tags": ["espiritu-santo", "fruto", "galatas"],
+    "viewCount": 203,
+    "isPublished": true,
+    "isFeatured": true
+  },
+  {
+    "title": {
+      "es": "Proposito y Llamado",
+      "en": "Purpose and Calling",
+      "pt": "Proposito e Chamado"
+    },
+    "slug": "proposito-y-llamado",
+    "description": {
+      "es": "Descubre el proposito que Dios tiene para tu vida y como responder a Su llamado con obediencia y gozo.",
+      "en": "Discover the purpose God has for your life and how to respond to His calling with obedience and joy.",
+      "pt": "Descubra o proposito que Deus tem para sua vida e como responder ao Seu chamado com obediencia e alegria."
+    },
+    "churchId": "cochabamba-department",
+    "churchName": "Cristo Es La Respuesta - Cochabamba",
+    "speakerName": "Pastor Roberto Flores",
+    "category": "purpose",
+    "date": "2026-01-19T10:00:00-04:00",
+    "duration": 40,
+    "scripture": "Jeremias 29:11-13",
+    "videoUrl": null,
+    "audioUrl": null,
+    "thumbnailUrl": null,
+    "youtubeId": null,
+    "resources": [],
+    "notes": {
+      "es": "1. Dios tiene planes de bien\n2. Un futuro y una esperanza\n3. Buscadme y me hallareis",
+      "en": "1. God has plans for good\n2. A future and a hope\n3. Seek me and you will find me",
+      "pt": "1. Deus tem planos de bem\n2. Um futuro e uma esperanca\n3. Buscai-me e me achareis"
+    },
+    "tags": ["proposito", "llamado", "jeremias"],
+    "viewCount": 45,
+    "isPublished": true,
+    "isFeatured": false
+  }
+]

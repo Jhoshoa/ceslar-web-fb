@@ -1,0 +1,131 @@
+{
+  "title": "Panel de Administración",
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Bienvenido, {{name}}",
+    "stats": {
+      "users": "Usuarios",
+      "churches": "Iglesias",
+      "events": "Eventos",
+      "sermons": "Sermones"
+    },
+    "recentActivity": "Actividad reciente",
+    "quickActions": "Acciones rápidas"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Usuarios",
+    "churches": "Iglesias",
+    "events": "Eventos",
+    "sermons": "Sermones",
+    "ministries": "Ministerios",
+    "questions": "Cuestionario",
+    "memberships": "Membresías",
+    "settings": "Configuración"
+  },
+  "users": {
+    "title": "Gestión de Usuarios",
+    "create": "Crear usuario",
+    "edit": "Editar usuario",
+    "columns": {
+      "name": "Nombre",
+      "email": "Email",
+      "role": "Rol",
+      "status": "Estado",
+      "createdAt": "Registrado"
+    },
+    "roles": {
+      "system_admin": "Administrador del Sistema",
+      "user": "Usuario"
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo"
+    }
+  },
+  "churches": {
+    "title": "Gestión de Iglesias",
+    "create": "Crear iglesia",
+    "edit": "Editar iglesia",
+    "columns": {
+      "name": "Nombre",
+      "level": "Nivel",
+      "country": "País",
+      "members": "Miembros",
+      "status": "Estado"
+    }
+  },
+  "events": {
+    "title": "Gestión de Eventos",
+    "create": "Crear evento",
+    "edit": "Editar evento",
+    "columns": {
+      "title": "Título",
+      "church": "Iglesia",
+      "date": "Fecha",
+      "type": "Tipo",
+      "status": "Estado",
+      "attendees": "Inscritos"
+    }
+  },
+  "sermons": {
+    "title": "Gestión de Sermones",
+    "create": "Crear sermón",
+    "edit": "Editar sermón",
+    "columns": {
+      "title": "Título",
+      "speaker": "Predicador",
+      "category": "Categoría",
+      "date": "Fecha",
+      "views": "Vistas"
+    }
+  },
+  "ministries": {
+    "title": "Gestión de Ministerios",
+    "create": "Crear ministerio",
+    "edit": "Editar ministerio",
+    "columns": {
+      "name": "Nombre",
+      "church": "Iglesia",
+      "type": "Tipo",
+      "members": "Miembros",
+      "status": "Estado"
+    }
+  },
+  "questions": {
+    "title": "Cuestionario de Registro",
+    "categories": "Categorías",
+    "createCategory": "Crear categoría",
+    "createQuestion": "Crear pregunta",
+    "types": {
+      "text": "Texto",
+      "textarea": "Texto largo",
+      "select": "Selección",
+      "multiselect": "Selección múltiple",
+      "radio": "Opción única",
+      "checkbox": "Casilla de verificación",
+      "date": "Fecha",
+      "number": "Número"
+    }
+  },
+  "memberships": {
+    "title": "Solicitudes de Membresía",
+    "pending": "Pendientes",
+    "approved": "Aprobadas",
+    "rejected": "Rechazadas",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "columns": {
+      "user": "Usuario",
+      "church": "Iglesia",
+      "requestedAt": "Solicitado",
+      "status": "Estado"
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "general": "General",
+    "security": "Seguridad",
+    "notifications": "Notificaciones"
+  }
+}

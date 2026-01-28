@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>Sin conexión - Cristo Es La Respuesta</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon svg {
+      width: 40px;
+      height: 40px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      background: #fff;
+      color: #1a365d;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .languages {
+      margin-top: 24px;
+      font-size: 0.875rem;
+      opacity: 0.7;
+    }
+
+    .languages span {
+      cursor: pointer;
+      margin: 0 8px;
+    }
+
+    .languages span:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">
+      <svg viewBox="0 0 24 24">
+        <line x1="1" y1="1" x2="23" y2="23"></line>
+        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+        <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg>
+    </div>
+    <h1 id="title">Sin conexión a internet</h1>
+    <p id="message">
+      Parece que no tienes conexión a internet. Verifica tu conexión e intenta nuevamente.
+    </p>
+    <a href="/" class="btn" id="retry" onclick="window.location.reload(); return false;">
+      Reintentar
+    </a>
+    <div class="languages">
+      <span onclick="setLang('es')">ES</span> |
+      <span onclick="setLang('en')">EN</span> |
+      <span onclick="setLang('pt')">PT</span>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      es: {
+        title: 'Sin conexión a internet',
+        message: 'Parece que no tienes conexión a internet. Verifica tu conexión e intenta nuevamente.',
+        retry: 'Reintentar'
+      },
+      en: {
+        title: 'No internet connection',
+        message: 'It seems you don\'t have an internet connection. Check your connection and try again.',
+        retry: 'Retry'
+      },
+      pt: {
+        title: 'Sem conexão com a internet',
+        message: 'Parece que você não tem conexão com a internet. Verifique sua conexão e tente novamente.',
+        retry: 'Tentar novamente'
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang] || translations.es;
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('message').textContent = t.message;
+      document.getElementById('retry').textContent = t.retry;
+      document.documentElement.lang = lang;
+      localStorage.setItem('ceslar-language', lang);
+    }
+
+    // Detect language from localStorage or browser
+    const savedLang = localStorage.getItem('ceslar-language');
+    const browserLang = navigator.language.split('-')[0];
+    const lang = savedLang || (['es', 'en', 'pt'].includes(browserLang) ? browserLang : 'es');
+    setLang(lang);
+  </script>
+</body>
+</html>

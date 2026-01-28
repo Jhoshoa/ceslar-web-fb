@@ -1,0 +1,60 @@
+{
+  "title": "Eventos",
+  "subtitle": "No te pierdas nuestras actividades",
+  "searchPlaceholder": "Buscar eventos...",
+  "filters": {
+    "type": "Tipo",
+    "status": "Estado",
+    "church": "Iglesia",
+    "all": "Todos"
+  },
+  "types": {
+    "service": "Culto",
+    "conference": "Conferencia",
+    "retreat": "Retiro",
+    "workshop": "Taller",
+    "concert": "Concierto",
+    "outreach": "Evangelismo",
+    "meeting": "Reunión",
+    "other": "Otro"
+  },
+  "status": {
+    "upcoming": "Próximo",
+    "ongoing": "En curso",
+    "completed": "Completado",
+    "cancelled": "Cancelado"
+  },
+  "card": {
+    "date": "Fecha",
+    "time": "Hora",
+    "location": "Lugar",
+    "attendees": "{{count}} asistentes",
+    "register": "Registrarse",
+    "registered": "Registrado",
+    "full": "Cupo lleno",
+    "viewDetails": "Ver detalles"
+  },
+  "detail": {
+    "about": "Acerca del evento",
+    "schedule": "Horario",
+    "location": "Ubicación",
+    "organizer": "Organizador",
+    "registration": "Registro",
+    "maxAttendees": "Cupo máximo",
+    "currentAttendees": "Inscritos",
+    "deadline": "Fecha límite de registro",
+    "fee": "Costo",
+    "free": "Gratuito"
+  },
+  "register": {
+    "title": "Registrarse al evento",
+    "message": "¿Deseas registrarte en {{eventName}}?",
+    "success": "Te has registrado exitosamente",
+    "cancel": "Cancelar registro",
+    "cancelSuccess": "Registro cancelado",
+    "error": "Error al registrarse"
+  },
+  "noEvents": "No hay eventos programados",
+  "upcoming": "Próximos eventos",
+  "past": "Eventos pasados"
+}

@@ -1,0 +1,20 @@
+# Frontend Development Dockerfile
+FROM node:20-alpine
+
+# Install dependencies for native modules
+RUN apk add --no-cache python3 make g++
+
+# Create app directory
+WORKDIR /app
+
+# Copy package files
+COPY frontend/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Expose Vite dev server port
+EXPOSE 3000
+
+# Default command
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

@@ -1,0 +1,38 @@
+{
+  "general": {
+    "title": "Error",
+    "message": "Ha ocurrido un error inesperado",
+    "tryAgain": "Intentar de nuevo",
+    "goHome": "Ir al inicio"
+  },
+  "network": {
+    "title": "Error de conexión",
+    "message": "No se pudo conectar con el servidor",
+    "offline": "No hay conexión a internet"
+  },
+  "auth": {
+    "unauthorized": "No tienes permiso para acceder a este recurso",
+    "sessionExpired": "Tu sesión ha expirado. Por favor, inicia sesión nuevamente",
+    "forbidden": "Acceso denegado"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "message": "La página que buscas no existe",
+    "code": "404"
+  },
+  "serverError": {
+    "title": "Error del servidor",
+    "message": "Ha ocurrido un error en el servidor",
+    "code": "500"
+  },
+  "validation": {
+    "title": "Error de validación",
+    "message": "Por favor, corrige los errores en el formulario"
+  },
+  "api": {
+    "fetchError": "Error al obtener datos",
+    "createError": "Error al crear",
+    "updateError": "Error al actualizar",
+    "deleteError": "Error al eliminar"
+  }
+}

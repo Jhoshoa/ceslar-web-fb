@@ -1,0 +1,131 @@
+{
+  "title": "Admin Panel",
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, {{name}}",
+    "stats": {
+      "users": "Users",
+      "churches": "Churches",
+      "events": "Events",
+      "sermons": "Sermons"
+    },
+    "recentActivity": "Recent activity",
+    "quickActions": "Quick actions"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "churches": "Churches",
+    "events": "Events",
+    "sermons": "Sermons",
+    "ministries": "Ministries",
+    "questions": "Questionnaire",
+    "memberships": "Memberships",
+    "settings": "Settings"
+  },
+  "users": {
+    "title": "User Management",
+    "create": "Create user",
+    "edit": "Edit user",
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "createdAt": "Registered"
+    },
+    "roles": {
+      "system_admin": "System Administrator",
+      "user": "User"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "churches": {
+    "title": "Church Management",
+    "create": "Create church",
+    "edit": "Edit church",
+    "columns": {
+      "name": "Name",
+      "level": "Level",
+      "country": "Country",
+      "members": "Members",
+      "status": "Status"
+    }
+  },
+  "events": {
+    "title": "Event Management",
+    "create": "Create event",
+    "edit": "Edit event",
+    "columns": {
+      "title": "Title",
+      "church": "Church",
+      "date": "Date",
+      "type": "Type",
+      "status": "Status",
+      "attendees": "Registered"
+    }
+  },
+  "sermons": {
+    "title": "Sermon Management",
+    "create": "Create sermon",
+    "edit": "Edit sermon",
+    "columns": {
+      "title": "Title",
+      "speaker": "Speaker",
+      "category": "Category",
+      "date": "Date",
+      "views": "Views"
+    }
+  },
+  "ministries": {
+    "title": "Ministry Management",
+    "create": "Create ministry",
+    "edit": "Edit ministry",
+    "columns": {
+      "name": "Name",
+      "church": "Church",
+      "type": "Type",
+      "members": "Members",
+      "status": "Status"
+    }
+  },
+  "questions": {
+    "title": "Registration Questionnaire",
+    "categories": "Categories",
+    "createCategory": "Create category",
+    "createQuestion": "Create question",
+    "types": {
+      "text": "Text",
+      "textarea": "Long text",
+      "select": "Select",
+      "multiselect": "Multi-select",
+      "radio": "Single choice",
+      "checkbox": "Checkbox",
+      "date": "Date",
+      "number": "Number"
+    }
+  },
+  "memberships": {
+    "title": "Membership Requests",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "approve": "Approve",
+    "reject": "Reject",
+    "columns": {
+      "user": "User",
+      "church": "Church",
+      "requestedAt": "Requested",
+      "status": "Status"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "security": "Security",
+    "notifications": "Notifications"
+  }
+}
