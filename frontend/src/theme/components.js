@@ -153,6 +153,7 @@ const components = {
       root: {
         backgroundImage: 'none',
         boxShadow: '0 2px 10px rgba(13, 27, 76, 0.06)',
+        borderRadius: 0,
       },
       colorDefault: {
         backgroundColor: '#FFFFFF',

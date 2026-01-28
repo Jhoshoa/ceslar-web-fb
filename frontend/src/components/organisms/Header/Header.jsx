@@ -192,6 +192,7 @@ const Header = ({
           bgcolor: 'background.paper',
           borderBottom: '1px solid',
           borderColor: 'divider',
+          borderRadius: 0,
           zIndex: (t) => t.zIndex.drawer + 1,
         }}
       >

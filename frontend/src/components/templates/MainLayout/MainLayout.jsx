@@ -19,7 +19,14 @@ const MainLayout = ({
       onLogout={onLogout}
     />
     <Toolbar />
-    <Box component="main" sx={{ flexGrow: 1 }}>
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        borderRadius: 0,
+        overflow: 'hidden',
+      }}
+    >
       <Outlet />
     </Box>
     <Footer />

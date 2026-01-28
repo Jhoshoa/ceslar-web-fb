@@ -48,11 +48,13 @@ const HeroSection = ({
     sx={{
       position: 'relative',
       minHeight: height,
+      width: '100%',
       display: 'flex',
       alignItems: 'center',
       overflow: 'hidden',
-      // Royal gradient background
-      background: 'linear-gradient(135deg, #060D26 0%, #0D1B4C 30%, #1E3A8A 70%, #0D1B4C 100%)',
+      borderRadius: 0,
+      // Enhanced royal gradient background - deeper, richer colors
+      background: 'linear-gradient(180deg, #060D26 0%, #0A1535 25%, #0D1B4C 50%, #0F2167 75%, #0D1B4C 100%)',
     }}
   >
     {/* Background image overlay */}
@@ -379,17 +381,6 @@ const HeroSection = ({
       </Box>
     </Container>
 
-    {/* Bottom wave decoration */}
-    <Box
-      sx={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 80,
-        background: 'linear-gradient(to top, rgba(248, 249, 252, 1), transparent)',
-      }}
-    />
   </Box>
 );
 
