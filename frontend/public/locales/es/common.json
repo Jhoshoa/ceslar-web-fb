@@ -147,5 +147,13 @@
     "confirmDelete": "¿Estás seguro de que deseas eliminar?",
     "confirmAction": "¿Estás seguro de que deseas continuar?",
     "unsavedChanges": "Tienes cambios sin guardar. ¿Deseas continuar?"
+  },
+  "menu": {
+    "profile": "Mi Perfil",
+    "settings": "Configuración",
+    "dashboard": "Dashboard",
+    "admin": "Panel Admin",
+    "logout": "Cerrar Sesión",
+    "guest": "Usuario"
   }
 }

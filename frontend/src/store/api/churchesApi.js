@@ -12,6 +12,10 @@ export const churchesApi = baseApi.injectEndpoints({
     // PUBLIC QUERIES
     // ==========================================
 
+    // ==========================================
+    // PUBLIC QUERIES (no auth required for GET)
+    // ==========================================
+
     getChurches: builder.query({
       query: (params = {}) => ({
         url: '/churches',
@@ -35,7 +39,7 @@ export const churchesApi = baseApi.injectEndpoints({
             ]
           : [{ type: 'Church', id: 'LIST' }],
       transformResponse: (response) => ({
-        data: response.data,
+        data: response.data || [],
         pagination: response.pagination,
       }),
     }),
@@ -54,12 +58,14 @@ export const churchesApi = baseApi.injectEndpoints({
     }),
 
     getFeaturedChurches: builder.query({
-      query: (limit = 4) => ({
+      query: (params = {}) => ({
         url: '/churches/featured',
-        params: { limit },
+        params: { limit: params.limit || 4 },
       }),
       providesTags: [{ type: 'Church', id: 'FEATURED' }],
-      transformResponse: (response) => response.data,
+      transformResponse: (response) => ({
+        data: response.data || [],
+      }),
     }),
 
     getHeadquarters: builder.query({
@@ -77,7 +83,9 @@ export const churchesApi = baseApi.injectEndpoints({
     getCountries: builder.query({
       query: () => '/churches/countries',
       providesTags: [{ type: 'Church', id: 'COUNTRIES' }],
-      transformResponse: (response) => response.data,
+      transformResponse: (response) => ({
+        data: response.data || [],
+      }),
     }),
 
     getDepartmentsByCountry: builder.query({

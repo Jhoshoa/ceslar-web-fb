@@ -102,15 +102,38 @@ const SectionTitle = ({ title, subtitle, light = false, centered = true, action 
   </Box>
 );
 
-// Card Skeleton Component
-const CardSkeleton = ({ height = 280 }) => (
-  <Card sx={{ height: '100%' }}>
-    <Skeleton variant="rectangular" height={160} animation="wave" />
-    <CardContent>
+// Card Skeleton Component - matches ChurchCardItem
+const ChurchCardSkeleton = () => (
+  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Skeleton variant="rectangular" height={180} animation="wave" />
+    <CardContent sx={{ flexGrow: 1 }}>
       <Skeleton variant="text" width="80%" height={28} animation="wave" />
-      <Skeleton variant="text" width="60%" height={20} animation="wave" />
-      <Skeleton variant="text" width="40%" height={20} animation="wave" sx={{ mt: 1 }} />
+      <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+        <Skeleton variant="circular" width={16} height={16} sx={{ mr: 0.5 }} />
+        <Skeleton variant="text" width="60%" height={20} animation="wave" />
+      </Box>
     </CardContent>
+  </Card>
+);
+
+// Sermon Card Skeleton - matches SermonCardItem
+const SermonCardSkeleton = () => (
+  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Skeleton variant="rectangular" height={200} animation="wave" />
+    <CardContent sx={{ flexGrow: 1 }}>
+      <Skeleton variant="text" width="85%" height={28} animation="wave" />
+      <Skeleton variant="text" width="60%" height={20} animation="wave" sx={{ mt: 1 }} />
+    </CardContent>
+  </Card>
+);
+
+// Ministry Card Skeleton - matches MinistryCardItem
+const MinistryCardSkeleton = () => (
+  <Card sx={{ p: 3, textAlign: 'center', height: '100%' }}>
+    <Skeleton variant="rectangular" width={70} height={70} sx={{ borderRadius: 2, mx: 'auto', mb: 2 }} />
+    <Skeleton variant="text" width="70%" height={28} sx={{ mx: 'auto' }} animation="wave" />
+    <Skeleton variant="text" width="90%" height={20} sx={{ mx: 'auto', mt: 1 }} animation="wave" />
+    <Skeleton variant="text" width="80%" height={20} sx={{ mx: 'auto' }} animation="wave" />
   </Card>
 );
 
@@ -470,7 +493,7 @@ const HomePage = () => {
             {loadingChurches
               ? Array.from({ length: 4 }).map((_, i) => (
                   <Grid item xs={12} sm={6} md={3} key={i}>
-                    <CardSkeleton />
+                    <ChurchCardSkeleton />
                   </Grid>
                 ))
               : churches.map((church) => (
@@ -543,7 +566,7 @@ const HomePage = () => {
             {loadingSermons
               ? Array.from({ length: 3 }).map((_, i) => (
                   <Grid item xs={12} sm={6} md={4} key={i}>
-                    <CardSkeleton height={300} />
+                    <SermonCardSkeleton />
                   </Grid>
                 ))
               : sermons.map((sermon) => (
@@ -574,12 +597,7 @@ const HomePage = () => {
             {loadingMinistries
               ? Array.from({ length: 4 }).map((_, i) => (
                   <Grid item xs={12} sm={6} md={3} key={i}>
-                    <Skeleton
-                      variant="rectangular"
-                      height={200}
-                      animation="wave"
-                      sx={{ borderRadius: 2 }}
-                    />
+                    <MinistryCardSkeleton />
                   </Grid>
                 ))
               : ministries.map((ministry) => (

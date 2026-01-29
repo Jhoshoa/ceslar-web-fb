@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Box, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import ChurchIcon from '@mui/icons-material/Church';
@@ -10,30 +10,40 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import QuizIcon from '@mui/icons-material/Quiz';
 import SettingsIcon from '@mui/icons-material/Settings';
+import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import { useTranslation } from 'react-i18next';
 import Header from '../../organisms/Header/Header';
 import Sidebar from '../../organisms/Sidebar/Sidebar';
+import useAuth from '../../../hooks/useAuth';
+import { selectTheme, toggleTheme } from '../../../store/slices/preferences.slice';
 
 const DRAWER_WIDTH = 260;
 
-const AdminLayout = ({
-  user,
-  themeMode,
-  onThemeToggle,
-  onLogout,
-}) => {
+const AdminLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { user, logout } = useAuth();
+  const themeMode = useSelector(selectTheme);
+
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme());
+  };
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   const menuItems = [
-    { label: t('admin.dashboard', 'Dashboard'), icon: <DashboardIcon />, path: '/admin' },
+    { label: t('admin.dashboard', 'Dashboard'), icon: <DashboardIcon />, path: '/admin/dashboard' },
     { label: t('admin.users', 'Usuarios'), icon: <PeopleIcon />, path: '/admin/users' },
     { label: t('admin.churches', 'Iglesias'), icon: <ChurchIcon />, path: '/admin/churches' },
     { label: t('admin.events', 'Eventos'), icon: <EventIcon />, path: '/admin/events' },
     { label: t('admin.sermons', 'Sermones'), icon: <LibraryBooksIcon />, path: '/admin/sermons' },
     { label: t('admin.ministries', 'Ministerios'), icon: <GroupWorkIcon />, path: '/admin/ministries' },
+    { label: t('admin.memberships', 'Membresías'), icon: <CardMembershipIcon />, path: '/admin/memberships' },
     { label: t('admin.questions', 'Preguntas'), icon: <QuizIcon />, path: '/admin/questions' },
     { label: t('admin.settings', 'Configuración'), icon: <SettingsIcon />, path: '/admin/settings' },
   ];
@@ -44,8 +54,8 @@ const AdminLayout = ({
         onMenuClick={() => setMobileOpen(!mobileOpen)}
         user={user}
         themeMode={themeMode}
-        onThemeToggle={onThemeToggle}
-        onLogout={onLogout}
+        onThemeToggle={handleThemeToggle}
+        onLogout={handleLogout}
         title="Admin"
       />
 
@@ -70,13 +80,6 @@ const AdminLayout = ({
       </Box>
     </Box>
   );
-};
-
-AdminLayout.propTypes = {
-  user: PropTypes.object,
-  themeMode: PropTypes.string,
-  onThemeToggle: PropTypes.func,
-  onLogout: PropTypes.func,
 };
 
 export default AdminLayout;

@@ -31,7 +31,7 @@ export const eventsApi = baseApi.injectEndpoints({
             ]
           : [{ type: 'Event', id: 'LIST' }],
       transformResponse: (response) => ({
-        data: response.data,
+        data: response.data || [],
         pagination: response.pagination,
       }),
     }),
@@ -45,7 +45,9 @@ export const eventsApi = baseApi.injectEndpoints({
         },
       }),
       providesTags: [{ type: 'Event', id: 'UPCOMING' }],
-      transformResponse: (response) => response.data,
+      transformResponse: (response) => ({
+        data: response.data || [],
+      }),
     }),
 
     getEventById: builder.query({

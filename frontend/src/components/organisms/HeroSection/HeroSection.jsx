@@ -297,7 +297,7 @@ const HeroSection = ({
               startIcon={<LocationOnIcon />}
               sx={{
                 bgcolor: '#D4AF37',
-                color: '#0D1B4C',
+                color: '#ffffff',
                 px: 4,
                 py: 1.5,
                 fontSize: '1.1rem',

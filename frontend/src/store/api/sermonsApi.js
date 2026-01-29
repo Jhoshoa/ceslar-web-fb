@@ -21,6 +21,7 @@ export const sermonsApi = baseApi.injectEndpoints({
           churchId: params.churchId,
           category: params.category,
           search: params.search,
+          sort: params.sort,
         },
       }),
       providesTags: (result) =>
@@ -31,7 +32,7 @@ export const sermonsApi = baseApi.injectEndpoints({
             ]
           : [{ type: 'Sermon', id: 'LIST' }],
       transformResponse: (response) => ({
-        data: response.data,
+        data: response.data || [],
         pagination: response.pagination,
       }),
     }),
@@ -45,7 +46,9 @@ export const sermonsApi = baseApi.injectEndpoints({
         },
       }),
       providesTags: [{ type: 'Sermon', id: 'LATEST' }],
-      transformResponse: (response) => response.data,
+      transformResponse: (response) => ({
+        data: response.data || [],
+      }),
     }),
 
     getFeaturedSermons: builder.query({
@@ -54,7 +57,9 @@ export const sermonsApi = baseApi.injectEndpoints({
         params: { limit },
       }),
       providesTags: [{ type: 'Sermon', id: 'FEATURED' }],
-      transformResponse: (response) => response.data,
+      transformResponse: (response) => ({
+        data: response.data || [],
+      }),
     }),
 
     getSermonById: builder.query({

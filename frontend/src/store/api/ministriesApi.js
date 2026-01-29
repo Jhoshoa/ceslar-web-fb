@@ -30,7 +30,7 @@ export const ministriesApi = baseApi.injectEndpoints({
             ]
           : [{ type: 'Ministry', id: 'LIST' }],
       transformResponse: (response) => ({
-        data: response.data,
+        data: response.data || [],
         pagination: response.pagination,
       }),
     }),

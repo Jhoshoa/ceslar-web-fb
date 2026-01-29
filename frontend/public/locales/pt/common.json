@@ -147,5 +147,13 @@
     "confirmDelete": "Tem certeza que deseja excluir?",
     "confirmAction": "Tem certeza que deseja continuar?",
     "unsavedChanges": "Você tem alterações não salvas. Deseja continuar?"
+  },
+  "menu": {
+    "profile": "Meu Perfil",
+    "settings": "Configurações",
+    "dashboard": "Painel",
+    "admin": "Administração",
+    "logout": "Sair",
+    "guest": "Usuário"
   }
 }

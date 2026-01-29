@@ -7,11 +7,14 @@ import {
   ListItemText,
   Divider,
   MenuItem as MuiMenuItem,
+  Box,
+  Typography,
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Avatar from '../../atoms/Avatar/Avatar';
@@ -23,6 +26,13 @@ const UserMenu = ({ user, onLogout }) => {
   const open = Boolean(anchorEl);
 
   const handleClose = () => setAnchorEl(null);
+
+  // Check if user has dashboard access (admin roles)
+  const hasDashboardAccess = user?.systemRole === 'system_admin' ||
+    user?.systemRole === 'admin' ||
+    Object.values(user?.churchRoles || {}).some(role =>
+      ['admin', 'pastor', 'leader'].includes(role)
+    );
 
   const menuItems = [
     {
@@ -37,8 +47,18 @@ const UserMenu = ({ user, onLogout }) => {
     },
   ];
 
-  if (user?.systemRole === 'system_admin') {
+  // Add dashboard link for users with dashboard access
+  if (hasDashboardAccess) {
     menuItems.unshift({
+      label: t('menu.dashboard', 'Dashboard'),
+      icon: <DashboardIcon fontSize="small" />,
+      onClick: () => navigate('/admin/dashboard'),
+    });
+  }
+
+  // Add admin panel link for system admins
+  if (user?.systemRole === 'system_admin') {
+    menuItems.splice(hasDashboardAccess ? 1 : 0, 0, {
       label: t('menu.admin', 'Panel Admin'),
       icon: <AdminPanelSettingsIcon fontSize="small" />,
       onClick: () => navigate('/admin'),
@@ -51,9 +71,9 @@ const UserMenu = ({ user, onLogout }) => {
         <Avatar
           src={user?.photoURL}
           alt={user?.displayName}
-          sx={{ width: 32, height: 32 }}
+          sx={{ width: 36, height: 36 }}
         >
-          {user?.displayName?.[0]?.toUpperCase()}
+          {user?.displayName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase()}
         </Avatar>
       </IconButton>
 
@@ -63,8 +83,18 @@ const UserMenu = ({ user, onLogout }) => {
         onClose={handleClose}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-        PaperProps={{ sx: { minWidth: 200, mt: 1 } }}
+        PaperProps={{ sx: { minWidth: 220, mt: 1 } }}
       >
+        {/* User info header */}
+        <Box sx={{ px: 2, py: 1.5 }}>
+          <Typography variant="subtitle2" noWrap>
+            {user?.displayName || t('menu.guest', 'Usuario')}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" noWrap>
+            {user?.email}
+          </Typography>
+        </Box>
+        <Divider />
         {menuItems.map((item) => (
           <MuiMenuItem
             key={item.label}
@@ -76,8 +106,8 @@ const UserMenu = ({ user, onLogout }) => {
         ))}
         <Divider />
         <MuiMenuItem onClick={() => { handleClose(); onLogout?.(); }}>
-          <ListItemIcon><LogoutIcon fontSize="small" /></ListItemIcon>
-          <ListItemText>{t('menu.logout', 'Cerrar Sesión')}</ListItemText>
+          <ListItemIcon><LogoutIcon fontSize="small" color="error" /></ListItemIcon>
+          <ListItemText sx={{ color: 'error.main' }}>{t('menu.logout', 'Cerrar Sesión')}</ListItemText>
         </MuiMenuItem>
       </Menu>
     </>
