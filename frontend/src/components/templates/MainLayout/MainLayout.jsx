@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Toolbar } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../organisms/Header/Header';
 import Footer from '../../organisms/Footer/Footer';
@@ -9,6 +9,7 @@ import { selectTheme, toggleTheme } from '../../../store/slices/preferences.slic
 
 const MainLayout = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const themeMode = useSelector(selectTheme);
 
@@ -18,6 +19,7 @@ const MainLayout = () => {
 
   const handleLogout = async () => {
     await logout();
+    navigate('/');
   };
 
   return (

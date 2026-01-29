@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Toolbar, useMediaQuery, useTheme } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../organisms/Header/Header';
 import Sidebar from '../../organisms/Sidebar/Sidebar';
@@ -18,6 +18,7 @@ const DashboardLayout = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const themeMode = useSelector(selectTheme);
 
@@ -27,6 +28,7 @@ const DashboardLayout = ({
 
   const handleLogout = async () => {
     await logout();
+    navigate('/');
   };
 
   return (

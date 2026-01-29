@@ -65,8 +65,6 @@ export function useAuth() {
    */
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      dispatch(setLoading(true));
-
       if (firebaseUser) {
         try {
           // Get ID token with claims
@@ -90,7 +88,18 @@ export function useAuth() {
           dispatch(setUser(userData));
         } catch (err) {
           console.error('Error getting user claims:', err);
-          dispatch(setError(err.message));
+          // Still set user with basic info even if claims fail
+          dispatch(setUser({
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            displayName: firebaseUser.displayName,
+            photoURL: firebaseUser.photoURL,
+            emailVerified: firebaseUser.emailVerified,
+            phoneNumber: firebaseUser.phoneNumber,
+            systemRole: 'user',
+            churchRoles: {},
+            permissions: ['read:public'],
+          }));
         }
       } else {
         dispatch(setUser(null));

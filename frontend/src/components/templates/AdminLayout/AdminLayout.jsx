@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Toolbar, useMediaQuery, useTheme } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
@@ -25,6 +25,7 @@ const AdminLayout = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const themeMode = useSelector(selectTheme);
 
@@ -34,6 +35,7 @@ const AdminLayout = () => {
 
   const handleLogout = async () => {
     await logout();
+    navigate('/');
   };
 
   const menuItems = [

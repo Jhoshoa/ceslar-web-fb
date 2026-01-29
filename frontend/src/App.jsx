@@ -192,7 +192,7 @@ const App = () => {
             path="admin"
             element={
               <AuthGuard>
-                <RoleGuard roles={['system_admin', 'admin', 'pastor']}>
+                <RoleGuard allowedRoles={['system_admin', 'admin', 'pastor', 'leader']}>
                   <AdminLayout />
                 </RoleGuard>
               </AuthGuard>

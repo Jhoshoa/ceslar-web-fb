@@ -13,7 +13,6 @@ import {
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -52,15 +51,6 @@ const UserMenu = ({ user, onLogout }) => {
     menuItems.unshift({
       label: t('menu.dashboard', 'Dashboard'),
       icon: <DashboardIcon fontSize="small" />,
-      onClick: () => navigate('/admin/dashboard'),
-    });
-  }
-
-  // Add admin panel link for system admins
-  if (user?.systemRole === 'system_admin') {
-    menuItems.splice(hasDashboardAccess ? 1 : 0, 0, {
-      label: t('menu.admin', 'Panel Admin'),
-      icon: <AdminPanelSettingsIcon fontSize="small" />,
       onClick: () => navigate('/admin'),
     });
   }
