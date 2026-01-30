@@ -2,17 +2,20 @@
   "name": "ceslar-functions",
   "version": "1.0.0",
   "description": "Firebase Cloud Functions for Cristo Es La Respuesta",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
-    "serve": "firebase emulators:start --only functions",
-    "shell": "firebase functions:shell",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "npm run build && firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
+    "clean": "rimraf lib",
     "seed": "node src/seeders/index.js",
     "seed:force": "node src/seeders/index.js --force",
     "seed:clear": "node src/seeders/index.js --clear",
@@ -39,10 +42,18 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^20.11.0",
+    "@types/nodemailer": "^6.4.14",
+    "@types/uuid": "^9.0.7",
     "eslint": "^8.56.0",
     "eslint-config-google": "^0.14.0",
     "firebase-functions-test": "^3.1.1",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
   },
   "private": true
 }
