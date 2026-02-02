@@ -137,7 +137,8 @@ router.get(
   [param('country').trim().notEmpty(), handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const departments = await churchService.getDepartmentsByCountry(req.params.country);
+      const countryParam = Array.isArray(req.params.country) ? req.params.country[0] : req.params.country;
+      const departments = await churchService.getDepartmentsByCountry(countryParam);
       success(res, departments);
     } catch (error) {
       console.error('Error getting departments:', error);
@@ -155,7 +156,8 @@ router.get(
   [param('slug').trim().notEmpty(), handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const church = await churchService.getChurchBySlug(req.params.slug);
+      const slugParam = Array.isArray(req.params.slug) ? req.params.slug[0] : req.params.slug;
+      const church = await churchService.getChurchBySlug(slugParam);
       if (!church) {
         return notFound(res, 'Church');
       }
@@ -177,7 +179,8 @@ router.get(
   async (req: Request, res: Response) => {
     try {
       const includeLeadership = req.query.includeLeadership === 'true';
-      const church = await churchService.getChurchById(req.params.id, includeLeadership);
+      const idParam = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+      const church = await churchService.getChurchById(idParam, includeLeadership);
 
       if (!church) {
         return notFound(res, 'Church');
@@ -245,11 +248,12 @@ router.put(
   async (req: Request, res: Response) => {
     try {
       // Check permissions
-      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.id)) {
+      const idParam = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, idParam)) {
         return forbidden(res, 'Church admin access required');
       }
 
-      const church = await churchService.updateChurch(req.params.id, req.body);
+      const church = await churchService.updateChurch(idParam, req.body);
       success(res, church);
     } catch (error) {
       console.error('Error updating church:', error);
@@ -272,7 +276,8 @@ router.delete(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await churchService.deleteChurch(req.params.id);
+      const idParam = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+      await churchService.deleteChurch(idParam);
       noContent(res);
     } catch (error) {
       console.error('Error deleting church:', error);
@@ -302,11 +307,12 @@ router.post(
   async (req: Request, res: Response) => {
     try {
       // Check permissions
-      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.id)) {
+      const idParam = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, idParam)) {
         return forbidden(res, 'Church admin access required');
       }
 
-      const leadership = await churchService.addLeadership(req.params.id, req.body);
+      const leadership = await churchService.addLeadership(idParam, req.body);
       created(res, leadership);
     } catch (error) {
       console.error('Error adding leadership:', error);
@@ -333,11 +339,13 @@ router.delete(
   async (req: Request, res: Response) => {
     try {
       // Check permissions
-      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.id)) {
+      const idParam = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, idParam)) {
         return forbidden(res, 'Church admin access required');
       }
 
-      await churchService.removeLeadership(req.params.id, req.params.leadershipId);
+      const leadershipIdParam = Array.isArray(req.params.leadershipId) ? req.params.leadershipId[0] : req.params.leadershipId;
+      await churchService.removeLeadership(idParam, leadershipIdParam);
       noContent(res);
     } catch (error) {
       console.error('Error removing leadership:', error);

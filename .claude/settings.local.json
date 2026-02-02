@@ -8,7 +8,8 @@
       "Bash(FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 npm run seed:*)",
       "Bash(git commit:*)",
       "Bash(npm install:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }

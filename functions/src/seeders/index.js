@@ -87,9 +87,9 @@ async function runSeeders(options = {}) {
   }
 
   // Filter seeders if 'only' is specified
-  const filteredSeeders = only.length
-    ? seeders.filter((s) => only.includes(s.name))
-    : seeders;
+  const filteredSeeders = only.length ?
+    seeders.filter((s) => only.includes(s.name)) :
+    seeders;
 
   const uniqueSeeders = getUniqueSeeders(filteredSeeders);
 
