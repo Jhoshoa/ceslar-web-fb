@@ -6,7 +6,8 @@
  * - onUserDelete: Cleans up user data from Firestore
  */
 
-import * as functions from 'firebase-functions';
+import * as functionsV1 from 'firebase-functions/v1';
+import { HttpsError } from 'firebase-functions/v2/https';
 import { UserRecord } from 'firebase-admin/auth';
 import { db, auth, serverTimestamp } from '../config/firebase';
 import { Permission, SystemRole, ChurchRole, ThemeMode, Language } from '@ceslar/shared-types';
@@ -63,7 +64,7 @@ interface UserDocument {
  * 1. Sets default custom claims (systemRole, churchRoles, permissions)
  * 2. Creates a corresponding Firestore user document
  */
-export const onUserCreate = functions
+export const onUserCreate = functionsV1
   .region(REGION)
   .auth.user()
   .onCreate(async (user: UserRecord) => {
@@ -112,7 +113,7 @@ export const onUserCreate = functions
       return { success: true, userId: user.uid };
     } catch (error) {
       console.error(`Error in onUserCreate for ${user.uid}:`, error);
-      throw new functions.https.HttpsError('internal', 'Failed to initialize user');
+      throw new HttpsError('internal', 'Failed to initialize user');
     }
   });
 
@@ -123,7 +124,7 @@ export const onUserCreate = functions
  * 1. Removes user from all church member subcollections
  * 2. Deletes the Firestore user document
  */
-export const onUserDelete = functions
+export const onUserDelete = functionsV1
   .region(REGION)
   .auth.user()
   .onDelete(async (user: UserRecord) => {

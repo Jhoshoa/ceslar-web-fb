@@ -7,8 +7,7 @@
  * - Updates leadership entries when user info changes
  */
 
-import * as functions from 'firebase-functions';
-import { QueryDocumentSnapshot } from 'firebase-admin/firestore';
+import { onDocumentUpdated } from 'firebase-functions/v2/firestore';
 import { db, serverTimestamp } from '../config/firebase';
 import { UserChurchMembership } from '@ceslar/shared-types';
 
@@ -29,13 +28,6 @@ interface UserData {
 }
 
 /**
- * Context params for user triggers
- */
-interface UserParams {
-  userId: string;
-}
-
-/**
  * Trigger: When a user document is updated
  *
  * Syncs relevant fields to denormalized locations:
@@ -43,13 +35,17 @@ interface UserParams {
  * - sermons where speakerId matches (speakerName)
  * - churches leadership subcollection entries
  */
-export const onUserUpdate = functions
-  .region(REGION)
-  .firestore.document('users/{userId}')
-  .onUpdate(async (change: functions.Change<QueryDocumentSnapshot>, context: functions.EventContext) => {
-    const { userId } = context.params as unknown as UserParams;
-    const before = change.before.data() as UserData;
-    const after = change.after.data() as UserData;
+export const onUserUpdate = onDocumentUpdated(
+  { document: 'users/{userId}', region: REGION },
+  async (event) => {
+    const userId = event.params.userId;
+    const beforeData = event.data?.before.data();
+    const afterData = event.data?.after.data();
+
+    if (!beforeData || !afterData) return;
+
+    const before = beforeData as UserData;
+    const after = afterData as UserData;
 
     // Check if display-relevant fields changed
     const displayNameChanged = before.displayName !== after.displayName;
@@ -120,19 +116,24 @@ export const onUserUpdate = functions
     } catch (error) {
       console.error(`Error syncing user data for ${userId}:`, error);
     }
-  });
+  }
+);
 
 /**
  * Trigger: When a user's systemRole changes (detected via custom claims update)
  * This handles role-related side effects on the Firestore side.
  */
-export const onUserRoleChange = functions
-  .region(REGION)
-  .firestore.document('users/{userId}')
-  .onUpdate(async (change: functions.Change<QueryDocumentSnapshot>, context: functions.EventContext) => {
-    const { userId } = context.params as unknown as UserParams;
-    const before = change.before.data() as UserData;
-    const after = change.after.data() as UserData;
+export const onUserRoleChange = onDocumentUpdated(
+  { document: 'users/{userId}', region: REGION },
+  async (event) => {
+    const userId = event.params.userId;
+    const beforeData = event.data?.before.data();
+    const afterData = event.data?.after.data();
+
+    if (!beforeData || !afterData) return;
+
+    const before = beforeData as UserData;
+    const after = afterData as UserData;
 
     if (before.systemRole === after.systemRole) return;
 
@@ -144,4 +145,5 @@ export const onUserRoleChange = functions
     if (before.isActive && !after.isActive) {
       console.log(`User ${userId} deactivated - no cascading action needed`);
     }
-  });
+  }
+);

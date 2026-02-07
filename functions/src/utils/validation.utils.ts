@@ -241,3 +241,21 @@ export function sanitizeInput(value: unknown): unknown {
 export const sanitize = {
   text: (field: string): ValidationChain => body(field).customSanitizer(sanitizeInput),
 };
+
+/**
+ * Helper to safely extract a string param from request
+ * Express params can be string | string[] in some type definitions
+ */
+export function getParam(req: Request, paramName: string): string {
+  const value = req.params[paramName];
+  return Array.isArray(value) ? value[0] : (value || '');
+}
+
+/**
+ * Helper to safely extract a string query param from request
+ */
+export function getQuery(req: Request, queryName: string): string | undefined {
+  const value = req.query[queryName];
+  if (value === undefined) return undefined;
+  return Array.isArray(value) ? value[0]?.toString() : value.toString();
+}

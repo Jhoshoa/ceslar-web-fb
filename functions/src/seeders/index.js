@@ -17,9 +17,13 @@ const { getFirestore } = require('firebase-admin/firestore');
 const { getAuth } = require('firebase-admin/auth');
 
 // Initialize Firebase Admin (uses emulators if FIRESTORE_EMULATOR_HOST is set)
+// Use demo- prefix for local emulators to avoid requiring authentication
+const isEmulator = process.env.FIRESTORE_EMULATOR_HOST || process.env.FIREBASE_AUTH_EMULATOR_HOST;
+const defaultProjectId = isEmulator ? 'demo-ceslar-church-platform' : 'ceslar-church-platform';
+
 if (!admin.apps.length) {
   admin.initializeApp({
-    projectId: process.env.FIREBASE_PROJECT_ID || 'ceslar-church-platform',
+    projectId: process.env.FIREBASE_PROJECT_ID || defaultProjectId,
   });
 }
 
@@ -74,6 +78,7 @@ async function runSeeders(options = {}) {
   console.log('========================================');
   console.log(`  Mode:        ${clear ? 'CLEAR ONLY' : force ? 'FORCE RESEED' : 'SEED (skip existing)'}`);
   console.log(`  Collections: ${only.length ? only.join(', ') : 'all'}`);
+  console.log(`  Project:     ${process.env.FIREBASE_PROJECT_ID || defaultProjectId}`);
   console.log(`  Emulator:    ${process.env.FIRESTORE_EMULATOR_HOST || 'NOT SET (production!)'}`);
   console.log('========================================');
   console.log('');

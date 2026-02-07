@@ -25,6 +25,16 @@ COPY functions/package*.json ./functions/
 # Install functions dependencies
 RUN cd functions && npm install
 
+# Copy functions source and build
+COPY functions/src ./functions/src
+COPY functions/tsconfig.json ./functions/
+COPY packages ./packages
+
+# Create minimal .env file for functions (avoids Windows line ending issues)
+RUN echo 'NODE_ENV=development' > ./functions/.env
+
+RUN cd functions && npm run build
+
 # Copy Firebase configuration files
 COPY firebase.json .firebaserc ./
 COPY firestore.rules storage.rules firestore.indexes.json ./

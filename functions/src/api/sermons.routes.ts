@@ -92,7 +92,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const sermon = await sermonService.getSermonById(req.params.id);
+      const sermon = await sermonService.getSermonById(req.params.id as string);
       if (!sermon) {
         return notFound(res, 'Sermon');
       }
@@ -135,7 +135,7 @@ router.put(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const sermon = await sermonService.updateSermon(req.params.id, req.body);
+      const sermon = await sermonService.updateSermon(req.params.id as string, req.body);
       success(res, sermon);
     } catch (error) {
       if ((error as Error).message === 'Sermon not found') {
@@ -156,7 +156,7 @@ router.delete(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await sermonService.deleteSermon(req.params.id);
+      await sermonService.deleteSermon(req.params.id as string);
       noContent(res);
     } catch (error) {
       serverError(res, (error as Error).message);
@@ -173,7 +173,7 @@ router.post(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await sermonService.incrementViews(req.params.id);
+      await sermonService.incrementViews(req.params.id as string);
       success(res, { success: true });
     } catch (error) {
       serverError(res, (error as Error).message);

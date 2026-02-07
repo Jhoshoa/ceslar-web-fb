@@ -129,7 +129,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const user = await userService.getUserById(req.params.id);
+      const user = await userService.getUserById(req.params.id as string);
 
       if (!user) {
         return notFound(res, 'User');
@@ -164,7 +164,7 @@ router.put(
   ],
   async (req: Request, res: Response) => {
     try {
-      const user = await userService.updateUser(req.params.id, req.body);
+      const user = await userService.updateUser(req.params.id as string, req.body);
       success(res, user);
     } catch (error) {
       console.error('Error updating user:', error);
@@ -191,7 +191,7 @@ router.put(
   async (req: Request, res: Response) => {
     try {
       const { systemRole } = req.body;
-      const user = await userService.updateUserRole(req.params.id, systemRole as SystemRole);
+      const user = await userService.updateUserRole(req.params.id as string, systemRole as SystemRole);
       success(res, user);
     } catch (error) {
       console.error('Error updating user role:', error);
@@ -235,7 +235,7 @@ router.put(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await userService.deactivateUser(req.params.id);
+      await userService.deactivateUser(req.params.id as string);
       success(res, { message: 'User deactivated successfully' });
     } catch (error) {
       console.error('Error deactivating user:', error);
@@ -254,7 +254,7 @@ router.put(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await userService.reactivateUser(req.params.id);
+      await userService.reactivateUser(req.params.id as string);
       success(res, { message: 'User reactivated successfully' });
     } catch (error) {
       console.error('Error reactivating user:', error);
@@ -280,7 +280,7 @@ router.post(
   async (req: Request, res: Response) => {
     try {
       const { churchId, role } = req.body;
-      const targetUserId = req.params.id;
+      const targetUserId = req.params.id as string;
 
       // Check permissions: must be system admin or church admin for the specified church
       if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, churchId)) {
@@ -320,7 +320,8 @@ router.put(
   async (req: Request, res: Response) => {
     try {
       const { role } = req.body;
-      const { id: targetUserId, churchId } = req.params;
+      const targetUserId = req.params.id as string;
+      const churchId = req.params.churchId as string;
 
       // Check permissions: must be system admin or church admin for the specified church
       if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, churchId)) {
@@ -352,7 +353,8 @@ router.delete(
   ],
   async (req: Request, res: Response) => {
     try {
-      const { id: targetUserId, churchId } = req.params;
+      const targetUserId = req.params.id as string;
+      const churchId = req.params.churchId as string;
 
       // Check permissions: must be system admin or church admin for the specified church
       if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, churchId)) {
@@ -388,7 +390,7 @@ router.post(
       }
 
       // Get current user to check for existing avatar
-      const currentUser = await userService.getUserById(req.params.id);
+      const currentUser = await userService.getUserById(req.params.id as string);
       if (!currentUser) {
         return notFound(res, 'User');
       }
@@ -410,11 +412,11 @@ router.post(
         folder: 'ceslar/avatars',
         width: 400,
         height: 400,
-        publicId: `user-${req.params.id}`,
+        publicId: `user-${req.params.id as string}`,
       });
 
       // Update user profile with new photo URL
-      const updatedUser = await userService.updateUser(req.params.id, {
+      const updatedUser = await userService.updateUser(req.params.id as string, {
         photoURL: uploadResult.url,
       });
 
@@ -439,7 +441,7 @@ router.delete(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const currentUser = await userService.getUserById(req.params.id);
+      const currentUser = await userService.getUserById(req.params.id as string);
       if (!currentUser) {
         return notFound(res, 'User');
       }
@@ -457,7 +459,7 @@ router.delete(
       }
 
       // Update user profile to remove photo URL
-      await userService.updateUser(req.params.id, {
+      await userService.updateUser(req.params.id as string, {
         photoURL: null,
       });
 

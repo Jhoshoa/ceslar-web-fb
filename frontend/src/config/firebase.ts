@@ -44,20 +44,25 @@ if (import.meta.env.PROD) {
 const useEmulators = import.meta.env.VITE_USE_EMULATORS === 'true';
 
 if (useEmulators) {
-  // eslint-disable-next-line no-console
-  console.log('🔧 Connecting to Firebase Emulators...');
+  try {
+    // eslint-disable-next-line no-console
+    console.log('🔧 Connecting to Firebase Emulators...');
 
-  // Auth Emulator
-  connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+    // Auth Emulator
+    connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
 
-  // Firestore Emulator
-  connectFirestoreEmulator(db, 'localhost', 8080);
+    // Firestore Emulator
+    connectFirestoreEmulator(db, 'localhost', 8080);
 
-  // Storage Emulator
-  connectStorageEmulator(storage, 'localhost', 9199);
+    // Storage Emulator
+    connectStorageEmulator(storage, 'localhost', 9199);
 
-  // eslint-disable-next-line no-console
-  console.log('✅ Connected to Firebase Emulators');
+    // eslint-disable-next-line no-console
+    console.log('✅ Connected to Firebase Emulators');
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('❌ Failed to connect to Firebase Emulators:', error);
+  }
 }
 
 /**

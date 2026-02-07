@@ -8,7 +8,11 @@
  * - Scheduled Functions (future)
  */
 
-import * as functions from 'firebase-functions';
+// Load environment variables first (for local development with emulators)
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+import { onRequest } from 'firebase-functions/v2/https';
 
 // Region configuration
 const REGION = 'southamerica-east1';
@@ -17,7 +21,7 @@ const REGION = 'southamerica-east1';
 // HTTP API (Express)
 // ==========================================
 import app from './api';
-export const api = functions.region(REGION).https.onRequest(app);
+export const api = onRequest({ region: REGION, cors: true }, app);
 
 // ==========================================
 // AUTH TRIGGERS

@@ -93,7 +93,7 @@ export function requireChurchAdmin(
   }
 
   const churchId =
-    req.params.churchId ||
+    (req.params.churchId as string) ||
     (req.body as { churchId?: string })?.churchId ||
     (req.query.churchId as string);
 
@@ -139,7 +139,7 @@ export function requireChurchRole(roles: ChurchRole[]) {
     }
 
     const churchId =
-      req.params.churchId ||
+      (req.params.churchId as string) ||
       (req.body as { churchId?: string })?.churchId ||
       (req.query.churchId as string);
 
@@ -250,7 +250,7 @@ export function requireOwnerOrAdmin(ownerField: string = 'userId') {
     }
 
     const ownerId =
-      req.params[ownerField] ||
+      (req.params[ownerField] as string) ||
       (req.body as Record<string, unknown>)?.[ownerField];
     const isOwner = ownerId === req.user.uid;
     const admin = isSystemAdmin(req.user as UserClaims);

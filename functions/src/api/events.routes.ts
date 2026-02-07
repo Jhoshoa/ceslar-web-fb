@@ -85,7 +85,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const event = await eventService.getEventById(req.params.id);
+      const event = await eventService.getEventById(req.params.id as string);
       if (!event) {
         return notFound(res, 'Event');
       }
@@ -129,7 +129,7 @@ router.put(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const event = await eventService.updateEvent(req.params.id, req.body);
+      const event = await eventService.updateEvent(req.params.id as string, req.body);
       success(res, event);
     } catch (error) {
       if ((error as Error).message === 'Event not found') {
@@ -150,7 +150,7 @@ router.delete(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await eventService.deleteEvent(req.params.id);
+      await eventService.deleteEvent(req.params.id as string);
       noContent(res);
     } catch (error) {
       serverError(res, (error as Error).message);
@@ -168,7 +168,7 @@ router.post(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await eventService.registerForEvent(req.params.id, req.userId!, req.body);
+      await eventService.registerForEvent(req.params.id as string, req.userId!, req.body);
       success(res, { message: 'Successfully registered' });
     } catch (error) {
       if ((error as Error).message === 'Event not found') {
@@ -189,7 +189,7 @@ router.delete(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await eventService.cancelRegistration(req.params.id, req.userId!);
+      await eventService.cancelRegistration(req.params.id as string, req.userId!);
       noContent(res);
     } catch (error) {
       serverError(res, (error as Error).message);

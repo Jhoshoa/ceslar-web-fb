@@ -60,7 +60,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const ministry = await ministryService.getMinistryById(req.params.id);
+      const ministry = await ministryService.getMinistryById(req.params.id as string);
       if (!ministry) {
         return notFound(res, 'Ministry');
       }
@@ -103,7 +103,7 @@ router.put(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const ministry = await ministryService.updateMinistry(req.params.id, req.body);
+      const ministry = await ministryService.updateMinistry(req.params.id as string, req.body);
       success(res, ministry);
     } catch (error) {
       if ((error as Error).message === 'Ministry not found') {
@@ -124,7 +124,7 @@ router.delete(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await ministryService.deleteMinistry(req.params.id);
+      await ministryService.deleteMinistry(req.params.id as string);
       noContent(res);
     } catch (error) {
       serverError(res, (error as Error).message);

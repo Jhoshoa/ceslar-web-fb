@@ -21,7 +21,7 @@ import type { RootState } from '../index';
 // API base URL from environment
 const API_URL =
   import.meta.env.VITE_API_URL ||
-  'http://localhost:5001/ceslar-church-platform/southamerica-east1/api';
+  'http://localhost:5001/demo-ceslar-church-platform/southamerica-east1/api';
 
 /**
  * Tag types for RTK Query cache invalidation

@@ -79,7 +79,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const church = await churchService.getChurchById(req.params.id, true);
+      const church = await churchService.getChurchById(req.params.id as string, true);
       if (!church || church.status !== 'active') return notFound(res, 'Church');
       success(res, church);
     } catch (error) {
@@ -138,7 +138,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const event = await eventService.getEventById(req.params.id);
+      const event = await eventService.getEventById(req.params.id as string);
       if (!event || !event.isPublic) return notFound(res, 'Event');
       success(res, event);
     } catch (error) {
@@ -196,7 +196,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const sermon = await sermonService.getSermonById(req.params.id);
+      const sermon = await sermonService.getSermonById(req.params.id as string);
       if (!sermon || !sermon.isPublished) return notFound(res, 'Sermon');
       success(res, sermon);
     } catch (error) {

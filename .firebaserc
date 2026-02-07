@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "ceslar-church-platform"
+    "default": "demo-ceslar-church-platform",
+    "production": "ceslar-church-platform"
   },
   "targets": {},
   "etags": {}

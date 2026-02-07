@@ -99,7 +99,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const question = await questionService.getQuestionById(req.params.id);
+      const question = await questionService.getQuestionById(req.params.id as string);
       if (!question) {
         return notFound(res, 'Question');
       }
@@ -161,7 +161,7 @@ router.put(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const question = await questionService.updateQuestion(req.params.id, req.body);
+      const question = await questionService.updateQuestion(req.params.id as string, req.body);
       success(res, question);
     } catch (error) {
       if ((error as Error).message === 'Question not found') {
@@ -183,7 +183,7 @@ router.delete(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await questionService.deleteQuestion(req.params.id);
+      await questionService.deleteQuestion(req.params.id as string);
       noContent(res);
     } catch (error) {
       if ((error as Error).message === 'Question not found') {
@@ -208,7 +208,7 @@ router.put(
   ],
   async (req: Request, res: Response) => {
     try {
-      await questionService.reorderQuestions(req.params.categoryId, req.body.orderedIds);
+      await questionService.reorderQuestions(req.params.categoryId as string, req.body.orderedIds);
       success(res, { message: 'Questions reordered successfully' });
     } catch (error) {
       serverError(res, (error as Error).message);
@@ -250,7 +250,7 @@ router.put(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const category = await questionService.updateCategory(req.params.id, req.body);
+      const category = await questionService.updateCategory(req.params.id as string, req.body);
       success(res, category);
     } catch (error) {
       if ((error as Error).message === 'Category not found') {
@@ -272,7 +272,7 @@ router.delete(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await questionService.deleteCategory(req.params.id);
+      await questionService.deleteCategory(req.params.id as string);
       noContent(res);
     } catch (error) {
       const message = (error as Error).message;
@@ -296,7 +296,7 @@ router.get(
   [commonValidators.id, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const category = await questionService.getCategoryById(req.params.id);
+      const category = await questionService.getCategoryById(req.params.id as string);
       if (!category) {
         return notFound(res, 'Category');
       }

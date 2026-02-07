@@ -79,7 +79,7 @@ router.delete(
   [param('churchId').notEmpty(), handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      await membershipService.leaveChurch(req.userId!, req.params.churchId);
+      await membershipService.leaveChurch(req.userId!, req.params.churchId as string);
       noContent(res);
     } catch (error) {
       serverError(res, (error as Error).message);
@@ -96,10 +96,10 @@ router.get(
   [param('churchId').notEmpty(), handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.churchId)) {
+      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.churchId as string)) {
         return forbidden(res, 'Unauthorized');
       }
-      const requests = await membershipService.getPendingRequests(req.params.churchId);
+      const requests = await membershipService.getPendingRequests(req.params.churchId as string);
       success(res, requests);
     } catch (error) {
       serverError(res, (error as Error).message);
@@ -121,12 +121,12 @@ router.put(
   ],
   async (req: Request, res: Response) => {
     try {
-      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.churchId)) {
+      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.churchId as string)) {
         return forbidden(res, 'Unauthorized');
       }
       await membershipService.approveMembership(
-        req.params.churchId,
-        req.params.userId,
+        req.params.churchId as string,
+        req.params.userId as string,
         (req.body.role as ChurchRole) || 'member'
       );
       success(res, { message: 'Membership approved' });
@@ -154,12 +154,12 @@ router.put(
   ],
   async (req: Request, res: Response) => {
     try {
-      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.churchId)) {
+      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.churchId as string)) {
         return forbidden(res, 'Unauthorized');
       }
       await membershipService.rejectMembership(
-        req.params.churchId,
-        req.params.userId,
+        req.params.churchId as string,
+        req.params.userId as string,
         req.body.reason
       );
       success(res, { message: 'Membership rejected' });
@@ -183,12 +183,12 @@ router.put(
   ],
   async (req: Request, res: Response) => {
     try {
-      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.churchId)) {
+      if (!isSystemAdmin(req.user!) && !isChurchAdmin(req.user!, req.params.churchId as string)) {
         return forbidden(res, 'Unauthorized');
       }
       await membershipService.updateMemberRole(
-        req.params.churchId,
-        req.params.userId,
+        req.params.churchId as string,
+        req.params.userId as string,
         req.body.role as ChurchRole
       );
       success(res, { message: 'Role updated' });
