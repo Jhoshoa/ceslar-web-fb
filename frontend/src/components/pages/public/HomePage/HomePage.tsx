@@ -51,12 +51,19 @@ interface Church {
   country?: string;
 }
 
+interface EventLocation {
+  name?: string;
+  address?: string;
+  coordinates?: { lat: number; lng: number };
+  isOnline?: boolean;
+}
+
 interface Event {
   id: string;
   title: string | LocalizedString;
   startDate?: string;
   startTime?: string;
-  location?: string;
+  location?: EventLocation | string;
   churchName?: string;
 }
 
@@ -226,52 +233,73 @@ interface ChurchCardItemProps {
   onClick: () => void;
 }
 
-const ChurchCardItem = ({ church, onClick }: ChurchCardItemProps) => (
-  <Card
-    onClick={onClick}
-    sx={{
-      cursor: 'pointer',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      '&:hover .church-image': { transform: 'scale(1.05)' },
-    }}
-  >
-    <Box sx={{ position: 'relative', overflow: 'hidden', height: 180 }}>
-      <CardMedia
-        className="church-image"
-        component="img"
-        height="180"
-        image={church.logo || church.coverImage || '/images/church-placeholder.jpg'}
-        alt={church.name}
-        sx={{ transition: 'transform 0.4s ease' }}
-      />
-      <Box sx={{ position: 'absolute', top: 12, left: 12 }}>
-        <Chip
-          label={church.level}
-          size="small"
-          sx={{
-            bgcolor: alpha('#D4AF37', 0.9),
-            color: '#0D1B4C',
-            fontWeight: 600,
-            textTransform: 'capitalize',
-          }}
-        />
+const ChurchCardItem = ({ church, onClick }: ChurchCardItemProps) => {
+  const hasImage = church.logo || church.coverImage;
+
+  return (
+    <Card
+      onClick={onClick}
+      sx={{
+        cursor: 'pointer',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        '&:hover .church-image': { transform: 'scale(1.05)' },
+        '&:hover .church-placeholder': { opacity: 0.9 },
+      }}
+    >
+      <Box sx={{ position: 'relative', overflow: 'hidden', height: 180 }}>
+        {hasImage ? (
+          <CardMedia
+            className="church-image"
+            component="img"
+            height="180"
+            image={church.logo || church.coverImage}
+            alt={church.name}
+            sx={{ transition: 'transform 0.4s ease', objectFit: 'cover' }}
+          />
+        ) : (
+          <Box
+            className="church-placeholder"
+            sx={{
+              height: 180,
+              background: 'linear-gradient(135deg, #0D1B4C 0%, #1E3A8A 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'opacity 0.3s ease',
+            }}
+          >
+            <LocationOnIcon sx={{ fontSize: 48, color: alpha('#D4AF37', 0.6) }} />
+          </Box>
+        )}
+        <Box sx={{ position: 'absolute', top: 12, left: 12 }}>
+          <Chip
+            label={church.level}
+            size="small"
+            sx={{
+              bgcolor: alpha('#D4AF37', 0.9),
+              color: '#0D1B4C',
+              fontWeight: 600,
+              textTransform: 'capitalize',
+            }}
+          />
+        </Box>
       </Box>
-    </Box>
-    <CardContent sx={{ flexGrow: 1 }}>
-      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }} noWrap>
-        {church.name}
-      </Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center', color: 'text.secondary' }}>
-        <LocationOnIcon sx={{ fontSize: 16, mr: 0.5 }} />
-        <Typography variant="body2" noWrap>
-          {church.city}, {church.country}
+      <CardContent sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }} noWrap>
+          {church.name}
         </Typography>
-      </Box>
-    </CardContent>
-  </Card>
-);
+        <Box sx={{ display: 'flex', alignItems: 'center', color: 'text.secondary' }}>
+          <LocationOnIcon sx={{ fontSize: 16, mr: 0.5 }} />
+          <Typography variant="body2" noWrap>
+            {church.city}, {church.country}
+          </Typography>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+};
 
 // Event Card Component
 interface EventCardItemProps {
@@ -282,6 +310,15 @@ interface EventCardItemProps {
 const EventCardItem = ({ event, onClick }: EventCardItemProps) => {
   const eventDate = event.startDate ? new Date(event.startDate) : new Date();
   const title = typeof event.title === 'string' ? event.title : event.title?.es || '';
+
+  // Handle location - can be string or object
+  const getLocationText = () => {
+    if (!event.location) return event.churchName || '';
+    if (typeof event.location === 'string') return event.location;
+    // Location is an object
+    if (event.location.isOnline) return 'En línea';
+    return event.location.name || event.location.address || event.churchName || '';
+  };
 
   return (
     <Card onClick={onClick} sx={{ cursor: 'pointer', display: 'flex', height: '100%', minHeight: 140 }}>
@@ -316,7 +353,7 @@ const EventCardItem = ({ event, onClick }: EventCardItemProps) => {
         <Box sx={{ display: 'flex', alignItems: 'center', color: 'text.secondary' }}>
           <LocationOnIcon sx={{ fontSize: 14, mr: 0.5 }} />
           <Typography variant="body2" noWrap>
-            {event.location || event.churchName}
+            {getLocationText()}
           </Typography>
         </Box>
       </CardContent>
@@ -332,6 +369,7 @@ interface SermonCardItemProps {
 
 const SermonCardItem = ({ sermon, onClick }: SermonCardItemProps) => {
   const title = typeof sermon.title === 'string' ? sermon.title : sermon.title?.es || '';
+  const hasImage = sermon.thumbnail;
 
   return (
     <Card
@@ -345,17 +383,27 @@ const SermonCardItem = ({ sermon, onClick }: SermonCardItemProps) => {
       }}
     >
       <Box sx={{ position: 'relative', height: 200 }}>
-        <CardMedia
-          component="img"
-          height="200"
-          image={sermon.thumbnail || '/images/sermon-placeholder.jpg'}
-          alt={title}
-        />
+        {hasImage ? (
+          <CardMedia
+            component="img"
+            height="200"
+            image={sermon.thumbnail}
+            alt={title}
+            sx={{ objectFit: 'cover' }}
+          />
+        ) : (
+          <Box
+            sx={{
+              height: 200,
+              background: 'linear-gradient(135deg, #1E3A8A 0%, #0D1B4C 100%)',
+            }}
+          />
+        )}
         <Box
           sx={{
             position: 'absolute',
             inset: 0,
-            bgcolor: alpha('#0D1B4C', 0.4),
+            bgcolor: hasImage ? alpha('#0D1B4C', 0.4) : 'transparent',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -453,16 +501,17 @@ const HomePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  // API calls
-  const { data: churchesData, isLoading: loadingChurches } = useGetFeaturedChurchesQuery({ limit: 4 });
-  const { data: eventsData, isLoading: loadingEvents } = useGetUpcomingEventsQuery({ limit: 3 });
-  const { data: sermonsData, isLoading: loadingSermons } = useGetSermonsQuery({ limit: 3, sort: '-createdAt' });
-  const { data: ministriesData, isLoading: loadingMinistries } = useGetMinistriesQuery({ limit: 4 });
+  // API calls with error handling
+  const { data: churchesData, isLoading: loadingChurches, isError: churchesError } = useGetFeaturedChurchesQuery({ limit: 4 });
+  const { data: eventsData, isLoading: loadingEvents, isError: eventsError } = useGetUpcomingEventsQuery({ limit: 3 });
+  const { data: sermonsData, isLoading: loadingSermons, isError: sermonsError } = useGetSermonsQuery({ limit: 3, sort: '-createdAt' });
+  const { data: ministriesData, isLoading: loadingMinistries, isError: ministriesError } = useGetMinistriesQuery({ limit: 4 });
 
-  const churches: Church[] = churchesData?.data || [];
-  const events: Event[] = eventsData?.data || [];
-  const sermons: Sermon[] = sermonsData?.data || [];
-  const ministries: Ministry[] = ministriesData?.data || [];
+  // Safely extract data with fallbacks
+  const churches: Church[] = (!churchesError && churchesData?.data) ? churchesData.data : [];
+  const events: Event[] = (!eventsError && eventsData?.data) ? eventsData.data : [];
+  const sermons: Sermon[] = (!sermonsError && sermonsData?.data) ? sermonsData.data : [];
+  const ministries: Ministry[] = (!ministriesError && ministriesData?.data) ? ministriesData.data : [];
 
   return (
     <Box>

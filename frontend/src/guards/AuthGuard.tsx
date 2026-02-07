@@ -27,7 +27,7 @@ function AuthGuard({ children, requireEmailVerified = false }: AuthGuardProps): 
   const { isAuthenticated, isInitialized, user, loading } = useAuth();
   const location = useLocation();
 
-  // Show loading state while checking auth
+  // Show loading state while checking auth - content-level, not full page
   if (!isInitialized || loading) {
     return (
       <Box
@@ -36,7 +36,7 @@ function AuthGuard({ children, requireEmailVerified = false }: AuthGuardProps): 
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          minHeight: '100vh',
+          minHeight: '60vh',
           gap: 2,
         }}
       >

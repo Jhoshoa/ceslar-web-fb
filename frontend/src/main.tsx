@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import { store, persistor } from './store';
 import { lightTheme } from './theme';
 import App from './App';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Import i18n (must be imported before App)
 import './i18n';
@@ -50,9 +51,11 @@ root.render(
           <BrowserRouter>
             <ThemeProvider theme={lightTheme}>
               <CssBaseline />
-              <Suspense fallback={<LoadingFallback />}>
-                <App />
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<LoadingFallback />}>
+                  <App />
+                </Suspense>
+              </ErrorBoundary>
             </ThemeProvider>
           </BrowserRouter>
         </PersistGate>

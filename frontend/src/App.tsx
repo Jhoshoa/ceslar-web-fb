@@ -1,6 +1,5 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 // Guards
@@ -11,20 +10,6 @@ import { MainLayout, AdminLayout, AuthLayout } from './components/templates';
 
 // Auth Hook
 import useAuth from './hooks/useAuth';
-
-// Loading component
-const PageLoader = () => (
-  <Box
-    sx={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '60vh',
-    }}
-  >
-    <CircularProgress />
-  </Box>
-);
 
 // Lazy load pages for code splitting
 
@@ -96,30 +81,13 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
-  // Initialize auth listener
-  const { isInitialized } = useAuth();
-
-  // Show loading while auth is initializing
-  if (!isInitialized) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '100vh',
-        }}
-      >
-        <CircularProgress size={48} />
-      </Box>
-    );
-  }
+  // Initialize auth listener - no blocking, let layouts render
+  useAuth();
 
   return (
     <>
       <ScrollToTop />
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
+      <Routes>
           {/* Public Routes with MainLayout */}
           <Route element={<MainLayout />}>
             <Route index element={<HomePage />} />
@@ -218,7 +186,6 @@ const App = () => {
             }
           />
         </Routes>
-      </Suspense>
     </>
   );
 };

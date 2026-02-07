@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { Box, Toolbar } from '@mui/material';
+import { ReactNode, Suspense } from 'react';
+import { Box, Toolbar, CircularProgress } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../organisms/Header/Header';
@@ -7,6 +7,20 @@ import Footer from '../../organisms/Footer/Footer';
 import useAuth from '../../../hooks/useAuth';
 import { selectTheme, toggleTheme } from '../../../store/slices/preferences.slice';
 import type { AppDispatch } from '../../../store';
+
+// Content-level loading component - fits within layout
+const ContentLoader = () => (
+  <Box
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '60vh',
+    }}
+  >
+    <CircularProgress />
+  </Box>
+);
 
 interface MainLayoutProps {
   children?: ReactNode;
@@ -44,7 +58,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           overflow: 'hidden',
         }}
       >
-        {children || <Outlet />}
+        <Suspense fallback={<ContentLoader />}>
+          {children || <Outlet />}
+        </Suspense>
       </Box>
       <Footer />
     </Box>

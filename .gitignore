@@ -23,6 +23,10 @@ ui-debug.log
 pubsub-debug.log
 firestore-debug.log
 emulator-data/
+firebase-export-*/
+
+# Claude Code
+.claude/
 
 # Service account keys (NEVER commit these!)
 **/service-account*.json

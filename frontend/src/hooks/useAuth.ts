@@ -145,7 +145,10 @@ export function useAuth(): UseAuthReturn {
    * Initialize auth state listener
    */
   useEffect(() => {
+    let authInitialized = false;
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      authInitialized = true;
       if (firebaseUser) {
         try {
           // Get ID token with claims
@@ -187,8 +190,20 @@ export function useAuth(): UseAuthReturn {
       }
     });
 
-    // Cleanup subscription
-    return () => unsubscribe();
+    // Safety timeout: If auth doesn't initialize within 5 seconds, set initialized anyway
+    // This prevents the app from being stuck in loading state
+    const timeoutId = setTimeout(() => {
+      if (!authInitialized) {
+        console.warn('Auth initialization timeout - setting initialized state');
+        dispatch(setUser(null));
+      }
+    }, 5000);
+
+    // Cleanup subscription and timeout
+    return () => {
+      unsubscribe();
+      clearTimeout(timeoutId);
+    };
   }, [dispatch]);
 
   /**
@@ -201,6 +216,10 @@ export function useAuth(): UseAuthReturn {
 
       try {
         const result = await signInWithEmailAndPassword(auth, email, password);
+
+        // Force token refresh to get latest claims after login
+        await result.user.getIdToken(true);
+
         return result.user;
       } catch (err) {
         const authError = err as FirebaseAuthError;
@@ -255,6 +274,10 @@ export function useAuth(): UseAuthReturn {
         prompt: 'select_account',
       });
       const result = await signInWithPopup(auth, provider);
+
+      // Force token refresh to get latest claims after login
+      await result.user.getIdToken(true);
+
       return result.user;
     } catch (err) {
       const authError = err as FirebaseAuthError;

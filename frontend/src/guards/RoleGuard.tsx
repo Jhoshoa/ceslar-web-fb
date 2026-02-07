@@ -44,7 +44,7 @@ function RoleGuard({
     useAuth();
   const location = useLocation();
 
-  // Show loading state while checking auth
+  // Show loading state while checking auth - content-level, not full page
   if (!isInitialized || loading) {
     return (
       <Box
@@ -53,7 +53,7 @@ function RoleGuard({
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          minHeight: '100vh',
+          minHeight: '60vh',
           gap: 2,
         }}
       >

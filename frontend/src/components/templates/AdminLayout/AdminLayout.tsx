@@ -1,5 +1,5 @@
-import { useState, ReactNode } from 'react';
-import { Box, Toolbar, useMediaQuery, useTheme } from '@mui/material';
+import { useState, ReactNode, Suspense } from 'react';
+import { Box, Toolbar, useMediaQuery, useTheme, CircularProgress } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -19,6 +19,20 @@ import { selectTheme, toggleTheme } from '../../../store/slices/preferences.slic
 import type { AppDispatch } from '../../../store';
 
 const DRAWER_WIDTH = 260;
+
+// Content-level loading component
+const ContentLoader = () => (
+  <Box
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '60vh',
+    }}
+  >
+    <CircularProgress />
+  </Box>
+);
 
 interface MenuItem {
   label: string;
@@ -83,7 +97,9 @@ const AdminLayout = () => {
         }}
       >
         <Toolbar />
-        <Outlet />
+        <Suspense fallback={<ContentLoader />}>
+          <Outlet />
+        </Suspense>
       </Box>
     </Box>
   );
