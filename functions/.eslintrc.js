@@ -30,6 +30,13 @@ module.exports = {
       },
       rules: {},
     },
+    {
+      files: ['**/__tests__/**/*', '**/*.test.*'],
+      env: {
+        jest: true,
+      },
+      rules: {},
+    },
   ],
   globals: {},
 };
