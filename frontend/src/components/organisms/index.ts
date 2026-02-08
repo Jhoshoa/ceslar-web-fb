@@ -17,3 +17,5 @@ export { default as ServiceScheduleManager } from './ServiceScheduleManager/Serv
 export { default as ChurchForm } from './ChurchForm/ChurchForm';
 export { default as EventForm } from './EventForm/EventForm';
 export { default as GlobalSnackbar } from './GlobalSnackbar/GlobalSnackbar';
+export { default as RichTextEditor } from './RichTextEditor/RichTextEditor';
+export { default as LocalizedRichTextInput } from './LocalizedRichTextInput/LocalizedRichTextInput';

@@ -59,6 +59,8 @@ const ChurchCreatePage = () => {
         website: data.website || undefined,
         socialMedia: data.socialMedia || undefined,
         description: data.description,
+        history: data.history || undefined,
+        foundationDate: data.foundationDate || undefined,
         serviceSchedule: data.serviceSchedule || undefined,
         coverImage: data.coverImage || undefined,
         logoImage: data.logoImage || undefined,

@@ -22,6 +22,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import DescriptionIcon from '@mui/icons-material/Description';
+import HistoryIcon from '@mui/icons-material/History';
 import ImageIcon from '@mui/icons-material/Image';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import { useTranslation } from 'react-i18next';
@@ -32,6 +33,7 @@ import FormField from '../../molecules/FormField/FormField';
 import SelectField from '../../molecules/SelectField/SelectField';
 import SwitchField from '../../molecules/SwitchField/SwitchField';
 import LocalizedStringInput from '../LocalizedStringInput/LocalizedStringInput';
+import LocalizedRichTextInput from '../LocalizedRichTextInput/LocalizedRichTextInput';
 import ImageUploadField from '../ImageUploadField/ImageUploadField';
 import CoordinatesInput from '../CoordinatesInput/CoordinatesInput';
 import SocialMediaLinks from '../SocialMediaLinks/SocialMediaLinks';
@@ -120,6 +122,8 @@ const ChurchForm = ({
       website: initialData.website || '',
       socialMedia: initialData.socialMedia || {},
       description: initialData.description || { es: '', en: '', pt: '' },
+      history: initialData.history || { es: '', en: '', pt: '' },
+      foundationDate: initialData.foundationDate || '',
       serviceSchedule: initialData.serviceSchedule || [],
       coverImage: initialData.coverImage || null,
       logoImage: initialData.logoImage || null,
@@ -565,6 +569,54 @@ const ChurchForm = ({
                   />
                 )}
               />
+            </AccordionDetails>
+          </Accordion>
+
+          {/* History & Foundation */}
+          <Accordion sx={accordionSx}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <HistoryIcon color="primary" />
+                <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                  {t('admin.churches.form.historySection', 'Historia y Fundación')}
+                </Typography>
+              </Box>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Controller
+                    name="foundationDate"
+                    control={control}
+                    render={({ field }) => (
+                      <FormField
+                        {...field}
+                        type="date"
+                        label={t('admin.churches.form.foundationDate', 'Fecha de Fundación')}
+                        error={errors.foundationDate?.message}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Controller
+                    name="history"
+                    control={control}
+                    render={({ field }) => (
+                      <LocalizedRichTextInput
+                        label={t('admin.churches.form.history', 'Historia de la Iglesia')}
+                        name={field.name}
+                        value={field.value}
+                        onChange={field.onChange}
+                        error={errors.history?.message}
+                        placeholder="Escribe la historia de la iglesia, su fundación, crecimiento y momentos importantes..."
+                        minHeight={250}
+                      />
+                    )}
+                  />
+                </Grid>
+              </Grid>
             </AccordionDetails>
           </Accordion>
 

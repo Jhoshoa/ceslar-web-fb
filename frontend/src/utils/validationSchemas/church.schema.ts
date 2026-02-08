@@ -126,6 +126,8 @@ export const churchFormSchema = z.object({
 
   // Content
   description: localizedStringRequiredSchema,
+  history: localizedStringSchema.optional(),
+  foundationDate: z.string().optional().or(z.literal('')),
   serviceSchedule: z.array(serviceScheduleSchema).optional(),
   coverImage: z.string().url('Invalid image URL').nullable().optional(),
   logoImage: z.string().url('Invalid image URL').nullable().optional(),
@@ -157,6 +159,8 @@ export const defaultChurchFormValues: ChurchFormData = {
   website: '',
   socialMedia: {},
   description: { es: '', en: '', pt: '' },
+  history: { es: '', en: '', pt: '' },
+  foundationDate: '',
   serviceSchedule: [],
   coverImage: null,
   logoImage: null,
