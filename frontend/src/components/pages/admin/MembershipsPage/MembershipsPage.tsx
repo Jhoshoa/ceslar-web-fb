@@ -130,7 +130,7 @@ const MembershipsPage = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Typography variant="h4" sx={{ fontWeight: 700, mb: 4 }}>
         {t('admin.memberships.pageTitle', 'Solicitudes de Membresía')}
       </Typography>
