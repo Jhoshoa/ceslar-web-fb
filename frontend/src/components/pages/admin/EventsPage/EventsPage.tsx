@@ -1,20 +1,26 @@
-import { useState, ChangeEvent } from 'react';
+/**
+ * EventsPage
+ *
+ * Admin page for managing events with navigation to create/edit pages.
+ */
+
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import {
   useGetEventsQuery,
-  useCreateEventMutation,
-  useUpdateEventMutation,
   useDeleteEventMutation,
 } from '../../../../store/api/eventsApi';
 import DataTable from '../../../organisms/DataTable/DataTable';
-import FormDialog from '../../../organisms/FormDialog/FormDialog';
 import ConfirmDialog from '../../../organisms/ConfirmDialog/ConfirmDialog';
 import Typography from '../../../atoms/Typography/Typography';
 import Button from '../../../atoms/Button/Button';
 import Chip from '../../../atoms/Chip/Chip';
-import FormField from '../../../molecules/FormField/FormField';
+import { showSuccess, showError } from '../../../../store/slices/ui.slice';
+import type { AppDispatch } from '../../../../store';
 
 interface LocalizedString {
   es?: string;
@@ -28,38 +34,29 @@ interface Event {
   title: string | LocalizedString;
   description?: string | LocalizedString;
   status: string;
+  type?: string;
   startDate?: { _seconds: number } | string;
-  location?: { name?: string };
-  registrationCount?: number;
-}
-
-interface EventForm {
-  title: string;
-  description: string;
-  startDate: string;
-  location: string;
-}
-
-interface DialogState {
-  open: boolean;
-  event: Event | null;
+  endDate?: { _seconds: number } | string;
+  location?: { name?: string; city?: string };
+  churchName?: string | LocalizedString;
+  registration?: { currentAttendees?: number };
+  isFeatured?: boolean;
+  isPublic?: boolean;
 }
 
 type ChipColor = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
 const EventsPage = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const lang = i18n.language?.split('-')[0] || 'es';
 
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const [dialog, setDialog] = useState<DialogState>({ open: false, event: null });
   const [deleteConfirm, setDeleteConfirm] = useState<Event | null>(null);
-  const [form, setForm] = useState<EventForm>({ title: '', description: '', startDate: '', location: '' });
 
   const { data, isLoading } = useGetEventsQuery({ page, limit: 10, search: search || undefined });
-  const [createEvent, { isLoading: creating }] = useCreateEventMutation();
-  const [updateEvent, { isLoading: updating }] = useUpdateEventMutation();
   const [deleteEvent, { isLoading: deleting }] = useDeleteEventMutation();
 
   const events: Event[] = data?.data || [];
@@ -71,45 +68,109 @@ const EventsPage = () => {
     return text[lang] || text.es || '';
   };
 
+  const formatDate = (date: { _seconds: number } | string | undefined): string => {
+    if (!date) return '—';
+    const d = typeof date === 'object' && '_seconds' in date
+      ? new Date(date._seconds * 1000)
+      : new Date(date);
+    return d.toLocaleDateString(lang, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
   const statusColors: Record<string, ChipColor> = {
-    upcoming: 'info',
-    ongoing: 'success',
-    completed: 'default',
+    draft: 'default',
+    published: 'success',
     cancelled: 'error',
+    postponed: 'warning',
+    completed: 'info',
+  };
+
+  const typeLabels: Record<string, string> = {
+    conference: t('admin.events.types.conference', 'Conferencia'),
+    special_event: t('admin.events.types.special_event', 'Evento Especial'),
+    camp: t('admin.events.types.camp', 'Campamento'),
+    workshop: t('admin.events.types.workshop', 'Taller'),
+    retreat: t('admin.events.types.retreat', 'Retiro'),
+    service: t('admin.events.types.service', 'Servicio'),
+    concert: t('admin.events.types.concert', 'Concierto'),
+    outreach: t('admin.events.types.outreach', 'Evangelismo'),
+    meeting: t('admin.events.types.meeting', 'Reunión'),
+    training: t('admin.events.types.training', 'Capacitación'),
   };
 
   const columns = [
     {
       field: 'title',
-      label: t('admin.events.title', 'Título'),
+      label: t('admin.events.titleField', 'Título'),
       sortable: true,
       render: (row: Event) => (
-        <Typography variant="body2" sx={{ fontWeight: 500 }}>{getLocalizedText(row.title)}</Typography>
+        <Box>
+          <Typography variant="body2" sx={{ fontWeight: 500 }}>
+            {getLocalizedText(row.title)}
+          </Typography>
+          {row.type && (
+            <Typography variant="caption" color="textSecondary">
+              {typeLabels[row.type] || row.type}
+            </Typography>
+          )}
+        </Box>
+      ),
+    },
+    {
+      field: 'church',
+      label: t('admin.events.church', 'Iglesia'),
+      render: (row: Event) => (
+        <Typography variant="body2" color="textSecondary">
+          {getLocalizedText(row.churchName)}
+        </Typography>
       ),
     },
     {
       field: 'status',
       label: t('admin.events.status', 'Estado'),
       render: (row: Event) => (
-        <Chip label={row.status} size="small" color={statusColors[row.status] || 'default'} />
+        <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+          <Chip
+            label={t(`admin.events.statuses.${row.status}`, row.status)}
+            size="small"
+            color={statusColors[row.status] || 'default'}
+          />
+          {row.isFeatured && (
+            <Chip label={t('admin.events.featured', 'Destacado')} size="small" color="primary" variant="outlined" />
+          )}
+        </Box>
       ),
     },
     {
       field: 'startDate',
       label: t('admin.events.date', 'Fecha'),
       sortable: true,
-      render: (row: Event) => {
-        if (!row.startDate) return '—';
-        const d = typeof row.startDate === 'object' && '_seconds' in row.startDate
-          ? new Date(row.startDate._seconds * 1000)
-          : new Date(row.startDate);
-        return <Typography variant="caption">{d.toLocaleDateString(lang)}</Typography>;
-      },
+      render: (row: Event) => (
+        <Box>
+          <Typography variant="caption" sx={{ display: 'block' }}>
+            {formatDate(row.startDate)}
+          </Typography>
+          {row.location?.name && (
+            <Typography variant="caption" color="textSecondary">
+              {row.location.name}
+            </Typography>
+          )}
+        </Box>
+      ),
     },
     {
-      field: 'registrationCount',
+      field: 'registrations',
       label: t('admin.events.registrations', 'Registros'),
-      render: (row: Event) => row.registrationCount || 0,
+      render: (row: Event) => (
+        <Typography variant="body2">
+          {row.registration?.currentAttendees || 0}
+        </Typography>
+      ),
     },
     {
       field: 'actions',
@@ -117,54 +178,38 @@ const EventsPage = () => {
       align: 'right' as const,
       render: (row: Event) => (
         <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
-          <Typography variant="body2" color="primary" sx={{ cursor: 'pointer', fontWeight: 500 }}
-            onClick={() => openEdit(row)}>{t('common.edit', 'Editar')}</Typography>
-          <Typography variant="body2" color="error" sx={{ cursor: 'pointer', fontWeight: 500 }}
-            onClick={() => setDeleteConfirm(row)}>{t('common.delete', 'Eliminar')}</Typography>
+          <Typography
+            variant="body2"
+            color="primary"
+            sx={{ cursor: 'pointer', fontWeight: 500 }}
+            onClick={() => navigate(`/admin/events/${row.id}/edit`)}
+          >
+            {t('common.edit', 'Editar')}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="error"
+            sx={{ cursor: 'pointer', fontWeight: 500 }}
+            onClick={() => setDeleteConfirm(row)}
+          >
+            {t('common.delete', 'Eliminar')}
+          </Typography>
         </Box>
       ),
     },
   ];
 
-  const openEdit = (event: Event) => {
-    setForm({
-      title: getLocalizedText(event.title),
-      description: getLocalizedText(event.description),
-      startDate: '',
-      location: event.location?.name || '',
-    });
-    setDialog({ open: true, event });
-  };
-
-  const openCreate = () => {
-    setForm({ title: '', description: '', startDate: '', location: '' });
-    setDialog({ open: true, event: null });
-  };
-
-  const handleSave = async () => {
-    const payload = {
-      title: { [lang]: form.title },
-      description: { [lang]: form.description },
-      startDate: form.startDate || undefined,
-      location: { name: form.location },
-    };
-    if (dialog.event) {
-      await updateEvent({ id: dialog.event.id, ...payload });
-    } else {
-      await createEvent(payload);
-    }
-    setDialog({ open: false, event: null });
-  };
-
   const handleDelete = async () => {
     if (deleteConfirm) {
-      await deleteEvent(deleteConfirm.id);
-      setDeleteConfirm(null);
+      try {
+        await deleteEvent(deleteConfirm.id).unwrap();
+        dispatch(showSuccess(t('admin.events.deleteSuccess', 'Evento eliminado exitosamente')));
+        setDeleteConfirm(null);
+      } catch (error) {
+        console.error('Error deleting event:', error);
+        dispatch(showError(t('admin.events.deleteError', 'Error al eliminar el evento')));
+      }
     }
-  };
-
-  const handleFormChange = (field: keyof EventForm) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((p) => ({ ...p, [field]: e.target.value }));
   };
 
   return (
@@ -173,7 +218,11 @@ const EventsPage = () => {
         <Typography variant="h4" sx={{ fontWeight: 700 }}>
           {t('admin.events.pageTitle', 'Gestión de Eventos')}
         </Typography>
-        <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => navigate('/admin/events/create')}
+        >
           {t('admin.events.add', 'Nuevo Evento')}
         </Button>
       </Box>
@@ -187,32 +236,21 @@ const EventsPage = () => {
         totalItems={pagination.total || 0}
         onPageChange={setPage}
         searchValue={search}
-        onSearch={(val) => { setSearch(val); setPage(1); }}
+        onSearch={(val) => {
+          setSearch(val);
+          setPage(1);
+        }}
       />
-
-      <FormDialog
-        open={dialog.open}
-        onClose={() => setDialog({ open: false, event: null })}
-        onSubmit={handleSave}
-        title={dialog.event ? t('admin.events.edit', 'Editar Evento') : t('admin.events.add', 'Nuevo Evento')}
-        loading={creating || updating}
-      >
-        <FormField label={t('admin.events.titleField', 'Título')} name="title" value={form.title}
-          onChange={handleFormChange('title')} required />
-        <FormField label={t('admin.events.description', 'Descripción')} name="description" value={form.description}
-          onChange={handleFormChange('description')} multiline rows={3} />
-        <FormField label={t('admin.events.date', 'Fecha')} name="startDate" type="datetime-local" value={form.startDate}
-          onChange={handleFormChange('startDate')} />
-        <FormField label={t('admin.events.location', 'Ubicación')} name="location" value={form.location}
-          onChange={handleFormChange('location')} />
-      </FormDialog>
 
       <ConfirmDialog
         open={!!deleteConfirm}
         onClose={() => setDeleteConfirm(null)}
         onConfirm={handleDelete}
         title={t('admin.events.deleteTitle', '¿Eliminar evento?')}
-        message={t('admin.events.deleteMessage', 'Esta acción no se puede deshacer.')}
+        message={t(
+          'admin.events.deleteMessage',
+          `¿Estás seguro de que deseas eliminar "${getLocalizedText(deleteConfirm?.title)}"? Esta acción no se puede deshacer.`
+        )}
         loading={deleting}
         destructive
       />

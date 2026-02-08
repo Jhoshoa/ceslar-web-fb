@@ -15,4 +15,5 @@ export { default as CoordinatesInput } from './CoordinatesInput/CoordinatesInput
 export { default as SocialMediaLinks } from './SocialMediaLinks/SocialMediaLinks';
 export { default as ServiceScheduleManager } from './ServiceScheduleManager/ServiceScheduleManager';
 export { default as ChurchForm } from './ChurchForm/ChurchForm';
+export { default as EventForm } from './EventForm/EventForm';
 export { default as GlobalSnackbar } from './GlobalSnackbar/GlobalSnackbar';
