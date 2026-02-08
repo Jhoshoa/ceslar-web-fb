@@ -1,20 +1,28 @@
-import { useState, ChangeEvent } from 'react';
+/**
+ * ChurchesPage - Admin
+ *
+ * Admin page for managing churches with proper CRUD operations.
+ * Uses navigation to separate create/edit pages for better UX.
+ */
+
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Container, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
+
 import {
   useGetChurchesQuery,
-  useCreateChurchMutation,
-  useUpdateChurchMutation,
   useDeleteChurchMutation,
 } from '../../../../store/api/churchesApi';
+import { showSuccess, showError } from '../../../../store/slices/ui.slice';
 import DataTable from '../../../organisms/DataTable/DataTable';
-import FormDialog from '../../../organisms/FormDialog/FormDialog';
 import ConfirmDialog from '../../../organisms/ConfirmDialog/ConfirmDialog';
 import Typography from '../../../atoms/Typography/Typography';
 import Button from '../../../atoms/Button/Button';
 import Chip from '../../../atoms/Chip/Chip';
-import FormField from '../../../molecules/FormField/FormField';
+import type { AppDispatch } from '../../../../store';
 
 interface LocalizedString {
   es?: string;
@@ -26,41 +34,59 @@ interface LocalizedString {
 interface Church {
   id: string;
   name: string | LocalizedString;
+  slug?: string;
   level: string;
   location?: {
     city?: string;
     country?: string;
   };
+  country?: string;
+  city?: string;
+  status?: string;
   stats?: {
     memberCount?: number;
   };
 }
 
-interface ChurchForm {
-  name: string;
-  level: string;
-  city: string;
-  country: string;
-}
+const LEVEL_COLORS: Record<string, 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'info' | 'error'> = {
+  headquarters: 'primary',
+  country: 'secondary',
+  department: 'info',
+  province: 'warning',
+  local: 'default',
+};
 
-interface DialogState {
-  open: boolean;
-  church: Church | null;
-}
+const LEVEL_LABELS: Record<string, string> = {
+  headquarters: 'Sede',
+  country: 'País',
+  department: 'Depto',
+  province: 'Prov',
+  local: 'Local',
+};
+
+const STATUS_COLORS: Record<string, 'default' | 'success' | 'warning' | 'error'> = {
+  active: 'success',
+  inactive: 'default',
+  pending: 'warning',
+  suspended: 'error',
+};
 
 const ChurchesPage = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const lang = i18n.language?.split('-')[0] || 'es';
 
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const [dialog, setDialog] = useState<DialogState>({ open: false, church: null });
   const [deleteConfirm, setDeleteConfirm] = useState<Church | null>(null);
-  const [form, setForm] = useState<ChurchForm>({ name: '', level: 'local', city: '', country: '' });
 
-  const { data, isLoading } = useGetChurchesQuery({ page, limit: 10, search: search || undefined });
-  const [createChurch, { isLoading: creating }] = useCreateChurchMutation();
-  const [updateChurch, { isLoading: updating }] = useUpdateChurchMutation();
+  const { data, isLoading } = useGetChurchesQuery({
+    page,
+    limit: 10,
+    search: search || undefined,
+  });
+
   const [deleteChurch, { isLoading: deleting }] = useDeleteChurchMutation();
 
   const churches: Church[] = data?.data || [];
@@ -71,33 +97,89 @@ const ChurchesPage = () => {
     return name[lang] || name.es || '';
   };
 
+  const handleCreate = () => {
+    navigate('/admin/churches/create');
+  };
+
+  const handleEdit = (church: Church) => {
+    navigate(`/admin/churches/${church.id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    if (deleteConfirm) {
+      try {
+        await deleteChurch(deleteConfirm.id).unwrap();
+        dispatch(showSuccess(t('admin.churches.deleteSuccess', 'Iglesia eliminada exitosamente')));
+        setDeleteConfirm(null);
+      } catch (error) {
+        console.error('Error deleting church:', error);
+        dispatch(showError(t('admin.churches.deleteError', 'Error al eliminar la iglesia')));
+      }
+    }
+  };
+
   const columns = [
     {
       field: 'name',
       label: t('admin.churches.name', 'Nombre'),
       sortable: true,
       render: (row: Church) => (
-        <Typography variant="body2" sx={{ fontWeight: 500 }}>{getLocalizedName(row.name)}</Typography>
+        <Box>
+          <Typography variant="body2" sx={{ fontWeight: 500 }}>
+            {getLocalizedName(row.name)}
+          </Typography>
+          {row.slug && (
+            <Typography variant="caption" color="textSecondary">
+              /{row.slug}
+            </Typography>
+          )}
+        </Box>
       ),
     },
     {
       field: 'level',
       label: t('admin.churches.level', 'Nivel'),
-      render: (row: Church) => <Chip label={row.level} size="small" variant="outlined" />,
+      render: (row: Church) => (
+        <Chip
+          label={LEVEL_LABELS[row.level] || row.level}
+          size="small"
+          color={LEVEL_COLORS[row.level] || 'default'}
+          variant="outlined"
+        />
+      ),
     },
     {
       field: 'location',
       label: t('admin.churches.location', 'Ubicación'),
+      render: (row: Church) => {
+        const city = row.location?.city || row.city;
+        const country = row.location?.country || row.country;
+        return (
+          <Typography variant="body2" color="textSecondary">
+            {[city, country].filter(Boolean).join(', ') || '—'}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: 'status',
+      label: t('admin.churches.status', 'Estado'),
       render: (row: Church) => (
-        <Typography variant="body2" color="textSecondary">
-          {[row.location?.city, row.location?.country].filter(Boolean).join(', ') || '—'}
-        </Typography>
+        <Chip
+          label={row.status || 'active'}
+          size="small"
+          color={STATUS_COLORS[row.status || 'active'] || 'default'}
+        />
       ),
     },
     {
       field: 'stats',
       label: t('admin.churches.members', 'Miembros'),
-      render: (row: Church) => row.stats?.memberCount || 0,
+      render: (row: Church) => (
+        <Typography variant="body2">
+          {row.stats?.memberCount || 0}
+        </Typography>
+      ),
     },
     {
       field: 'actions',
@@ -109,7 +191,7 @@ const ChurchesPage = () => {
             variant="body2"
             color="primary"
             sx={{ cursor: 'pointer', fontWeight: 500 }}
-            onClick={() => openEdit(row)}
+            onClick={() => handleEdit(row)}
           >
             {t('common.edit', 'Editar')}
           </Typography>
@@ -126,55 +208,18 @@ const ChurchesPage = () => {
     },
   ];
 
-  const openEdit = (church: Church) => {
-    const name = getLocalizedName(church.name);
-    setForm({
-      name,
-      level: church.level || 'local',
-      city: church.location?.city || '',
-      country: church.location?.country || '',
-    });
-    setDialog({ open: true, church });
-  };
-
-  const openCreate = () => {
-    setForm({ name: '', level: 'local', city: '', country: '' });
-    setDialog({ open: true, church: null });
-  };
-
-  const handleSave = async () => {
-    const payload = {
-      name: { [lang]: form.name },
-      level: form.level,
-      location: { city: form.city, country: form.country },
-    };
-
-    if (dialog.church) {
-      await updateChurch({ id: dialog.church.id, ...payload });
-    } else {
-      await createChurch(payload);
-    }
-    setDialog({ open: false, church: null });
-  };
-
-  const handleDelete = async () => {
-    if (deleteConfirm) {
-      await deleteChurch(deleteConfirm.id);
-      setDeleteConfirm(null);
-    }
-  };
-
-  const handleFormChange = (field: keyof ChurchForm) => (e: ChangeEvent<HTMLInputElement>) => {
-    setForm((p) => ({ ...p, [field]: e.target.value }));
-  };
-
   return (
     <Container maxWidth="xl">
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-        <Typography variant="h4" sx={{ fontWeight: 700 }}>
-          {t('admin.churches.title', 'Gestión de Iglesias')}
-        </Typography>
-        <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
+        <Box>
+          <Typography variant="h4" sx={{ fontWeight: 700 }}>
+            {t('admin.churches.title', 'Gestión de Iglesias')}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" sx={{ mt: 0.5 }}>
+            {t('admin.churches.subtitle', 'Administra las iglesias de la red')}
+          </Typography>
+        </Box>
+        <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreate}>
           {t('admin.churches.add', 'Nueva Iglesia')}
         </Button>
       </Box>
@@ -188,32 +233,26 @@ const ChurchesPage = () => {
         totalItems={pagination.total || 0}
         onPageChange={setPage}
         searchValue={search}
-        onSearch={(val) => { setSearch(val); setPage(1); }}
+        onSearch={(val) => {
+          setSearch(val);
+          setPage(1);
+        }}
+        emptyMessage={t('admin.churches.empty', 'No hay iglesias registradas')}
       />
-
-      <FormDialog
-        open={dialog.open}
-        onClose={() => setDialog({ open: false, church: null })}
-        onSubmit={handleSave}
-        title={dialog.church ? t('admin.churches.edit', 'Editar Iglesia') : t('admin.churches.add', 'Nueva Iglesia')}
-        loading={creating || updating}
-      >
-        <FormField label={t('admin.churches.name', 'Nombre')} name="name" value={form.name}
-          onChange={handleFormChange('name')} required />
-        <FormField label={t('admin.churches.level', 'Nivel')} name="level" value={form.level}
-          onChange={handleFormChange('level')} />
-        <FormField label={t('admin.churches.city', 'Ciudad')} name="city" value={form.city}
-          onChange={handleFormChange('city')} />
-        <FormField label={t('admin.churches.country', 'País')} name="country" value={form.country}
-          onChange={handleFormChange('country')} />
-      </FormDialog>
 
       <ConfirmDialog
         open={!!deleteConfirm}
         onClose={() => setDeleteConfirm(null)}
         onConfirm={handleDelete}
         title={t('admin.churches.deleteTitle', '¿Eliminar iglesia?')}
-        message={t('admin.churches.deleteMessage', 'Esta acción no se puede deshacer.')}
+        message={
+          deleteConfirm
+            ? t(
+                'admin.churches.deleteMessage',
+                `¿Estás seguro de que deseas eliminar "${getLocalizedName(deleteConfirm.name)}"? Esta acción no se puede deshacer.`
+              )
+            : ''
+        }
         loading={deleting}
         destructive
       />
