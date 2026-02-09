@@ -155,5 +155,176 @@
     "admin": "Administração",
     "logout": "Sair",
     "guest": "Usuário"
+  },
+  "about": {
+    "meta": {
+      "title": "Sobre Nós | Cristo É A Resposta",
+      "description": "Conheça a história, missão, visão e valores de Cristo É A Resposta. Mais de 55 anos transformando vidas na Bolívia e América do Sul."
+    },
+    "hero": {
+      "label": "NOSSA HISTÓRIA",
+      "title": "Cristo É A",
+      "titleHighlight": "Resposta",
+      "subtitle": "Desde 1969, levando esperança e transformando vidas na Bolívia e em toda América do Sul",
+      "foundedIn": "Fundada em",
+      "foundationDate": "24 de Setembro"
+    },
+    "mission": {
+      "label": "NOSSA MISSÃO",
+      "title": "Missão",
+      "content": "Restaurar as pessoas à fé dos pais apostólicos, instruindo os crentes na paz, no amor de Deus, na fraternidade e no respeito ao próximo."
+    },
+    "vision": {
+      "label": "NOSSA VISÃO",
+      "title": "Visão",
+      "content": "Ser uma rede de igrejas unidas que impacte positivamente a sociedade, combinando a salvação eterna com uma vida cristã digna no presente, transformando comunidades inteiras com o amor de Cristo."
+    },
+    "history": {
+      "label": "NOSSA TRAJETÓRIA",
+      "title": "História de Fé",
+      "subtitle": "Mais de cinco décadas de serviço, milagres e transformação espiritual",
+      "events": {
+        "arrival": {
+          "title": "Chegada à Bolívia",
+          "description": "Em 18 de setembro de 1969 às 18h, um casal de missionários recém-formados chegou a Santa Cruz de la Sierra, Bolívia, obedecendo ao chamado divino."
+        },
+        "firstService": {
+          "title": "Primeiro Culto",
+          "description": "Em 24 de setembro começaram a pregar no bairro \"El Lazareto\" debaixo de uma árvore de Tururé. A mensagem de Cristo começou a ressoar."
+        },
+        "firstMiracle": {
+          "title": "Primeiro Milagre",
+          "description": "Raquel de Orías foi curada de espondilose, tornando-se a primeira mensageira do poder de Deus na nascente congregação."
+        },
+        "expansion": {
+          "title": "Expansão Regional",
+          "description": "A obra missionária se espalhou por todo o norte da Bolívia, chegando eventualmente ao Peru, Brasil, Chile, Argentina e Paraguai."
+        },
+        "legal": {
+          "title": "Reconhecimento Legal",
+          "description": "Em 8 de setembro de 1978, a igreja obteve seu reconhecimento oficial através da Resolução Suprema Nº 188425 do Ministério das Relações Exteriores."
+        },
+        "present": {
+          "year": "Hoje",
+          "title": "Presente e Futuro",
+          "description": "Com sede internacional em Santa Cruz de la Sierra, a igreja continua sua missão de restaurar a fé e transformar vidas em toda América do Sul."
+        }
+      }
+    },
+    "values": {
+      "label": "O QUE NOS DEFINE",
+      "title": "Nossos Valores",
+      "subtitle": "Princípios fundamentais que guiam nossa fé e nossas ações",
+      "faith": {
+        "title": "Fé",
+        "description": "Confiança absoluta em Deus e em Sua palavra. Cremos na Trindade, em Jesus Cristo como manifestação física de Deus, e na salvação pela fé pessoal."
+      },
+      "love": {
+        "title": "Amor",
+        "description": "O amor de Deus como fundamento de todas as nossas ações. Amamos o próximo e servimos toda a comunidade com compaixão."
+      },
+      "service": {
+        "title": "Serviço",
+        "description": "Seguindo o exemplo de Cristo, servimos aos outros com humildade e dedicação, buscando o bem-estar espiritual e material da nossa comunidade."
+      },
+      "unity": {
+        "title": "Unidade",
+        "description": "Uma rede de igrejas unidas em propósito e visão, trabalhando juntos para estender o reino de Deus em toda América do Sul."
+      },
+      "integrity": {
+        "title": "Integridade",
+        "description": "Vivemos com honestidade e transparência, respeitando as leis civis e mantendo uma conduta exemplar em todas as áreas da nossa vida."
+      },
+      "hope": {
+        "title": "Esperança",
+        "description": "Proclamamos a esperança na segunda vinda de Cristo e no estabelecimento do Seu reino de paz, inspirando outros com esta promessa eterna."
+      }
+    },
+    "principles": {
+      "label": "NOSSOS FUNDAMENTOS",
+      "title": "Princípios Doutrinários",
+      "subtitle": "As bases espirituais, morais e cívicas que regem nossa fé e conduta",
+      "religious": {
+        "label": "Princípios Religiosos",
+        "trinity": {
+          "title": "A Trindade",
+          "item1": "Cremos em um só Deus verdadeiro, manifestado em três pessoas: Pai, Filho e Espírito Santo.",
+          "item2": "Jesus Cristo é Deus feito carne, a manifestação visível do Deus invisível."
+        },
+        "salvation": {
+          "title": "A Salvação",
+          "item1": "A salvação é pela graça mediante a fé em Jesus Cristo.",
+          "item2": "Todo ser humano necessita de arrependimento e conversão pessoal.",
+          "item3": "O batismo nas águas é por imersão, em nome de Jesus."
+        },
+        "holySpirit": {
+          "title": "O Espírito Santo",
+          "item1": "Cremos no batismo do Espírito Santo com a evidência de falar em outras línguas.",
+          "item2": "Os dons do Espírito Santo estão ativos para a igreja de hoje."
+        },
+        "secondComing": {
+          "title": "Segunda Vinda",
+          "item1": "Cremos na segunda vinda literal e visível de Jesus Cristo.",
+          "item2": "O estabelecimento do reino milenar de paz e justiça."
+        }
+      },
+      "moral": {
+        "label": "Princípios Morais",
+        "family": {
+          "title": "A Família",
+          "item1": "O casamento é a união sagrada entre um homem e uma mulher.",
+          "item2": "Os filhos são herança do Senhor e devem ser criados em Seus caminhos.",
+          "item3": "O lar é a base fundamental da sociedade."
+        },
+        "integrity": {
+          "title": "A Integridade",
+          "item1": "Vivemos com honestidade e transparência em todas as áreas.",
+          "item2": "Rejeitamos toda forma de corrupção e engano.",
+          "item3": "Nossa palavra deve ser nosso compromisso."
+        },
+        "love": {
+          "title": "O Amor ao Próximo",
+          "item1": "Servimos aos necessitados sem distinção de raça, credo ou condição.",
+          "item2": "Praticamos o perdão e a reconciliação."
+        }
+      },
+      "civil": {
+        "label": "Princípios Civis",
+        "respect": {
+          "title": "Respeito às Autoridades",
+          "item1": "Respeitamos e obedecemos às leis civis de cada país onde operamos.",
+          "item2": "Oramos pelas autoridades governamentais.",
+          "item3": "Cumprimos nossas obrigações fiscais e legais."
+        },
+        "citizenship": {
+          "title": "Cidadania Responsável",
+          "item1": "Participamos construtivamente na sociedade.",
+          "item2": "Promovemos a paz e a convivência harmônica.",
+          "item3": "Contribuímos para o bem-estar das nossas comunidades."
+        },
+        "transparency": {
+          "title": "Transparência Institucional",
+          "item1": "Nossa organização opera com total transparência financeira.",
+          "item2": "Prestamos contas aos nossos membros e às autoridades competentes."
+        }
+      }
+    },
+    "stats": {
+      "label": "NOSSO IMPACTO",
+      "title": "Transformando Vidas",
+      "years": "Anos de Serviço",
+      "churches": "Igrejas",
+      "countries": "Países",
+      "members": "Membros",
+      "quote": "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
+      "quoteReference": "JOÃO 3:16"
+    }
+  },
+  "cta": {
+    "label": "JUNTE-SE A NÓS",
+    "title": "Faça Parte da Nossa Família",
+    "description": "Convidamos você a nos conhecer melhor. Visite uma das nossas congregações e descubra como Cristo pode transformar sua vida.",
+    "findChurch": "Encontrar uma Igreja",
+    "contact": "Fale Conosco"
   }
 }

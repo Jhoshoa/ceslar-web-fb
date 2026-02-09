@@ -1,63 +1,73 @@
-import { Container, Box, Grid } from '@mui/material';
+/**
+ * AboutPage
+ *
+ * A comprehensive page showcasing the church's history, mission, vision,
+ * values, and foundational principles. Features a modern, elegant design
+ * with smooth animations and a cohesive visual identity.
+ */
+
+import { Box } from '@mui/material';
+import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import Typography from '../../../atoms/Typography/Typography';
+import {
+  AboutHero,
+  MissionVisionSection,
+  HistoryTimeline,
+  ValuesSection,
+  PrinciplesSection,
+  ImpactStats,
+} from '../../../organisms/about';
+import CallToActionSection from '../../../organisms/home/CallToActionSection/CallToActionSection';
 
 const AboutPage = () => {
   const { t } = useTranslation();
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Typography variant="h3" sx={{ fontWeight: 700, mb: 2 }}>
-        {t('about.title', 'Sobre Nosotros')}
-      </Typography>
-      <Typography variant="h6" color="textSecondary" sx={{ mb: 4 }}>
-        {t('about.subtitle', 'Conoce nuestra historia y misión')}
-      </Typography>
+    <>
+      <Helmet>
+        <title>{t('about.meta.title', 'Sobre Nosotros | Cristo Es La Respuesta')}</title>
+        <meta
+          name="description"
+          content={t(
+            'about.meta.description',
+            'Conoce la historia, misión, visión y valores de Cristo Es La Respuesta. Más de 55 años transformando vidas en Bolivia y Sudamérica.'
+          )}
+        />
+        <meta
+          name="keywords"
+          content="Cristo Es La Respuesta, iglesia, Bolivia, historia, misión, visión, valores, principios"
+        />
+      </Helmet>
 
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
-              {t('about.mission.title', 'Nuestra Misión')}
-            </Typography>
-            <Typography variant="body1" color="textSecondary" paragraph>
-              {t('about.mission.description', 'Llevar el mensaje de Cristo a cada rincón de Sudamérica, formando discípulos y plantando iglesias que transformen comunidades.')}
-            </Typography>
-          </Box>
+      <Box
+        component="main"
+        sx={{
+          minHeight: '100vh',
+          bgcolor: 'background.default',
+        }}
+      >
+        {/* Hero Section */}
+        <AboutHero />
 
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
-              {t('about.vision.title', 'Nuestra Visión')}
-            </Typography>
-            <Typography variant="body1" color="textSecondary" paragraph>
-              {t('about.vision.description', 'Ser una red de iglesias unidas, dinámicas y relevantes que impacten positivamente a la sociedad con el amor de Cristo.')}
-            </Typography>
-          </Box>
-        </Grid>
+        {/* Mission & Vision */}
+        <MissionVisionSection />
 
-        <Grid item xs={12} md={6}>
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
-              {t('about.history.title', 'Nuestra Historia')}
-            </Typography>
-            <Typography variant="body1" color="textSecondary" paragraph>
-              {t('about.history.description', 'Fundada en Bolivia, Cristo Es La Respuesta ha crecido hasta convertirse en una red de iglesias presente en múltiples países de Sudamérica, con un compromiso firme con la predicación del evangelio y el servicio a la comunidad.')}
-            </Typography>
-          </Box>
+        {/* Impact Statistics */}
+        <ImpactStats />
 
-          <Box>
-            <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
-              {t('about.values.title', 'Nuestros Valores')}
-            </Typography>
-            {['Fe', 'Amor', 'Servicio', 'Unidad', 'Integridad'].map((value) => (
-              <Typography key={value} variant="body1" color="textSecondary" sx={{ mb: 1 }}>
-                • {value}
-              </Typography>
-            ))}
-          </Box>
-        </Grid>
-      </Grid>
-    </Container>
+        {/* History Timeline */}
+        <HistoryTimeline />
+
+        {/* Core Values */}
+        <ValuesSection />
+
+        {/* Foundational Principles */}
+        <PrinciplesSection />
+
+        {/* Call to Action */}
+        <CallToActionSection />
+      </Box>
+    </>
   );
 };
 

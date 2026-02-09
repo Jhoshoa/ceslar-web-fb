@@ -155,5 +155,176 @@
     "admin": "Admin Panel",
     "logout": "Sign Out",
     "guest": "User"
+  },
+  "about": {
+    "meta": {
+      "title": "About Us | Christ Is The Answer",
+      "description": "Learn about the history, mission, vision and values of Christ Is The Answer. Over 55 years transforming lives in Bolivia and South America."
+    },
+    "hero": {
+      "label": "OUR STORY",
+      "title": "Christ Is The",
+      "titleHighlight": "Answer",
+      "subtitle": "Since 1969, bringing hope and transforming lives in Bolivia and all of South America",
+      "foundedIn": "Founded in",
+      "foundationDate": "September 24"
+    },
+    "mission": {
+      "label": "OUR MISSION",
+      "title": "Mission",
+      "content": "To restore people to the faith of the apostolic fathers, instructing believers in peace, the love of God, fellowship and respect for others."
+    },
+    "vision": {
+      "label": "OUR VISION",
+      "title": "Vision",
+      "content": "To be a network of united churches that positively impacts society, combining eternal salvation with a dignified Christian life in the present, transforming entire communities with the love of Christ."
+    },
+    "history": {
+      "label": "OUR JOURNEY",
+      "title": "History of Faith",
+      "subtitle": "More than five decades of service, miracles and spiritual transformation",
+      "events": {
+        "arrival": {
+          "title": "Arrival in Bolivia",
+          "description": "On September 18, 1969 at 6 PM, a couple of newly graduated missionaries arrived in Santa Cruz de la Sierra, Bolivia, obeying the divine calling."
+        },
+        "firstService": {
+          "title": "First Service",
+          "description": "On September 24 they began preaching in the \"El Lazareto\" neighborhood under a Tururé tree. The message of Christ began to resonate."
+        },
+        "firstMiracle": {
+          "title": "First Miracle",
+          "description": "Raquel de Orías was healed from spondylosis, becoming the first messenger of God's power in the nascent congregation."
+        },
+        "expansion": {
+          "title": "Regional Expansion",
+          "description": "The missionary work spread throughout northern Bolivia, eventually reaching Peru, Brazil, Chile, Argentina and Paraguay."
+        },
+        "legal": {
+          "title": "Legal Recognition",
+          "description": "On September 8, 1978, the church obtained its official recognition through Supreme Resolution No. 188425 from the Ministry of Foreign Affairs."
+        },
+        "present": {
+          "year": "Today",
+          "title": "Present and Future",
+          "description": "With international headquarters in Santa Cruz de la Sierra, the church continues its mission to restore faith and transform lives throughout South America."
+        }
+      }
+    },
+    "values": {
+      "label": "WHAT DEFINES US",
+      "title": "Our Values",
+      "subtitle": "Fundamental principles that guide our faith and actions",
+      "faith": {
+        "title": "Faith",
+        "description": "Absolute trust in God and His word. We believe in the Trinity, in Jesus Christ as the physical manifestation of God, and in salvation through personal faith."
+      },
+      "love": {
+        "title": "Love",
+        "description": "God's love as the foundation of all our actions. We love our neighbor and serve the entire community with compassion."
+      },
+      "service": {
+        "title": "Service",
+        "description": "Following Christ's example, we serve others with humility and dedication, seeking the spiritual and material welfare of our community."
+      },
+      "unity": {
+        "title": "Unity",
+        "description": "A network of churches united in purpose and vision, working together to extend God's kingdom throughout South America."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "We live with honesty and transparency, respecting civil laws and maintaining exemplary conduct in all areas of our lives."
+      },
+      "hope": {
+        "title": "Hope",
+        "description": "We proclaim hope in the second coming of Christ and the establishment of His kingdom of peace, inspiring others with this eternal promise."
+      }
+    },
+    "principles": {
+      "label": "OUR FOUNDATIONS",
+      "title": "Doctrinal Principles",
+      "subtitle": "The spiritual, moral and civic foundations that govern our faith and conduct",
+      "religious": {
+        "label": "Religious Principles",
+        "trinity": {
+          "title": "The Trinity",
+          "item1": "We believe in one true God, manifested in three persons: Father, Son and Holy Spirit.",
+          "item2": "Jesus Christ is God made flesh, the visible manifestation of the invisible God."
+        },
+        "salvation": {
+          "title": "Salvation",
+          "item1": "Salvation is by grace through faith in Jesus Christ.",
+          "item2": "Every human being needs repentance and personal conversion.",
+          "item3": "Water baptism is by immersion, in the name of Jesus."
+        },
+        "holySpirit": {
+          "title": "The Holy Spirit",
+          "item1": "We believe in the baptism of the Holy Spirit with the evidence of speaking in other tongues.",
+          "item2": "The gifts of the Holy Spirit are active for the church today."
+        },
+        "secondComing": {
+          "title": "Second Coming",
+          "item1": "We believe in the literal and visible second coming of Jesus Christ.",
+          "item2": "The establishment of the millennial kingdom of peace and justice."
+        }
+      },
+      "moral": {
+        "label": "Moral Principles",
+        "family": {
+          "title": "The Family",
+          "item1": "Marriage is the sacred union between a man and a woman.",
+          "item2": "Children are a heritage from the Lord and must be raised in His ways.",
+          "item3": "The home is the fundamental foundation of society."
+        },
+        "integrity": {
+          "title": "Integrity",
+          "item1": "We live with honesty and transparency in all areas.",
+          "item2": "We reject all forms of corruption and deceit.",
+          "item3": "Our word must be our commitment."
+        },
+        "love": {
+          "title": "Love for Others",
+          "item1": "We serve those in need without distinction of race, creed or condition.",
+          "item2": "We practice forgiveness and reconciliation."
+        }
+      },
+      "civil": {
+        "label": "Civil Principles",
+        "respect": {
+          "title": "Respect for Authorities",
+          "item1": "We respect and obey the civil laws of each country where we operate.",
+          "item2": "We pray for government authorities.",
+          "item3": "We fulfill our tax and legal obligations."
+        },
+        "citizenship": {
+          "title": "Responsible Citizenship",
+          "item1": "We participate constructively in society.",
+          "item2": "We promote peace and harmonious coexistence.",
+          "item3": "We contribute to the welfare of our communities."
+        },
+        "transparency": {
+          "title": "Institutional Transparency",
+          "item1": "Our organization operates with complete financial transparency.",
+          "item2": "We are accountable to our members and competent authorities."
+        }
+      }
+    },
+    "stats": {
+      "label": "OUR IMPACT",
+      "title": "Transforming Lives",
+      "years": "Years of Service",
+      "churches": "Churches",
+      "countries": "Countries",
+      "members": "Members",
+      "quote": "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
+      "quoteReference": "JOHN 3:16"
+    }
+  },
+  "cta": {
+    "label": "JOIN US",
+    "title": "Become Part of Our Family",
+    "description": "We invite you to get to know us better. Visit one of our congregations and discover how Christ can transform your life.",
+    "findChurch": "Find a Church",
+    "contact": "Contact Us"
   }
 }
