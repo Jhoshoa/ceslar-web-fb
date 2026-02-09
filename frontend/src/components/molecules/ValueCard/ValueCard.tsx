@@ -8,12 +8,15 @@
 import { Box, Paper, Typography, alpha, keyframes } from '@mui/material';
 import { ReactNode } from 'react';
 
-const float = keyframes`
-  0%, 100% {
-    transform: translateY(0);
+const shimmer = keyframes`
+  0% {
+    transform: scale(1);
   }
   50% {
-    transform: translateY(-5px);
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
   }
 `;
 
@@ -26,8 +29,6 @@ interface ValueCardProps {
   description: string;
   /** Animation delay */
   delay?: number;
-  /** Card variant */
-  variant?: 'default' | 'gold' | 'navy';
 }
 
 const ValueCard = ({
@@ -35,103 +36,91 @@ const ValueCard = ({
   title,
   description,
   delay = 0,
-  variant = 'default',
 }: ValueCardProps) => {
   const goldColor = '#D4AF37';
-  const navyColor = '#0D1B4C';
-
-  const getColors = () => {
-    switch (variant) {
-      case 'gold':
-        return {
-          bg: alpha(goldColor, 0.08),
-          iconBg: goldColor,
-          iconColor: 'white',
-          border: alpha(goldColor, 0.2),
-        };
-      case 'navy':
-        return {
-          bg: alpha(navyColor, 0.05),
-          iconBg: navyColor,
-          iconColor: 'white',
-          border: alpha(navyColor, 0.1),
-        };
-      default:
-        return {
-          bg: 'background.paper',
-          iconBg: alpha(navyColor, 0.1),
-          iconColor: navyColor,
-          border: 'transparent',
-        };
-    }
-  };
-
-  const colors = getColors();
+  const goldColorLight = '#F5ECD7';
+  const blueColor = '#0F2167';
 
   return (
     <Paper
       elevation={0}
       sx={{
-        p: 4,
+        p: 3,
         height: '100%',
-        borderRadius: 4,
-        bgcolor: colors.bg,
-        border: `1px solid ${colors.border}`,
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-        animation: `fadeIn 0.6s ease-out ${delay}s both`,
+        borderRadius: 3,
+        bgcolor: alpha('#FFFFFF', 0.95),
+        border: `1px solid ${alpha(goldColor, 0.15)}`,
+        transition: 'all 0.3s ease',
+        animation: `fadeIn 0.5s ease-out ${delay}s both`,
         '@keyframes fadeIn': {
-          from: { opacity: 0, transform: 'translateY(20px)' },
+          from: { opacity: 0, transform: 'translateY(15px)' },
           to: { opacity: 1, transform: 'translateY(0)' },
         },
         '&:hover': {
-          transform: 'translateY(-8px)',
-          boxShadow: `0 20px 40px ${alpha(navyColor, 0.12)}`,
+          transform: 'translateY(-4px)',
+          boxShadow: `0 12px 32px ${alpha(blueColor, 0.1)}`,
+          borderColor: alpha(goldColor, 0.3),
           '& .value-icon': {
-            animation: `${float} 2s ease-in-out infinite`,
+            animation: `${shimmer} 0.5s ease`,
+            bgcolor: goldColor,
+            color: '#FFFFFF',
           },
         },
       }}
     >
-      {/* Icon */}
+      {/* Icon + Title Row */}
       <Box
-        className="value-icon"
         sx={{
-          width: 64,
-          height: 64,
-          borderRadius: 3,
-          bgcolor: colors.iconBg,
-          color: colors.iconColor,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          mb: 3,
-          '& svg': {
-            fontSize: 32,
-          },
-        }}
-      >
-        {icon}
-      </Box>
-
-      {/* Title */}
-      <Typography
-        variant="h5"
-        sx={{
-          fontWeight: 700,
-          color: navyColor,
+          gap: 2,
           mb: 1.5,
-          fontFamily: '"Playfair Display", serif',
         }}
       >
-        {title}
-      </Typography>
+        {/* Icon */}
+        <Box
+          className="value-icon"
+          sx={{
+            width: 44,
+            height: 44,
+            minWidth: 44,
+            borderRadius: 2,
+            bgcolor: goldColorLight,
+            color: goldColor,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.3s ease',
+            '& svg': {
+              fontSize: 22,
+            },
+          }}
+        >
+          {icon}
+        </Box>
+
+        {/* Title */}
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 700,
+            color: blueColor,
+            fontFamily: '"Playfair Display", serif',
+            fontSize: '1.1rem',
+            lineHeight: 1.3,
+          }}
+        >
+          {title}
+        </Typography>
+      </Box>
 
       {/* Description */}
       <Typography
         variant="body2"
         sx={{
-          color: 'text.secondary',
-          lineHeight: 1.8,
+          color: alpha(blueColor, 0.7),
+          lineHeight: 1.7,
+          fontSize: '0.85rem',
         }}
       >
         {description}

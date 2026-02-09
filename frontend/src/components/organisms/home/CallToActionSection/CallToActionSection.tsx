@@ -145,18 +145,19 @@ const CallToActionSection = () => {
             onClick={() => navigate('/churches')}
             sx={{
               bgcolor: goldColor,
-              color: navyColor,
+              color: '#FFFFFF',
               px: 4,
               py: 1.5,
-              borderRadius: 2,
+              borderRadius: 50,
               fontWeight: 600,
               textTransform: 'none',
               fontSize: '1rem',
               boxShadow: `0 4px 20px ${alpha(goldColor, 0.4)}`,
               '&:hover': {
-                bgcolor: '#E5C76B',
+                bgcolor: '#C9A227',
+                color: '#FFFFFF',
                 transform: 'translateY(-2px)',
-                boxShadow: `0 6px 25px ${alpha(goldColor, 0.5)}`,
+                boxShadow: `0 8px 30px ${alpha(goldColor, 0.5)}`,
               },
               transition: 'all 0.3s ease',
             }}
@@ -170,17 +171,20 @@ const CallToActionSection = () => {
             startIcon={<GroupAddIcon />}
             onClick={() => navigate('/contact')}
             sx={{
-              borderColor: alpha('#FFFFFF', 0.4),
+              borderColor: alpha('#FFFFFF', 0.5),
+              borderWidth: 2,
               color: '#FFFFFF',
               px: 4,
               py: 1.5,
-              borderRadius: 2,
+              borderRadius: 50,
               fontWeight: 600,
               textTransform: 'none',
               fontSize: '1rem',
               '&:hover': {
                 borderColor: goldColor,
-                bgcolor: alpha(goldColor, 0.1),
+                borderWidth: 2,
+                bgcolor: alpha(goldColor, 0.15),
+                color: goldColor,
                 transform: 'translateY(-2px)',
               },
               transition: 'all 0.3s ease',
