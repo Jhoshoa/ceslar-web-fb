@@ -147,7 +147,7 @@ const UsersPage = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Typography variant="h4" sx={{ fontWeight: 700, mb: 4 }}>
         {t('admin.users.title', 'Gestión de Usuarios')}
       </Typography>

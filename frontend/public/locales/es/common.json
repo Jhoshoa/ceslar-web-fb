@@ -155,5 +155,176 @@
     "admin": "Panel Admin",
     "logout": "Cerrar Sesión",
     "guest": "Usuario"
+  },
+  "about": {
+    "meta": {
+      "title": "Sobre Nosotros | Cristo Es La Respuesta",
+      "description": "Conoce la historia, misión, visión y valores de Cristo Es La Respuesta. Más de 55 años transformando vidas en Bolivia y Sudamérica."
+    },
+    "hero": {
+      "label": "NUESTRA HISTORIA",
+      "title": "Cristo Es La",
+      "titleHighlight": "Respuesta",
+      "subtitle": "Desde 1969, llevando esperanza y transformando vidas en Bolivia y toda Sudamérica",
+      "foundedIn": "Fundada en",
+      "foundationDate": "24 de Septiembre"
+    },
+    "mission": {
+      "label": "NUESTRA MISIÓN",
+      "title": "Misión",
+      "content": "Restaurar a las personas a la fe de los padres apostólicos, instruyendo a los creyentes en la paz, el amor de Dios, la fraternidad y el respeto al prójimo."
+    },
+    "vision": {
+      "label": "NUESTRA VISIÓN",
+      "title": "Visión",
+      "content": "Ser una red de iglesias unidas que impacte positivamente a la sociedad, combinando la salvación eterna con una vida cristiana digna en el presente, transformando comunidades enteras con el amor de Cristo."
+    },
+    "history": {
+      "label": "NUESTRA TRAYECTORIA",
+      "title": "Historia de Fe",
+      "subtitle": "Más de cinco décadas de servicio, milagros y transformación espiritual",
+      "events": {
+        "arrival": {
+          "title": "Llegada a Bolivia",
+          "description": "El 18 de septiembre de 1969 a las 6 PM, una pareja de misioneros recién graduados llegó a Santa Cruz de la Sierra, Bolivia, obedeciendo el llamado divino."
+        },
+        "firstService": {
+          "title": "Primer Culto",
+          "description": "El 24 de septiembre comenzaron a predicar en el barrio \"El Lazareto\" bajo un árbol de Tururé. El mensaje de Cristo empezó a resonar."
+        },
+        "firstMiracle": {
+          "title": "Primer Milagro",
+          "description": "Raquel de Orías fue sanada de espondilosis, convirtiéndose en la primera mensajera del poder de Dios en la naciente congregación."
+        },
+        "expansion": {
+          "title": "Expansión Regional",
+          "description": "La obra misionera se extendió por todo el norte de Bolivia, llegando eventualmente a Perú, Brasil, Chile, Argentina y Paraguay."
+        },
+        "legal": {
+          "title": "Reconocimiento Legal",
+          "description": "El 8 de septiembre de 1978, la iglesia obtuvo su reconocimiento oficial mediante Resolución Suprema No. 188425 del Ministerio de Relaciones Exteriores."
+        },
+        "present": {
+          "year": "Hoy",
+          "title": "Presente y Futuro",
+          "description": "Con sede internacional en Santa Cruz de la Sierra, la iglesia continúa su misión de restaurar la fe y transformar vidas en toda Sudamérica."
+        }
+      }
+    },
+    "values": {
+      "label": "LO QUE NOS DEFINE",
+      "title": "Nuestros Valores",
+      "subtitle": "Principios fundamentales que guían nuestra fe y nuestras acciones",
+      "faith": {
+        "title": "Fe",
+        "description": "Confianza absoluta en Dios y en su palabra. Creemos en la Trinidad, en Jesucristo como manifestación física de Dios, y en la salvación por fe personal."
+      },
+      "love": {
+        "title": "Amor",
+        "description": "El amor de Dios como fundamento de todas nuestras acciones. Amamos a nuestro prójimo y servimos con compasión a toda la comunidad."
+      },
+      "service": {
+        "title": "Servicio",
+        "description": "Siguiendo el ejemplo de Cristo, servimos a los demás con humildad y dedicación, buscando el bienestar espiritual y material de nuestra comunidad."
+      },
+      "unity": {
+        "title": "Unidad",
+        "description": "Una red de iglesias unidas en propósito y visión, trabajando juntos para extender el reino de Dios en toda Sudamérica."
+      },
+      "integrity": {
+        "title": "Integridad",
+        "description": "Vivimos con honestidad y transparencia, respetando las leyes civiles y manteniendo una conducta ejemplar en todas las áreas de nuestra vida."
+      },
+      "hope": {
+        "title": "Esperanza",
+        "description": "Proclamamos la esperanza en la segunda venida de Cristo y el establecimiento de su reino de paz, inspirando a otros con esta promesa eterna."
+      }
+    },
+    "principles": {
+      "label": "NUESTROS FUNDAMENTOS",
+      "title": "Principios Doctrinales",
+      "subtitle": "Las bases espirituales, morales y cívicas que rigen nuestra fe y conducta",
+      "religious": {
+        "label": "Principios Religiosos",
+        "trinity": {
+          "title": "La Trinidad",
+          "item1": "Creemos en un solo Dios verdadero, manifestado en tres personas: Padre, Hijo y Espíritu Santo.",
+          "item2": "Jesucristo es Dios hecho carne, la manifestación visible del Dios invisible."
+        },
+        "salvation": {
+          "title": "La Salvación",
+          "item1": "La salvación es por gracia mediante la fe en Jesucristo.",
+          "item2": "Todo ser humano necesita arrepentimiento y conversión personal.",
+          "item3": "El bautismo en agua es por inmersión, en el nombre de Jesús."
+        },
+        "holySpirit": {
+          "title": "El Espíritu Santo",
+          "item1": "Creemos en el bautismo del Espíritu Santo con la evidencia de hablar en otras lenguas.",
+          "item2": "Los dones del Espíritu Santo están vigentes para la iglesia de hoy."
+        },
+        "secondComing": {
+          "title": "Segunda Venida",
+          "item1": "Creemos en la segunda venida literal y visible de Jesucristo.",
+          "item2": "El establecimiento del reino milenial de paz y justicia."
+        }
+      },
+      "moral": {
+        "label": "Principios Morales",
+        "family": {
+          "title": "La Familia",
+          "item1": "El matrimonio es la unión sagrada entre un hombre y una mujer.",
+          "item2": "Los hijos son herencia del Señor y deben ser criados en sus caminos.",
+          "item3": "El hogar es la base fundamental de la sociedad."
+        },
+        "integrity": {
+          "title": "La Integridad",
+          "item1": "Vivimos con honestidad y transparencia en todas las áreas.",
+          "item2": "Rechazamos toda forma de corrupción y engaño.",
+          "item3": "Nuestra palabra debe ser nuestro compromiso."
+        },
+        "love": {
+          "title": "El Amor al Prójimo",
+          "item1": "Servimos a los necesitados sin distinción de raza, credo o condición.",
+          "item2": "Practicamos el perdón y la reconciliación."
+        }
+      },
+      "civil": {
+        "label": "Principios Civiles",
+        "respect": {
+          "title": "Respeto a las Autoridades",
+          "item1": "Respetamos y obedecemos las leyes civiles de cada país donde operamos.",
+          "item2": "Oramos por las autoridades gubernamentales.",
+          "item3": "Cumplimos con nuestras obligaciones fiscales y legales."
+        },
+        "citizenship": {
+          "title": "Ciudadanía Responsable",
+          "item1": "Participamos constructivamente en la sociedad.",
+          "item2": "Promovemos la paz y la convivencia armónica.",
+          "item3": "Contribuimos al bienestar de nuestras comunidades."
+        },
+        "transparency": {
+          "title": "Transparencia Institucional",
+          "item1": "Nuestra organización opera con total transparencia financiera.",
+          "item2": "Rendimos cuentas a nuestros miembros y a las autoridades competentes."
+        }
+      }
+    },
+    "stats": {
+      "label": "NUESTRO IMPACTO",
+      "title": "Transformando Vidas",
+      "years": "Años de Servicio",
+      "churches": "Iglesias",
+      "countries": "Países",
+      "members": "Miembros",
+      "quote": "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.",
+      "quoteReference": "JUAN 3:16"
+    }
+  },
+  "cta": {
+    "label": "ÚNETE A NOSOTROS",
+    "title": "Forma Parte de Nuestra Familia",
+    "description": "Te invitamos a conocernos mejor. Visita una de nuestras congregaciones y descubre cómo Cristo puede transformar tu vida.",
+    "findChurch": "Encuentra una Iglesia",
+    "contact": "Contáctanos"
   }
 }

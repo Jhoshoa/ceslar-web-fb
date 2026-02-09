@@ -91,9 +91,12 @@ const AdminLayout = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          py: 3,
+          px: { xs: 2, sm: 3, md: 4 },
           ml: isMobile ? 0 : `${DRAWER_WIDTH}px`,
           width: isMobile ? '100%' : `calc(100% - ${DRAWER_WIDTH}px)`,
+          maxWidth: isMobile ? '100%' : `calc(100% - ${DRAWER_WIDTH}px)`,
+          mx: 'auto',
         }}
       >
         <Toolbar />

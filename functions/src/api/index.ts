@@ -18,6 +18,7 @@ import ministriesRoutes from './ministries.routes';
 import membershipsRoutes from './memberships.routes';
 import questionsRoutes from './questions.routes';
 import publicRoutes from './public.routes';
+import mediaRoutes from './media.routes';
 
 // Create Express app
 const app = express();
@@ -74,6 +75,7 @@ app.use('/sermons', sermonsRoutes); // Mixed auth
 app.use('/ministries', ministriesRoutes); // Mixed auth
 app.use('/memberships', verifyToken, membershipsRoutes);
 app.use('/questions', questionsRoutes); // Mixed auth
+app.use('/media', mediaRoutes); // Protected (auth in route handlers)
 
 // ==========================================
 // ERROR HANDLING

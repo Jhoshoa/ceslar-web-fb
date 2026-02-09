@@ -8,6 +8,9 @@ import { AuthGuard, GuestGuard, RoleGuard } from './guards';
 // Templates/Layouts
 import { MainLayout, AdminLayout, AuthLayout } from './components/templates';
 
+// Global Components
+import { GlobalSnackbar } from './components/organisms';
+
 // Auth Hook
 import useAuth from './hooks/useAuth';
 
@@ -47,6 +50,10 @@ const AdminMinistriesPage = lazy(() => import('./components/pages/admin/Ministri
 const AdminQuestionsPage = lazy(() => import('./components/pages/admin/QuestionsPage/QuestionsPage'));
 const AdminMembershipsPage = lazy(() => import('./components/pages/admin/MembershipsPage/MembershipsPage'));
 const AdminSettingsPage = lazy(() => import('./components/pages/admin/SettingsPage/SettingsPage'));
+const AdminChurchCreatePage = lazy(() => import('./components/pages/admin/ChurchCreatePage/ChurchCreatePage'));
+const AdminChurchEditPage = lazy(() => import('./components/pages/admin/ChurchEditPage/ChurchEditPage'));
+const AdminEventCreatePage = lazy(() => import('./components/pages/admin/EventCreatePage/EventCreatePage'));
+const AdminEventEditPage = lazy(() => import('./components/pages/admin/EventEditPage/EventEditPage'));
 
 // Not Found Page
 const NotFoundPage = () => (
@@ -87,6 +94,7 @@ const App = () => {
   return (
     <>
       <ScrollToTop />
+      <GlobalSnackbar />
       <Routes>
           {/* Public Routes with MainLayout */}
           <Route element={<MainLayout />}>
@@ -168,7 +176,11 @@ const App = () => {
             <Route path="dashboard" element={<AdminDashboardPage />} />
             <Route path="users" element={<AdminUsersPage />} />
             <Route path="churches" element={<AdminChurchesPage />} />
+            <Route path="churches/create" element={<AdminChurchCreatePage />} />
+            <Route path="churches/:id/edit" element={<AdminChurchEditPage />} />
             <Route path="events" element={<AdminEventsPage />} />
+            <Route path="events/create" element={<AdminEventCreatePage />} />
+            <Route path="events/:id/edit" element={<AdminEventEditPage />} />
             <Route path="sermons" element={<AdminSermonsPage />} />
             <Route path="ministries" element={<AdminMinistriesPage />} />
             <Route path="questions" element={<AdminQuestionsPage />} />

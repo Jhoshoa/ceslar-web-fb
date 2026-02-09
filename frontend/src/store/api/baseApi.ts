@@ -36,6 +36,7 @@ export const tagTypes = [
   'QuestionCategory',
   'Membership',
   'PrayerRequest',
+  'Stats',
 ] as const;
 
 export type TagType = (typeof tagTypes)[number];

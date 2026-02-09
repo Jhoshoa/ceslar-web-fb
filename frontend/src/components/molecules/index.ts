@@ -9,3 +9,6 @@ export { default as Breadcrumb } from './Breadcrumb/Breadcrumb';
 export { default as Pagination } from './Pagination/Pagination';
 export { default as MenuItem } from './MenuItem/MenuItem';
 export { default as UserChip } from './UserChip/UserChip';
+export { default as SelectField } from './SelectField/SelectField';
+export { default as SwitchField } from './SwitchField/SwitchField';
+export { default as CheckboxField } from './CheckboxField/CheckboxField';

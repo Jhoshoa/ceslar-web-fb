@@ -125,7 +125,7 @@ const QuestionsPage = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <Typography variant="h4" sx={{ fontWeight: 700 }}>
           {t('admin.questions.pageTitle', 'Constructor de Preguntas')}

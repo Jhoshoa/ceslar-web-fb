@@ -120,6 +120,8 @@ export interface ChurchData {
 
   // Content
   description: LocalizedString;
+  history?: LocalizedString;
+  foundationDate?: string;
   serviceSchedule?: ServiceSchedule[];
   coverImage?: string | null;
   logoImage?: string | null;
