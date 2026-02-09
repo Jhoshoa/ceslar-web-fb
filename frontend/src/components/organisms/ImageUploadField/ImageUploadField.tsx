@@ -1,3 +1,10 @@
+/**
+ * ImageUploadField Organism
+ *
+ * Drag & drop image upload component with Cloudinary integration.
+ * Supports both unsigned (direct) and signed (via backend) uploads.
+ */
+
 import { useState, useCallback, ReactNode, DragEvent, ChangeEvent } from 'react';
 import {
   Box,
@@ -5,17 +12,31 @@ import {
   IconButton,
   CircularProgress,
   alpha,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button as MuiButton,
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ImageIcon from '@mui/icons-material/Image';
 import Typography from '../../atoms/Typography/Typography';
+import { useCloudinary } from '../../../hooks/useCloudinary';
+
+interface CloudinaryConfig {
+  cloudName: string;
+  uploadPreset: string;
+  folder?: string;
+}
 
 interface ImageUploadFieldProps {
   label?: string;
   name: string;
   value?: string | null;
   onChange: (url: string | null) => void;
+  onDelete?: (url: string) => void;
   error?: string;
   helperText?: string;
   description?: string;
@@ -25,11 +46,9 @@ interface ImageUploadFieldProps {
   maxSizeMB?: number;
   aspectRatio?: 'square' | 'landscape' | 'portrait' | 'free';
   previewHeight?: number;
-  cloudinaryConfig?: {
-    cloudName: string;
-    uploadPreset: string;
-    folder?: string;
-  };
+  cloudinaryConfig?: CloudinaryConfig;
+  useSignedUpload?: boolean;
+  deleteFromServer?: boolean;
 }
 
 const ImageUploadField = ({
@@ -37,6 +56,7 @@ const ImageUploadField = ({
   name,
   value,
   onChange,
+  onDelete,
   error,
   helperText,
   description,
@@ -47,10 +67,20 @@ const ImageUploadField = ({
   aspectRatio = 'free',
   previewHeight = 200,
   cloudinaryConfig,
+  useSignedUpload = false,
+  deleteFromServer = true,
 }: ImageUploadFieldProps): ReactNode => {
   const [isDragging, setIsDragging] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+  const {
+    uploadImage,
+    deleteImage,
+    isUploading,
+    isDeleting,
+    error: cloudinaryError,
+  } = useCloudinary();
 
   const getAspectRatioStyles = () => {
     switch (aspectRatio) {
@@ -65,35 +95,38 @@ const ImageUploadField = ({
     }
   };
 
+  /**
+   * Upload to Cloudinary
+   */
   const uploadToCloudinary = async (file: File): Promise<string> => {
-    if (!cloudinaryConfig) {
-      // Fallback: create object URL (temporary, won't persist)
-      return URL.createObjectURL(file);
+    // If using signed upload via backend
+    if (useSignedUpload) {
+      const result = await uploadImage(file, {
+        folder: cloudinaryConfig?.folder || 'ceslar',
+        useSignedUpload: true,
+        maxSizeMB,
+      });
+      return result.url;
     }
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', cloudinaryConfig.uploadPreset);
-    if (cloudinaryConfig.folder) {
-      formData.append('folder', cloudinaryConfig.folder);
+    // If cloudinaryConfig is provided, use unsigned upload
+    if (cloudinaryConfig?.cloudName && cloudinaryConfig?.uploadPreset) {
+      const result = await uploadImage(file, {
+        folder: cloudinaryConfig.folder || 'ceslar',
+        useSignedUpload: false,
+        maxSizeMB,
+      });
+      return result.url;
     }
 
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudinaryConfig.cloudName}/image/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error('Upload failed');
-    }
-
-    const data = await response.json();
-    return data.secure_url;
+    // Fallback: create object URL (temporary, won't persist)
+    console.warn('No Cloudinary config provided, using temporary URL');
+    return URL.createObjectURL(file);
   };
 
+  /**
+   * Handle file selection/drop
+   */
   const handleFile = useCallback(
     async (file: File) => {
       setUploadError(null);
@@ -110,17 +143,15 @@ const ImageUploadField = ({
         return;
       }
 
-      setIsUploading(true);
       try {
         const url = await uploadToCloudinary(file);
         onChange(url);
-      } catch {
-        setUploadError('Failed to upload image. Please try again.');
-      } finally {
-        setIsUploading(false);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : 'Failed to upload image';
+        setUploadError(message);
       }
     },
-    [onChange, maxSizeMB, cloudinaryConfig]
+    [onChange, maxSizeMB, cloudinaryConfig, useSignedUpload]
   );
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
@@ -148,12 +179,59 @@ const ImageUploadField = ({
     e.target.value = ''; // Reset to allow selecting same file
   };
 
-  const handleRemove = () => {
-    onChange(null);
-    setUploadError(null);
+  /**
+   * Handle image removal
+   */
+  const handleRemove = async () => {
+    if (!value) return;
+
+    // If deleteFromServer is enabled and the URL is from Cloudinary
+    if (deleteFromServer && value.includes('cloudinary.com')) {
+      setShowDeleteConfirm(true);
+    } else {
+      // Just clear the value without server deletion
+      onChange(null);
+      setUploadError(null);
+      onDelete?.(value);
+    }
   };
 
-  const displayError = error || uploadError;
+  /**
+   * Confirm and delete from server
+   */
+  const confirmDelete = async () => {
+    if (!value) return;
+
+    try {
+      await deleteImage(value);
+      onChange(null);
+      setUploadError(null);
+      onDelete?.(value);
+    } catch (err) {
+      // Even if server delete fails, clear the local value
+      console.error('Failed to delete from server:', err);
+      onChange(null);
+      setUploadError(null);
+    } finally {
+      setShowDeleteConfirm(false);
+    }
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteConfirm(false);
+  };
+
+  /**
+   * Clear value without server deletion
+   */
+  const clearWithoutDelete = () => {
+    onChange(null);
+    setUploadError(null);
+    setShowDeleteConfirm(false);
+  };
+
+  const displayError = error || uploadError || cloudinaryError;
+  const isLoading = isUploading || isDeleting;
 
   return (
     <Box sx={{ mb: 2 }}>
@@ -213,7 +291,7 @@ const ImageUploadField = ({
                 objectFit: 'contain',
               }}
             />
-            {!disabled && (
+            {!disabled && !isLoading && (
               <IconButton
                 onClick={handleRemove}
                 sx={{
@@ -228,6 +306,20 @@ const ImageUploadField = ({
               >
                 <DeleteIcon fontSize="small" />
               </IconButton>
+            )}
+            {isDeleting && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  bgcolor: 'rgba(0,0,0,0.5)',
+                }}
+              >
+                <CircularProgress size={40} sx={{ color: 'white' }} />
+              </Box>
             )}
           </Box>
         ) : (
@@ -246,7 +338,12 @@ const ImageUploadField = ({
             }}
           >
             {isUploading ? (
-              <CircularProgress size={40} />
+              <>
+                <CircularProgress size={40} />
+                <Typography variant="caption" color="textSecondary" sx={{ mt: 1 }}>
+                  Uploading...
+                </Typography>
+              </>
             ) : (
               <>
                 {isDragging ? (
@@ -272,7 +369,7 @@ const ImageUploadField = ({
           type="file"
           accept={accept}
           onChange={handleInputChange}
-          disabled={disabled || isUploading}
+          disabled={disabled || isLoading}
           style={{ display: 'none' }}
         />
       </Box>
@@ -288,6 +385,33 @@ const ImageUploadField = ({
       {helperText && !displayError && (
         <FormHelperText sx={{ mt: 0.5 }}>{helperText}</FormHelperText>
       )}
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={showDeleteConfirm}
+        onClose={cancelDelete}
+        aria-labelledby="delete-dialog-title"
+      >
+        <DialogTitle id="delete-dialog-title">
+          Delete Image?
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Do you want to permanently delete this image from the server, or just remove it from this form?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <MuiButton onClick={cancelDelete} color="inherit">
+            Cancel
+          </MuiButton>
+          <MuiButton onClick={clearWithoutDelete} color="primary">
+            Remove Only
+          </MuiButton>
+          <MuiButton onClick={confirmDelete} color="error" disabled={isDeleting}>
+            {isDeleting ? 'Deleting...' : 'Delete Permanently'}
+          </MuiButton>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
