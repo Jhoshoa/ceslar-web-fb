@@ -3,11 +3,13 @@
  *
  * Displays impressive statistics about the church's impact.
  * Features animated counters that trigger when scrolled into view.
+ * Fetches real data from the API with skeleton loading states.
  */
 
-import { Box, Container, Grid, Typography, alpha, keyframes } from '@mui/material';
+import { Box, Container, Grid, Typography, Skeleton, alpha, keyframes } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AnimatedCounter from '../../atoms/AnimatedCounter/AnimatedCounter';
+import { useGetPublicStatsQuery } from '../../../store/api/statsApi';
 
 // Icons
 import ChurchIcon from '@mui/icons-material/Church';
@@ -32,9 +34,10 @@ interface StatItemProps {
   suffix?: string;
   label: string;
   delay: number;
+  isLoading?: boolean;
 }
 
-const StatItem = ({ icon, value, suffix = '', label, delay }: StatItemProps) => {
+const StatItem = ({ icon, value, suffix = '', label, delay, isLoading = false }: StatItemProps) => {
   const goldColor = '#D4AF37';
 
   return (
@@ -98,30 +101,45 @@ const StatItem = ({ icon, value, suffix = '', label, delay }: StatItemProps) => 
         </Box>
       </Box>
 
-      {/* Counter */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', gap: 0.5 }}>
-        <AnimatedCounter
-          end={value}
-          duration={2500}
-          sx={{
-            fontFamily: '"Playfair Display", serif',
-            fontWeight: 700,
-            fontSize: { xs: '2.5rem', md: '3.5rem' },
-            color: '#FFFFFF',
-            lineHeight: 1,
-          }}
-        />
-        {suffix && (
-          <Typography
+      {/* Counter or Skeleton */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', gap: 0.5, minHeight: 56 }}>
+        {isLoading ? (
+          <Skeleton
+            variant="text"
+            width={80}
+            height={56}
             sx={{
-              fontFamily: '"Playfair Display", serif',
-              fontWeight: 700,
-              fontSize: { xs: '2rem', md: '2.5rem' },
-              color: goldColor,
+              bgcolor: alpha('#FFFFFF', 0.1),
+              borderRadius: 1,
             }}
-          >
-            {suffix}
-          </Typography>
+          />
+        ) : (
+          <>
+            <AnimatedCounter
+              value={value}
+              duration={2500}
+              sx={{
+                fontFamily: '"Playfair Display", serif',
+                fontWeight: 700,
+                fontSize: { xs: '2.5rem', md: '3.5rem' },
+                color: '#FFFFFF',
+                lineHeight: 1,
+              }}
+            />
+            {suffix && (
+              <Typography
+                component="span"
+                sx={{
+                  fontFamily: '"Playfair Display", serif',
+                  fontWeight: 700,
+                  fontSize: { xs: '2rem', md: '2.5rem' },
+                  color: goldColor,
+                }}
+              >
+                {suffix}
+              </Typography>
+            )}
+          </>
         )}
       </Box>
 
@@ -148,28 +166,42 @@ const ImpactStats = () => {
   const goldColor = '#D4AF37';
   const navyColor = '#0D1B4C';
 
-  const stats = [
+  // Fetch stats from API
+  const { data: stats, isLoading } = useGetPublicStatsQuery();
+
+  // Format members count (show in K if >= 1000)
+  const formatMembersCount = (count: number): { value: number; suffix: string } => {
+    if (count >= 1000) {
+      return { value: Math.round(count / 1000), suffix: 'K+' };
+    }
+    return { value: count, suffix: '+' };
+  };
+
+  const membersFormatted = stats ? formatMembersCount(stats.membersCount) : { value: 0, suffix: '+' };
+
+  const statsData = [
     {
       icon: <CalendarMonthIcon />,
-      value: 55,
+      value: stats?.yearsOfService ?? 0,
       suffix: '+',
       label: t('about.stats.years', 'Años de Servicio'),
     },
     {
       icon: <ChurchIcon />,
-      value: 200,
+      value: stats?.churchesCount ?? 0,
       suffix: '+',
       label: t('about.stats.churches', 'Iglesias'),
     },
     {
       icon: <PublicIcon />,
-      value: 6,
+      value: stats?.countriesCount ?? 0,
+      suffix: '',
       label: t('about.stats.countries', 'Países'),
     },
     {
       icon: <GroupsIcon />,
-      value: 50,
-      suffix: 'K+',
+      value: membersFormatted.value,
+      suffix: membersFormatted.suffix,
       label: t('about.stats.members', 'Miembros'),
     },
   ];
@@ -239,7 +271,7 @@ const ImpactStats = () => {
 
         {/* Stats grid */}
         <Grid container spacing={{ xs: 4, md: 6 }}>
-          {stats.map((stat, index) => (
+          {statsData.map((stat, index) => (
             <Grid item xs={6} md={3} key={index}>
               <StatItem
                 icon={stat.icon}
@@ -247,6 +279,7 @@ const ImpactStats = () => {
                 suffix={stat.suffix}
                 label={stat.label}
                 delay={index * 0.2}
+                isLoading={isLoading}
               />
             </Grid>
           ))}

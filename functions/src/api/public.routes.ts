@@ -13,6 +13,7 @@ import * as eventService from '../services/event.service';
 import * as sermonService from '../services/sermon.service';
 import * as ministryService from '../services/ministry.service';
 import * as questionService from '../services/question.service';
+import * as statsService from '../services/stats.service';
 import { handleValidationErrors, commonValidators } from '../utils/validation.utils';
 import { success, successWithPagination, notFound, serverError } from '../utils/response.utils';
 import { ChurchLevel, EventType, SermonCategory } from '@ceslar/shared-types';
@@ -244,6 +245,20 @@ router.get('/questions/registration', async (req: Request, res: Response) => {
       req.query.churchId as string | null
     );
     success(res, grouped);
+  } catch (error) {
+    serverError(res, (error as Error).message);
+  }
+});
+
+// ==========================================
+// PUBLIC STATS
+// ==========================================
+
+// GET /public/stats - Public statistics for about page
+router.get('/stats', async (_req: Request, res: Response) => {
+  try {
+    const stats = await statsService.getPublicStats();
+    success(res, stats);
   } catch (error) {
     serverError(res, (error as Error).message);
   }
