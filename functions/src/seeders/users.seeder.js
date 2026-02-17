@@ -32,7 +32,6 @@ async function seedUsers(db, auth, options = {}) {
     try {
       // Create or get Firebase Auth user
       let authUser;
-      let _isNewUser = false;
       try {
         authUser = await auth.getUserByEmail(user.email);
       } catch (error) {
@@ -44,7 +43,6 @@ async function seedUsers(db, auth, options = {}) {
             photoURL: user.photoURL || undefined,
             emailVerified: true,
           });
-          _isNewUser = true;
           // Wait for auth trigger to complete before setting claims
           // The onUserCreate trigger sets default claims, we need to overwrite them
           await new Promise((resolve) => setTimeout(resolve, 2000));

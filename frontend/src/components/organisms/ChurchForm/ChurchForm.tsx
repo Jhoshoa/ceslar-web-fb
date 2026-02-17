@@ -145,7 +145,7 @@ const ChurchForm = ({
     formState: { errors, isSubmitting },
   } = methods;
 
-  const watchCountry = watch('country');
+  const _watchCountry = watch('country');
   const watchLevel = watch('level');
 
   // Update country code when country changes

@@ -59,7 +59,7 @@ const LocalizedRichTextInput = ({
     });
   };
 
-  const currentLang = LANGUAGES[activeTab].code;
+  const _currentLang = LANGUAGES[activeTab].code;
 
   return (
     <Box>
