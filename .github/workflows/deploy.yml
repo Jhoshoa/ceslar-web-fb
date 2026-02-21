@@ -1,36 +1,16 @@
-# ===========================================
-# CESLAR - Firebase Deployment Pipeline
-# ===========================================
-# This workflow deploys the application to Firebase
-# ONLY when changes are pushed to the 'release' branch.
-#
-# Trigger: Push to release branch (typically via PR merge)
-# Deploys: Hosting, Functions, Firestore Rules/Indexes, Storage Rules
-#
-# See docs/deployment/DEPLOYMENT-GUIDE.md for full documentation
-# ===========================================
-
 name: Deploy to Firebase
 
 on:
   push:
     branches:
       - release
-  # Allow manual deployment
-  workflow_dispatch:
-    inputs:
-      skip_lint:
-        description: Skip linting (emergency deploy)
-        required: false
-        default: false
-        type: boolean
 
 env:
-  NODE_VERSION: "20"
+  NODE_VERSION: '20'
 
 jobs:
   # ==========================================
-  # JOB 1: BUILD AND TEST
+  # BUILD AND TEST
   # ==========================================
   build-and-test:
     name: Build and Test
@@ -44,49 +24,37 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            frontend/package-lock.json
-            functions/package-lock.json
-            packages/shared-types/package-lock.json
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
 
-      # Install Dependencies
-      - name: Install root dependencies
+      # Install all dependencies (workspaces handled by root npm ci)
+      - name: Install all dependencies
         run: npm ci
 
-      - name: Install shared-types dependencies
-        run: npm ci
+      # Install and build shared-types
+      - name: Install shared-types
+        run: npm install
         working-directory: packages/shared-types
 
       - name: Build shared-types
         run: npm run build
         working-directory: packages/shared-types
 
-      - name: Install functions dependencies
-        run: npm ci
-        working-directory: functions
-
-      - name: Install frontend dependencies
-        run: npm ci
-        working-directory: frontend
-
-      # Linting
+      # Lint
       - name: Lint functions
-        if: inputs.skip_lint != true
         run: npm run lint
         working-directory: functions
 
       - name: Lint frontend
-        if: inputs.skip_lint != true
         run: npm run lint
         working-directory: frontend
 
-      # Build
+      # Build functions
       - name: Build functions
         run: npm run build
         working-directory: functions
 
+      # Build frontend with environment variables
       - name: Build frontend
         run: npm run build
         working-directory: frontend
@@ -100,11 +68,9 @@ jobs:
           VITE_API_URL: https://southamerica-east1-${{ secrets.FIREBASE_PROJECT_ID }}.cloudfunctions.net/api
           VITE_CLOUDINARY_CLOUD_NAME: ${{ secrets.VITE_CLOUDINARY_CLOUD_NAME }}
           VITE_CLOUDINARY_UPLOAD_PRESET: ${{ secrets.VITE_CLOUDINARY_UPLOAD_PRESET }}
-          VITE_USE_EMULATORS: "false"
-          VITE_APP_NAME: Cristo Es La Respuesta
-          VITE_DEFAULT_LANGUAGE: es
+          VITE_USE_EMULATORS: 'false'
 
-      # Upload Artifacts
+      # Upload artifacts for deploy job
       - name: Upload frontend build
         uses: actions/upload-artifact@v4
         with:
@@ -116,20 +82,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: functions-lib
-          path: |
-            functions/lib
-            functions/package.json
-            functions/package-lock.json
+          path: functions/lib
           retention-days: 1
 
   # ==========================================
-  # JOB 2: DEPLOY TO FIREBASE
+  # DEPLOY TO FIREBASE
   # ==========================================
   deploy:
     name: Deploy to Firebase
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: success()
 
     steps:
       - name: Checkout repository
@@ -140,7 +102,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      # Download Artifacts
+      # Download build artifacts
       - name: Download frontend build
         uses: actions/download-artifact@v4
         with:
@@ -151,34 +113,30 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: functions-lib
-          path: functions
+          path: functions/lib
 
-      # Prepare Functions
-      - name: Install functions production dependencies
-        run: npm ci --omit=dev
+      # Install functions production dependencies (needed for deployment)
+      - name: Install functions dependencies
+        run: npm install --omit=dev
         working-directory: functions
 
-      - name: Create functions environment file
+      # Create functions .env file for Firebase Functions runtime
+      - name: Create functions .env file
         run: |
-          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" > functions/.env
-          echo "CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}" >> functions/.env
-          echo "CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}" >> functions/.env
-          echo "CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}" >> functions/.env
-          echo "SMTP_HOST=${{ secrets.SMTP_HOST }}" >> functions/.env
-          echo "SMTP_PORT=${{ secrets.SMTP_PORT }}" >> functions/.env
-          echo "SMTP_USER=${{ secrets.SMTP_USER }}" >> functions/.env
-          echo "SMTP_PASS=${{ secrets.SMTP_PASS }}" >> functions/.env
+          cat << EOF > functions/.env
+          CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
+          EOF
 
-      # Authenticate
+      # Authenticate with Firebase using service account
       - name: Authenticate to Google Cloud
+        id: auth
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
-
-      # Deploy
+      # Deploy Hosting
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -187,29 +145,18 @@ jobs:
           projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
           channelId: live
 
-      - name: Deploy Cloud Functions
-        run: firebase deploy --only functions --project ${{ secrets.FIREBASE_PROJECT_ID }} --force
+      # Deploy Functions
+      - name: Deploy Firebase Functions
+        run: npx firebase-tools deploy --only functions --project ${{ secrets.FIREBASE_PROJECT_ID }} --force
 
+      # Deploy Firestore Rules
       - name: Deploy Firestore Rules
-        run: firebase deploy --only firestore:rules --project ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: npx firebase-tools deploy --only firestore:rules --project ${{ secrets.FIREBASE_PROJECT_ID }}
 
+      # Deploy Firestore Indexes
       - name: Deploy Firestore Indexes
-        run: firebase deploy --only firestore:indexes --project ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: npx firebase-tools deploy --only firestore:indexes --project ${{ secrets.FIREBASE_PROJECT_ID }}
 
+      # Deploy Storage Rules
       - name: Deploy Storage Rules
-        run: firebase deploy --only storage --project ${{ secrets.FIREBASE_PROJECT_ID }}
-
-      # Summary
-      - name: Deployment Summary
-        run: |
-          echo "## Deployment Complete!" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Project:** ${{ secrets.FIREBASE_PROJECT_ID }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Deployed:" >> $GITHUB_STEP_SUMMARY
-          echo "- Firebase Hosting" >> $GITHUB_STEP_SUMMARY
-          echo "- Cloud Functions" >> $GITHUB_STEP_SUMMARY
-          echo "- Firestore Rules and Indexes" >> $GITHUB_STEP_SUMMARY
-          echo "- Storage Rules" >> $GITHUB_STEP_SUMMARY
+        run: npx firebase-tools deploy --only storage --project ${{ secrets.FIREBASE_PROJECT_ID }}

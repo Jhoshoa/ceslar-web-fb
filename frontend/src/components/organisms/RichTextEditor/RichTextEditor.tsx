@@ -60,13 +60,6 @@ const RichTextEditor = ({
     }
   }, [value]);
 
-  // Execute formatting command
-  const execCommand = useCallback((command: string, value: string | undefined = undefined) => {
-    document.execCommand(command, false, value);
-    editorRef.current?.focus();
-    handleContentChange();
-  }, []);
-
   // Handle content changes
   const handleContentChange = useCallback(() => {
     if (editorRef.current) {
@@ -77,6 +70,13 @@ const RichTextEditor = ({
       }
     }
   }, [onChange, value]);
+
+  // Execute formatting command
+  const execCommand = useCallback((command: string, cmdValue: string | undefined = undefined) => {
+    document.execCommand(command, false, cmdValue);
+    editorRef.current?.focus();
+    handleContentChange();
+  }, [handleContentChange]);
 
   // Format buttons configuration
   const formatButtons = [

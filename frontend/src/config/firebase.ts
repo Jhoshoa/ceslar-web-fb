@@ -60,7 +60,6 @@ if (useEmulators) {
     // eslint-disable-next-line no-console
     console.log('✅ Connected to Firebase Emulators');
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('❌ Failed to connect to Firebase Emulators:', error);
   }
 }

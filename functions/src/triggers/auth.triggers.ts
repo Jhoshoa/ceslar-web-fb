@@ -7,7 +7,6 @@
  */
 
 import * as functionsV1 from 'firebase-functions/v1';
-import { HttpsError } from 'firebase-functions/v2/https';
 import { UserRecord } from 'firebase-admin/auth';
 import { db, auth, serverTimestamp } from '../config/firebase';
 import { Permission, SystemRole, ChurchRole, ThemeMode, Language } from '@ceslar/shared-types';
@@ -113,7 +112,8 @@ export const onUserCreate = functionsV1
       return { success: true, userId: user.uid };
     } catch (error) {
       console.error(`Error in onUserCreate for ${user.uid}:`, error);
-      throw new HttpsError('internal', 'Failed to initialize user');
+      // For background triggers, we log and return error info rather than throwing
+      return { success: false, error: (error as Error).message };
     }
   });
 

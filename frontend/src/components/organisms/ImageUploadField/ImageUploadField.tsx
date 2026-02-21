@@ -98,7 +98,7 @@ const ImageUploadField = ({
   /**
    * Upload to Cloudinary
    */
-  const uploadToCloudinary = async (file: File): Promise<string> => {
+  const uploadToCloudinary = useCallback(async (file: File): Promise<string> => {
     // If using signed upload via backend
     if (useSignedUpload) {
       const result = await uploadImage(file, {
@@ -122,7 +122,7 @@ const ImageUploadField = ({
     // Fallback: create object URL (temporary, won't persist)
     console.warn('No Cloudinary config provided, using temporary URL');
     return URL.createObjectURL(file);
-  };
+  }, [uploadImage, useSignedUpload, cloudinaryConfig, maxSizeMB]);
 
   /**
    * Handle file selection/drop
@@ -151,7 +151,7 @@ const ImageUploadField = ({
         setUploadError(message);
       }
     },
-    [onChange, maxSizeMB, cloudinaryConfig, useSignedUpload]
+    [onChange, maxSizeMB, uploadToCloudinary]
   );
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {

@@ -306,7 +306,7 @@ const ImpactStats = () => {
               fontSize: { xs: '1.1rem', md: '1.4rem' },
             }}
           >
-            "{t('about.stats.quote', 'Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.')}"
+            &ldquo;{t('about.stats.quote', 'Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.')}&rdquo;
           </Typography>
           <Typography
             variant="body2"

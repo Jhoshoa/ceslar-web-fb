@@ -39,6 +39,26 @@ const AnimatedCounter = ({
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    const animateValue = () => {
+      const startTime = performance.now();
+      const startValue = 0;
+
+      const updateValue = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
+        const currentValue = startValue + (value - startValue) * easedProgress;
+
+        setDisplayValue(currentValue);
+
+        if (progress < 1) {
+          requestAnimationFrame(updateValue);
+        }
+      };
+
+      requestAnimationFrame(updateValue);
+    };
+
     if (!startOnView) {
       // Start immediately if not waiting for view
       animateValue();
@@ -62,27 +82,7 @@ const AnimatedCounter = ({
     }
 
     return () => observer.disconnect();
-  }, [value, hasAnimated, startOnView]);
-
-  const animateValue = () => {
-    const startTime = performance.now();
-    const startValue = 0;
-
-    const updateValue = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = easeOutQuart(progress);
-      const currentValue = startValue + (value - startValue) * easedProgress;
-
-      setDisplayValue(currentValue);
-
-      if (progress < 1) {
-        requestAnimationFrame(updateValue);
-      }
-    };
-
-    requestAnimationFrame(updateValue);
-  };
+  }, [value, duration, hasAnimated, startOnView]);
 
   const formattedValue = displayValue.toFixed(decimals);
 

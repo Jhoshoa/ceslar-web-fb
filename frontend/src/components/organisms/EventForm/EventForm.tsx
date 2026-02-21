@@ -179,7 +179,7 @@ const EventForm = ({
   const watchChurchId = watch('churchId');
   const watchIsOnline = watch('location.isOnline');
   const watchRegistrationRequired = watch('registration.required');
-  const watchHasFee = watch('registration.fee');
+  const _watchHasFee = watch('registration.fee');
 
   // Update church name when church changes
   useEffect(() => {

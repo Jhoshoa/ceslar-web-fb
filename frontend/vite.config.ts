@@ -38,6 +38,14 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        // Exclude Firebase reserved paths from navigation fallback
+        navigateFallback: '/index.html',
+        navigateFallbackDenylist: [
+          // Firebase reserved paths (auth handler, etc.)
+          /^\/__\/.*/,
+          // API routes
+          /^\/api\/.*/,
+        ],
         runtimeCaching: [
           {
             // API requests - Network First with 24h cache
