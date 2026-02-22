@@ -42,8 +42,7 @@ const UsersPage = () => {
     page,
     limit: 10,
     search: search || undefined,
-    role: roleFilter || undefined,
-    sort: `${sortOrder === 'desc' ? '-' : ''}${sortBy}`,
+    systemRole: (roleFilter as 'system_admin' | 'user') || undefined,
   });
 
   const [updateRole, { isLoading: updatingRole }] = useUpdateUserRoleMutation();
@@ -131,7 +130,7 @@ const UsersPage = () => {
 
   const handleSaveRole = async () => {
     if (editUser && newRole !== editUser.systemRole) {
-      await updateRole({ userId: editUser.id, role: newRole });
+      await updateRole({ id: editUser.id, systemRole: newRole as 'system_admin' | 'user' });
     }
     setEditUser(null);
   };
