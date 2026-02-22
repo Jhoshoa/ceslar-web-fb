@@ -192,8 +192,8 @@ const HeroSection = ({
     )}
 
     {/* Content */}
-    <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, py: { xs: 8, md: 12 } }}>
-      <Grid container spacing={4} alignItems="center">
+    <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, py: { xs: 6, md: 12 }, px: { xs: 2, sm: 3, md: 3 } }}>
+      <Grid container spacing={{ xs: 0, sm: 2, md: 4 }} alignItems="center">
         {/* Left side - Historical Photos */}
         <Grid size={{ xs: 12, md: 5, lg: 4 }} sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
           <Box
@@ -234,7 +234,7 @@ const HeroSection = ({
           <Box
             sx={{
               textAlign: { xs: 'center', md: 'left' },
-              pl: { md: 4 },
+              pl: { xs: 0, md: 4 },
             }}
           >
         {/* Crown decoration */}
@@ -259,6 +259,7 @@ const HeroSection = ({
                 width: 40,
                 height: 1,
                 background: 'linear-gradient(90deg, transparent, #D4AF37)',
+                display: { xs: 'none', sm: 'block' },
               }}
             />
             <Typography
@@ -277,6 +278,7 @@ const HeroSection = ({
                 width: 40,
                 height: 1,
                 background: 'linear-gradient(90deg, #D4AF37, transparent)',
+                display: { xs: 'none', sm: 'block' },
               }}
             />
           </Box>
@@ -288,7 +290,7 @@ const HeroSection = ({
           sx={{
             fontFamily: '"Playfair Display", serif',
             fontWeight: 700,
-            fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
+            fontSize: { xs: '1.75rem', sm: '3rem', md: '4.5rem' },
             lineHeight: 1.1,
             color: '#FFFFFF',
             mb: 2,
@@ -320,7 +322,7 @@ const HeroSection = ({
               fontWeight: 400,
               mb: 2,
               animation: `${fadeInUp} 0.8s ease-out 0.4s both`,
-              fontSize: { xs: '1.1rem', md: '1.35rem' },
+              fontSize: { xs: '0.95rem', sm: '1.1rem', md: '1.35rem' },
             }}
           >
             {subtitle}
@@ -334,10 +336,11 @@ const HeroSection = ({
                 sx={{
                   color: alpha('#FFFFFF', 0.7),
                   mb: 4,
-                  maxWidth: 600,
+                  maxWidth: { xs: '100%', md: 600 },
                   mx: { xs: 'auto', md: 0 },
                   animation: `${fadeInUp} 0.8s ease-out 0.5s both`,
                   lineHeight: 1.8,
+                  fontSize: { xs: '0.85rem', sm: '1rem' },
                 }}
               >
                 {description}
@@ -348,9 +351,10 @@ const HeroSection = ({
             <Box
               sx={{
                 display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
                 justifyContent: { xs: 'center', md: 'flex-start' },
+                alignItems: { xs: 'center', sm: 'flex-start', md: 'flex-start' },
                 gap: { xs: 2, sm: 3 },
-                flexWrap: 'wrap',
                 animation: `${fadeInUp} 0.8s ease-out 0.6s both`,
               }}
             >
@@ -365,9 +369,10 @@ const HeroSection = ({
                 color: '#ffffff',
                 px: 4,
                 py: 1.5,
-                fontSize: '1.1rem',
+                fontSize: { xs: '0.9rem', sm: '1.1rem' },
                 fontWeight: 600,
                 borderRadius: 3,
+                minWidth: { xs: 200, sm: 'auto' },
                 '&:hover': {
                   bgcolor: '#E5C76B',
                   transform: 'translateY(-2px)',
@@ -391,8 +396,9 @@ const HeroSection = ({
                 borderWidth: 2,
                 px: 4,
                 py: 1.5,
-                fontSize: '1.1rem',
+                fontSize: { xs: '0.9rem', sm: '1.1rem' },
                 borderRadius: 3,
+                minWidth: { xs: 200, sm: 'auto' },
                 '&:hover': {
                   borderColor: '#FFFFFF',
                   borderWidth: 2,
@@ -410,9 +416,9 @@ const HeroSection = ({
               sx={{
                 display: 'flex',
                 justifyContent: { xs: 'center', md: 'flex-start' },
-                gap: { xs: 4, sm: 8 },
-                mt: 8,
-                pt: 6,
+                gap: { xs: 4, sm: 6, md: 8 },
+                mt: { xs: 5, md: 8 },
+                pt: { xs: 4, md: 6 },
                 borderTop: `1px solid ${alpha('#D4AF37', 0.2)}`,
                 animation: `${fadeInUp} 0.8s ease-out 0.8s both`,
               }}
@@ -429,7 +435,7 @@ const HeroSection = ({
                       color: '#D4AF37',
                       fontWeight: 700,
                       fontFamily: '"Playfair Display", serif',
-                      fontSize: { xs: '2rem', md: '2.5rem' },
+                      fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
                     }}
                   >
                     {stat.value}
