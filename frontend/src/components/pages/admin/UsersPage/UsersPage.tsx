@@ -2,62 +2,47 @@ import { useState } from 'react';
 import { Container, Box, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useGetUsersQuery, useUpdateUserRoleMutation } from '../../../../store/api/usersApi';
-import DataTable from '../../../organisms/DataTable/DataTable';
+import DataTable, { TableColumn, DataTableRow } from '../../../organisms/DataTable/DataTable';
 import Typography from '../../../atoms/Typography/Typography';
 import Chip from '../../../atoms/Chip/Chip';
 import Avatar from '../../../atoms/Avatar/Avatar';
 import FormDialog from '../../../organisms/FormDialog/FormDialog';
+import type { SystemRole, User } from '@ceslar/shared-types';
 
-interface User {
-  id: string;
-  displayName?: string;
-  email: string;
-  photoURL?: string;
-  systemRole: string;
-  status?: string;
-  createdAt?: { _seconds: number } | string;
-}
+type UserRow = User & DataTableRow;
 
-interface Column {
-  field: string;
-  label: string;
-  sortable?: boolean;
-  align?: 'left' | 'right' | 'center';
-  render?: (row: User) => React.ReactNode;
-}
-
-const ROLES = ['system_admin', 'user'];
+const ROLES: SystemRole[] = ['system_admin', 'user'];
 
 const UsersPage = () => {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const [roleFilter, setRoleFilter] = useState('');
+  const [roleFilter, setRoleFilter] = useState<SystemRole | ''>('');
   const [sortBy, setSortBy] = useState('createdAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-  const [editUser, setEditUser] = useState<User | null>(null);
-  const [newRole, setNewRole] = useState('');
+  const [editUser, setEditUser] = useState<UserRow | null>(null);
+  const [newRole, setNewRole] = useState<SystemRole>('user');
 
   const { data, isLoading } = useGetUsersQuery({
     page,
     limit: 10,
     search: search || undefined,
-    systemRole: (roleFilter as 'system_admin' | 'user') || undefined,
+    systemRole: roleFilter || undefined,
   });
 
   const [updateRole, { isLoading: updatingRole }] = useUpdateUserRoleMutation();
 
-  const users: User[] = data?.data || [];
-  const pagination = data?.pagination || {};
+  const users = (data?.data || []) as UserRow[];
+  const pagination = data?.pagination;
 
-  const columns: Column[] = [
+  const columns: TableColumn<UserRow>[] = [
     {
       field: 'displayName',
       label: t('admin.users.name', 'Nombre'),
       sortable: true,
       render: (row) => (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <Avatar src={row.photoURL} sx={{ width: 32, height: 32 }}>
+          <Avatar src={row.photoURL || undefined} sx={{ width: 32, height: 32 }}>
             {row.displayName?.[0]}
           </Avatar>
           <Box>
@@ -73,7 +58,7 @@ const UsersPage = () => {
       sortable: true,
       render: (row) => (
         <Chip
-          label={row.systemRole}
+          label={row.systemRole || 'user'}
           size="small"
           color={row.systemRole === 'system_admin' ? 'error' : 'default'}
           variant="outlined"
@@ -81,13 +66,13 @@ const UsersPage = () => {
       ),
     },
     {
-      field: 'status',
+      field: 'isActive',
       label: t('admin.users.status', 'Estado'),
       render: (row) => (
         <Chip
-          label={row.status || 'active'}
+          label={row.isActive !== false ? 'active' : 'inactive'}
           size="small"
-          color={row.status === 'active' || !row.status ? 'success' : 'warning'}
+          color={row.isActive !== false ? 'success' : 'warning'}
         />
       ),
     },
@@ -96,9 +81,11 @@ const UsersPage = () => {
       label: t('admin.users.created', 'Creado'),
       sortable: true,
       render: (row) => {
-        const date = row.createdAt && typeof row.createdAt === 'object' && '_seconds' in row.createdAt
-          ? new Date(row.createdAt._seconds * 1000)
-          : new Date(row.createdAt as string);
+        if (!row.createdAt) return <Typography variant="caption">-</Typography>;
+        const createdAt = row.createdAt as { _seconds?: number } | string;
+        const date = typeof createdAt === 'object' && createdAt._seconds
+          ? new Date(createdAt._seconds * 1000)
+          : new Date(createdAt as string);
         return <Typography variant="caption">{date.toLocaleDateString()}</Typography>;
       },
     },
@@ -111,7 +98,7 @@ const UsersPage = () => {
           variant="body2"
           color="primary"
           sx={{ cursor: 'pointer', fontWeight: 500 }}
-          onClick={() => { setEditUser(row); setNewRole(row.systemRole); }}
+          onClick={() => { setEditUser(row); setNewRole(row.systemRole || 'user'); }}
         >
           {t('common.edit', 'Editar')}
         </Typography>
@@ -130,13 +117,13 @@ const UsersPage = () => {
 
   const handleSaveRole = async () => {
     if (editUser && newRole !== editUser.systemRole) {
-      await updateRole({ id: editUser.id, systemRole: newRole as 'system_admin' | 'user' });
+      await updateRole({ id: editUser.id, systemRole: newRole });
     }
     setEditUser(null);
   };
 
   const handleRoleFilterChange = (e: SelectChangeEvent) => {
-    setRoleFilter(e.target.value);
+    setRoleFilter(e.target.value as SystemRole | '');
     setPage(1);
   };
 
@@ -167,7 +154,7 @@ const UsersPage = () => {
         </FormControl>
       </Box>
 
-      <DataTable
+      <DataTable<UserRow>
         columns={columns}
         rows={users}
         loading={isLoading}
@@ -175,8 +162,8 @@ const UsersPage = () => {
         sortOrder={sortOrder}
         onSort={handleSort}
         page={page}
-        totalPages={pagination.totalPages || 1}
-        totalItems={pagination.total || 0}
+        totalPages={pagination?.totalPages || 1}
+        totalItems={pagination?.total || 0}
         onPageChange={setPage}
         searchValue={search}
         onSearch={handleSearch}
@@ -200,7 +187,7 @@ const UsersPage = () => {
               <Select
                 value={newRole}
                 label={t('admin.users.role', 'Rol')}
-                onChange={(e) => setNewRole(e.target.value)}
+                onChange={(e) => setNewRole(e.target.value as SystemRole)}
               >
                 {ROLES.map((r) => (
                   <MenuItem key={r} value={r}>{r}</MenuItem>
