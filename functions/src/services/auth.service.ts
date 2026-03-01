@@ -239,3 +239,62 @@ export function hasChurchRole(
   const userRole = claims.churchRoles?.[churchId];
   return userRole !== undefined && roles.includes(userRole);
 }
+
+/**
+ * Check if user has a specific granular permission
+ *
+ * Supports:
+ * - Exact match: "events:create"
+ * - Wildcard: "*" (full access)
+ * - Resource wildcard: "events:*"
+ */
+export function hasGranularPermission(
+  claims: UserClaims,
+  permission: string
+): boolean {
+  // Cast to string array to support both legacy and new permission formats
+  const permissions = (claims.permissions || []) as string[];
+
+  // Check for full access wildcard
+  if (permissions.includes('*')) {
+    return true;
+  }
+
+  // Check for admin:all (legacy support)
+  if (permissions.includes('admin:all')) {
+    return true;
+  }
+
+  // Check for exact permission
+  if (permissions.includes(permission)) {
+    return true;
+  }
+
+  // Check for resource wildcard (e.g., "events:*" grants "events:create")
+  const [resource] = permission.split(':');
+  if (permissions.includes(`${resource}:*`)) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Check if user has any of the specified permissions
+ */
+export function hasAnyGranularPermission(
+  claims: UserClaims,
+  permissions: string[]
+): boolean {
+  return permissions.some((p) => hasGranularPermission(claims, p));
+}
+
+/**
+ * Check if user has all of the specified permissions
+ */
+export function hasAllGranularPermissions(
+  claims: UserClaims,
+  permissions: string[]
+): boolean {
+  return permissions.every((p) => hasGranularPermission(claims, p));
+}

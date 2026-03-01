@@ -37,11 +37,16 @@ const { seedEvents, clearEvents } = require('./events.seeder');
 const { seedSermons, clearSermons } = require('./sermons.seeder');
 const { seedMinistries, clearMinistries } = require('./ministries.seeder');
 const { seedQuestions, clearQuestions } = require('./questions.seeder');
+const { seedPermissions, clearPermissions } = require('./permissions.seeder');
+const { seedRoles, clearRoles } = require('./roles.seeder');
 
 /**
  * Available seeders in execution order
+ * Note: permissions and roles are seeded first as they are referenced by other data
  */
 const seeders = [
+  { name: 'permissions', seed: seedPermissions, clear: clearPermissions },
+  { name: 'roles', seed: seedRoles, clear: clearRoles },
   { name: 'questionCategories', seed: seedQuestions, clear: clearQuestions },
   { name: 'questions', seed: seedQuestions, clear: clearQuestions },
   { name: 'churches', seed: seedChurches, clear: clearChurches },

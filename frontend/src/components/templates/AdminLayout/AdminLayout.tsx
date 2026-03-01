@@ -11,6 +11,7 @@ import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import QuizIcon from '@mui/icons-material/Quiz';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useTranslation } from 'react-i18next';
 import Header from '../../organisms/Header/Header';
 import Sidebar from '../../organisms/Sidebar/Sidebar';
@@ -68,6 +69,7 @@ const AdminLayout = () => {
     { label: t('admin.ministries', 'Ministerios'), icon: <GroupWorkIcon />, path: '/admin/ministries' },
     { label: t('admin.memberships', 'Membresías'), icon: <CardMembershipIcon />, path: '/admin/memberships' },
     { label: t('admin.questions', 'Preguntas'), icon: <QuizIcon />, path: '/admin/questions' },
+    { label: t('admin.roles', 'Roles'), icon: <AdminPanelSettingsIcon />, path: '/admin/roles' },
     { label: t('admin.settings', 'Configuración'), icon: <SettingsIcon />, path: '/admin/settings' },
   ];
 

@@ -21,6 +21,7 @@
     "ministries": "Ministerios",
     "questions": "Cuestionario",
     "memberships": "Membresías",
+    "roles": "Roles",
     "settings": "Configuración"
   },
   "users": {
@@ -127,5 +128,48 @@
     "general": "General",
     "security": "Seguridad",
     "notifications": "Notificaciones"
+  },
+  "roles": {
+    "title": "Roles y Permisos",
+    "name": "Nombre",
+    "description": "Descripción",
+    "scope": "Alcance",
+    "permissions": "Permisos",
+    "permissionsCount": "permisos",
+    "type": "Tipo",
+    "color": "Color",
+    "create": "Crear Rol",
+    "createTitle": "Crear Nuevo Rol",
+    "editTitle": "Editar Rol",
+    "deleteTitle": "Eliminar Rol",
+    "deleteMessage": "¿Estás seguro de eliminar este rol? Esta acción no se puede deshacer.",
+    "duplicate": "Duplicar",
+    "duplicateTitle": "Duplicar Rol",
+    "newName": "Nuevo Nombre",
+    "selectPermissions": "Seleccionar Permisos",
+    "filterScope": "Filtrar por alcance",
+    "empty": "No hay roles",
+    "cannotEditDefault": "Los roles por defecto no se pueden editar",
+    "cannotDeleteDefault": "Los roles por defecto no se pueden eliminar",
+    "createSuccess": "Rol creado exitosamente",
+    "createError": "Error al crear el rol",
+    "updateSuccess": "Rol actualizado exitosamente",
+    "updateError": "Error al actualizar el rol",
+    "deleteSuccess": "Rol eliminado exitosamente",
+    "deleteError": "Error al eliminar el rol",
+    "duplicateSuccess": "Rol duplicado exitosamente",
+    "duplicateError": "Error al duplicar el rol",
+    "church": "Iglesia",
+    "churchRequired": "Debe seleccionar una iglesia para roles de iglesia",
+    "churchScopeNote": "Los roles de iglesia deben estar asociados a una iglesia específica.",
+    "scopes": {
+      "system": "Sistema",
+      "church": "Iglesia",
+      "all": "Todos"
+    },
+    "types": {
+      "default": "Por defecto",
+      "custom": "Personalizado"
+    }
   }
 }

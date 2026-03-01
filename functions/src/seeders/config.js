@@ -9,7 +9,10 @@ module.exports = {
   BATCH_SIZE: 450,
 
   // Seeding order (dependencies respected)
+  // Note: permissions and roles are seeded first as they are referenced by users
   SEED_ORDER: [
+    'permissions',
+    'roles',
     'questionCategories',
     'questions',
     'churches',
@@ -28,6 +31,8 @@ module.exports = {
     'churches',
     'questions',
     'questionCategories',
+    'roles',
+    'permissions',
   ],
 
   // Default passwords for test users

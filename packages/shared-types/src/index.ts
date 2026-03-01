@@ -186,6 +186,32 @@ export type {
 } from './question.types';
 
 // ============================================
+// ROLE & PERMISSION TYPES
+// ============================================
+export type {
+  // Scopes
+  PermissionScope,
+  RoleScope,
+  // Permission entity
+  PermissionData,
+  PermissionEntity,
+  PermissionsByCategory,
+  // Role entity
+  RoleData,
+  Role,
+  RoleWithPermissions,
+  // CRUD inputs
+  RoleCreateInput,
+  RoleUpdateInput,
+  RoleDuplicateInput,
+  // Query filters
+  RoleQueryFilters,
+  PermissionQueryFilters,
+  // Responses
+  DefaultRolesResponse,
+} from './role.types';
+
+// ============================================
 // API TYPES
 // ============================================
 export type {

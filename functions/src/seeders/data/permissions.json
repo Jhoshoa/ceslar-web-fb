@@ -1,0 +1,326 @@
+[
+  {
+    "id": "users:read",
+    "name": "View Users",
+    "description": "Can view user profiles and list",
+    "resource": "users",
+    "action": "read",
+    "category": "User Management",
+    "scope": "both"
+  },
+  {
+    "id": "users:create",
+    "name": "Create Users",
+    "description": "Can create new user accounts",
+    "resource": "users",
+    "action": "create",
+    "category": "User Management",
+    "scope": "system"
+  },
+  {
+    "id": "users:update",
+    "name": "Update Users",
+    "description": "Can update user profiles",
+    "resource": "users",
+    "action": "update",
+    "category": "User Management",
+    "scope": "both"
+  },
+  {
+    "id": "users:delete",
+    "name": "Delete Users",
+    "description": "Can delete user accounts",
+    "resource": "users",
+    "action": "delete",
+    "category": "User Management",
+    "scope": "system"
+  },
+  {
+    "id": "users:manage-roles",
+    "name": "Manage User Roles",
+    "description": "Can assign and modify user roles",
+    "resource": "users",
+    "action": "manage-roles",
+    "category": "User Management",
+    "scope": "both"
+  },
+  {
+    "id": "roles:read",
+    "name": "View Roles",
+    "description": "Can view roles and permissions",
+    "resource": "roles",
+    "action": "read",
+    "category": "Role Management",
+    "scope": "system"
+  },
+  {
+    "id": "roles:create",
+    "name": "Create Roles",
+    "description": "Can create new roles",
+    "resource": "roles",
+    "action": "create",
+    "category": "Role Management",
+    "scope": "system"
+  },
+  {
+    "id": "roles:update",
+    "name": "Update Roles",
+    "description": "Can modify existing roles",
+    "resource": "roles",
+    "action": "update",
+    "category": "Role Management",
+    "scope": "system"
+  },
+  {
+    "id": "roles:delete",
+    "name": "Delete Roles",
+    "description": "Can delete roles",
+    "resource": "roles",
+    "action": "delete",
+    "category": "Role Management",
+    "scope": "system"
+  },
+  {
+    "id": "churches:read",
+    "name": "View Churches",
+    "description": "Can view church information",
+    "resource": "churches",
+    "action": "read",
+    "category": "Church Management",
+    "scope": "both"
+  },
+  {
+    "id": "churches:create",
+    "name": "Create Churches",
+    "description": "Can create new churches",
+    "resource": "churches",
+    "action": "create",
+    "category": "Church Management",
+    "scope": "system"
+  },
+  {
+    "id": "churches:update",
+    "name": "Update Churches",
+    "description": "Can update church information",
+    "resource": "churches",
+    "action": "update",
+    "category": "Church Management",
+    "scope": "church"
+  },
+  {
+    "id": "churches:delete",
+    "name": "Delete Churches",
+    "description": "Can delete churches",
+    "resource": "churches",
+    "action": "delete",
+    "category": "Church Management",
+    "scope": "system"
+  },
+  {
+    "id": "members:read",
+    "name": "View Members",
+    "description": "Can view church member list",
+    "resource": "members",
+    "action": "read",
+    "category": "Member Management",
+    "scope": "church"
+  },
+  {
+    "id": "members:create",
+    "name": "Add Members",
+    "description": "Can add new members to church",
+    "resource": "members",
+    "action": "create",
+    "category": "Member Management",
+    "scope": "church"
+  },
+  {
+    "id": "members:update",
+    "name": "Update Members",
+    "description": "Can update member information",
+    "resource": "members",
+    "action": "update",
+    "category": "Member Management",
+    "scope": "church"
+  },
+  {
+    "id": "members:delete",
+    "name": "Remove Members",
+    "description": "Can remove members from church",
+    "resource": "members",
+    "action": "delete",
+    "category": "Member Management",
+    "scope": "church"
+  },
+  {
+    "id": "members:approve",
+    "name": "Approve Memberships",
+    "description": "Can approve pending membership requests",
+    "resource": "members",
+    "action": "approve",
+    "category": "Member Management",
+    "scope": "church"
+  },
+  {
+    "id": "members:export",
+    "name": "Export Members",
+    "description": "Can export member data",
+    "resource": "members",
+    "action": "export",
+    "category": "Member Management",
+    "scope": "church"
+  },
+  {
+    "id": "events:read",
+    "name": "View Events",
+    "description": "Can view events",
+    "resource": "events",
+    "action": "read",
+    "category": "Events Management",
+    "scope": "both"
+  },
+  {
+    "id": "events:create",
+    "name": "Create Events",
+    "description": "Can create new events",
+    "resource": "events",
+    "action": "create",
+    "category": "Events Management",
+    "scope": "church"
+  },
+  {
+    "id": "events:update",
+    "name": "Update Events",
+    "description": "Can update event information",
+    "resource": "events",
+    "action": "update",
+    "category": "Events Management",
+    "scope": "church"
+  },
+  {
+    "id": "events:delete",
+    "name": "Delete Events",
+    "description": "Can delete events",
+    "resource": "events",
+    "action": "delete",
+    "category": "Events Management",
+    "scope": "church"
+  },
+  {
+    "id": "events:manage-registrations",
+    "name": "Manage Registrations",
+    "description": "Can manage event registrations",
+    "resource": "events",
+    "action": "manage-registrations",
+    "category": "Events Management",
+    "scope": "church"
+  },
+  {
+    "id": "sermons:read",
+    "name": "View Sermons",
+    "description": "Can view sermons",
+    "resource": "sermons",
+    "action": "read",
+    "category": "Sermons",
+    "scope": "both"
+  },
+  {
+    "id": "sermons:create",
+    "name": "Upload Sermons",
+    "description": "Can upload new sermons",
+    "resource": "sermons",
+    "action": "create",
+    "category": "Sermons",
+    "scope": "church"
+  },
+  {
+    "id": "sermons:update",
+    "name": "Update Sermons",
+    "description": "Can update sermon information",
+    "resource": "sermons",
+    "action": "update",
+    "category": "Sermons",
+    "scope": "church"
+  },
+  {
+    "id": "sermons:delete",
+    "name": "Delete Sermons",
+    "description": "Can delete sermons",
+    "resource": "sermons",
+    "action": "delete",
+    "category": "Sermons",
+    "scope": "church"
+  },
+  {
+    "id": "ministries:read",
+    "name": "View Ministries",
+    "description": "Can view ministries",
+    "resource": "ministries",
+    "action": "read",
+    "category": "Ministries",
+    "scope": "both"
+  },
+  {
+    "id": "ministries:create",
+    "name": "Create Ministries",
+    "description": "Can create new ministries",
+    "resource": "ministries",
+    "action": "create",
+    "category": "Ministries",
+    "scope": "church"
+  },
+  {
+    "id": "ministries:update",
+    "name": "Update Ministries",
+    "description": "Can update ministry information",
+    "resource": "ministries",
+    "action": "update",
+    "category": "Ministries",
+    "scope": "church"
+  },
+  {
+    "id": "ministries:delete",
+    "name": "Delete Ministries",
+    "description": "Can delete ministries",
+    "resource": "ministries",
+    "action": "delete",
+    "category": "Ministries",
+    "scope": "church"
+  },
+  {
+    "id": "settings:read",
+    "name": "View Settings",
+    "description": "Can view church settings",
+    "resource": "settings",
+    "action": "read",
+    "category": "Settings",
+    "scope": "church"
+  },
+  {
+    "id": "settings:update",
+    "name": "Update Settings",
+    "description": "Can update church settings",
+    "resource": "settings",
+    "action": "update",
+    "category": "Settings",
+    "scope": "church"
+  },
+  {
+    "id": "reports:view",
+    "name": "View Reports",
+    "description": "Can view reports and analytics",
+    "resource": "reports",
+    "action": "view",
+    "category": "Reports",
+    "scope": "church"
+  },
+  {
+    "id": "reports:export",
+    "name": "Export Reports",
+    "description": "Can export reports",
+    "resource": "reports",
+    "action": "export",
+    "category": "Reports",
+    "scope": "church"
+  }
+]

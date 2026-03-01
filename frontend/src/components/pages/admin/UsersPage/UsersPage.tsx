@@ -1,27 +1,26 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Container, Box, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useGetUsersQuery, useUpdateUserRoleMutation } from '../../../../store/api/usersApi';
+import { useGetRolesQuery } from '../../../../store/api/rolesApi';
 import DataTable, { TableColumn, DataTableRow } from '../../../organisms/DataTable/DataTable';
 import Typography from '../../../atoms/Typography/Typography';
 import Chip from '../../../atoms/Chip/Chip';
 import Avatar from '../../../atoms/Avatar/Avatar';
 import FormDialog from '../../../organisms/FormDialog/FormDialog';
-import type { SystemRole, User } from '@ceslar/shared-types';
+import type { User } from '@ceslar/shared-types';
 
 type UserRow = User & DataTableRow;
-
-const ROLES: SystemRole[] = ['system_admin', 'user'];
 
 const UsersPage = () => {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const [roleFilter, setRoleFilter] = useState<SystemRole | ''>('');
+  const [roleFilter, setRoleFilter] = useState<string>('');
   const [sortBy, setSortBy] = useState('createdAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [editUser, setEditUser] = useState<UserRow | null>(null);
-  const [newRole, setNewRole] = useState<SystemRole>('user');
+  const [newRole, setNewRole] = useState<string>('user');
 
   const { data, isLoading } = useGetUsersQuery({
     page,
@@ -29,6 +28,18 @@ const UsersPage = () => {
     search: search || undefined,
     systemRole: roleFilter || undefined,
   });
+
+  // Fetch system-scoped roles for the dropdown
+  const { data: allRoles = [] } = useGetRolesQuery({ scope: 'system' });
+
+  // Get system roles for dropdowns
+  const systemRoles = useMemo(() => {
+    return allRoles.map(role => ({
+      id: role.id,
+      name: role.name,
+      color: role.color,
+    }));
+  }, [allRoles]);
 
   const [updateRole, { isLoading: updatingRole }] = useUpdateUserRoleMutation();
 
@@ -56,14 +67,18 @@ const UsersPage = () => {
       field: 'systemRole',
       label: t('admin.users.role', 'Rol'),
       sortable: true,
-      render: (row) => (
-        <Chip
-          label={row.systemRole || 'user'}
-          size="small"
-          color={row.systemRole === 'system_admin' ? 'error' : 'default'}
-          variant="outlined"
-        />
-      ),
+      render: (row) => {
+        const role = systemRoles.find(r => r.name === row.systemRole);
+        return (
+          <Chip
+            label={row.systemRole || 'user'}
+            size="small"
+            color={row.systemRole === 'system_admin' ? 'error' : 'default'}
+            variant="outlined"
+            sx={role?.color ? { borderColor: role.color, color: role.color } : undefined}
+          />
+        );
+      },
     },
     {
       field: 'isActive',
@@ -123,7 +138,7 @@ const UsersPage = () => {
   };
 
   const handleRoleFilterChange = (e: SelectChangeEvent) => {
-    setRoleFilter(e.target.value as SystemRole | '');
+    setRoleFilter(e.target.value);
     setPage(1);
   };
 
@@ -147,8 +162,8 @@ const UsersPage = () => {
             onChange={handleRoleFilterChange}
           >
             <MenuItem value="">{t('common.all', 'Todos')}</MenuItem>
-            {ROLES.map((r) => (
-              <MenuItem key={r} value={r}>{r}</MenuItem>
+            {systemRoles.map((role) => (
+              <MenuItem key={role.id} value={role.name}>{role.name}</MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -187,10 +202,10 @@ const UsersPage = () => {
               <Select
                 value={newRole}
                 label={t('admin.users.role', 'Rol')}
-                onChange={(e) => setNewRole(e.target.value as SystemRole)}
+                onChange={(e) => setNewRole(e.target.value)}
               >
-                {ROLES.map((r) => (
-                  <MenuItem key={r} value={r}>{r}</MenuItem>
+                {systemRoles.map((role) => (
+                  <MenuItem key={role.id} value={role.name}>{role.name}</MenuItem>
                 ))}
               </Select>
             </FormControl>

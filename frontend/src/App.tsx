@@ -54,6 +54,7 @@ const AdminChurchCreatePage = lazy(() => import('./components/pages/admin/Church
 const AdminChurchEditPage = lazy(() => import('./components/pages/admin/ChurchEditPage/ChurchEditPage'));
 const AdminEventCreatePage = lazy(() => import('./components/pages/admin/EventCreatePage/EventCreatePage'));
 const AdminEventEditPage = lazy(() => import('./components/pages/admin/EventEditPage/EventEditPage'));
+const AdminRolesPage = lazy(() => import('./components/pages/admin/RolesPage/RolesPage'));
 
 // Not Found Page
 const NotFoundPage = () => (
@@ -185,6 +186,7 @@ const App = () => {
             <Route path="ministries" element={<AdminMinistriesPage />} />
             <Route path="questions" element={<AdminQuestionsPage />} />
             <Route path="memberships" element={<AdminMembershipsPage />} />
+            <Route path="roles" element={<AdminRolesPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
 

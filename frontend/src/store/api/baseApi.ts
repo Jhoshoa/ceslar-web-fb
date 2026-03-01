@@ -37,6 +37,8 @@ export const tagTypes = [
   'Membership',
   'PrayerRequest',
   'Stats',
+  'Role',
+  'Permission',
 ] as const;
 
 export type TagType = (typeof tagTypes)[number];

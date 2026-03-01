@@ -13,6 +13,9 @@ import {
   isChurchAdmin,
   hasChurchRole,
   hasPermission,
+  hasGranularPermission,
+  hasAnyGranularPermission,
+  hasAllGranularPermissions,
 } from '../services/auth.service';
 import { ChurchRole, Permission, UserClaims } from '@ceslar/shared-types';
 
@@ -261,6 +264,104 @@ export function requireOwnerOrAdmin(ownerField: string = 'userId') {
         error: {
           code: 'auth/not-owner',
           message: 'You can only access your own resources.',
+        },
+      });
+    }
+
+    next();
+  };
+}
+
+/**
+ * Factory: Require specific granular permission
+ *
+ * Supports wildcard permissions like "*" and "resource:*"
+ *
+ * @example
+ * router.post('/events', verifyToken, requireGranularPermission('events:create'), createEvent)
+ */
+export function requireGranularPermission(permission: string) {
+  return (req: Request, res: Response, next: NextFunction): void | Response => {
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        error: {
+          code: 'auth/not-authenticated',
+          message: 'Authentication required.',
+        },
+      });
+    }
+
+    if (!hasGranularPermission(req.user as UserClaims, permission)) {
+      return res.status(403).json({
+        success: false,
+        error: {
+          code: 'auth/insufficient-permissions',
+          message: `Permission required: ${permission}`,
+        },
+      });
+    }
+
+    next();
+  };
+}
+
+/**
+ * Factory: Require any of the specified granular permissions
+ *
+ * @example
+ * router.get('/data', verifyToken, requireAnyGranularPermission(['data:read', 'data:export']), getData)
+ */
+export function requireAnyGranularPermission(permissions: string[]) {
+  return (req: Request, res: Response, next: NextFunction): void | Response => {
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        error: {
+          code: 'auth/not-authenticated',
+          message: 'Authentication required.',
+        },
+      });
+    }
+
+    if (!hasAnyGranularPermission(req.user as UserClaims, permissions)) {
+      return res.status(403).json({
+        success: false,
+        error: {
+          code: 'auth/insufficient-permissions',
+          message: `One of these permissions required: ${permissions.join(', ')}`,
+        },
+      });
+    }
+
+    next();
+  };
+}
+
+/**
+ * Factory: Require all of the specified granular permissions
+ *
+ * @example
+ * router.delete('/data/:id', verifyToken, requireAllGranularPermissions(['data:read', 'data:delete']), deleteData)
+ */
+export function requireAllGranularPermissions(permissions: string[]) {
+  return (req: Request, res: Response, next: NextFunction): void | Response => {
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        error: {
+          code: 'auth/not-authenticated',
+          message: 'Authentication required.',
+        },
+      });
+    }
+
+    if (!hasAllGranularPermissions(req.user as UserClaims, permissions)) {
+      return res.status(403).json({
+        success: false,
+        error: {
+          code: 'auth/insufficient-permissions',
+          message: `All of these permissions required: ${permissions.join(', ')}`,
         },
       });
     }

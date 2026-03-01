@@ -21,6 +21,7 @@
     "ministries": "Ministérios",
     "questions": "Questionário",
     "memberships": "Membresias",
+    "roles": "Funções",
     "settings": "Configurações"
   },
   "users": {
@@ -127,5 +128,48 @@
     "general": "Geral",
     "security": "Segurança",
     "notifications": "Notificações"
+  },
+  "roles": {
+    "title": "Funções e Permissões",
+    "name": "Nome",
+    "description": "Descrição",
+    "scope": "Escopo",
+    "permissions": "Permissões",
+    "permissionsCount": "permissões",
+    "type": "Tipo",
+    "color": "Cor",
+    "create": "Criar Função",
+    "createTitle": "Criar Nova Função",
+    "editTitle": "Editar Função",
+    "deleteTitle": "Excluir Função",
+    "deleteMessage": "Tem certeza de que deseja excluir esta função? Esta ação não pode ser desfeita.",
+    "duplicate": "Duplicar",
+    "duplicateTitle": "Duplicar Função",
+    "newName": "Novo Nome",
+    "selectPermissions": "Selecionar Permissões",
+    "filterScope": "Filtrar por escopo",
+    "empty": "Nenhuma função encontrada",
+    "cannotEditDefault": "Funções padrão não podem ser editadas",
+    "cannotDeleteDefault": "Funções padrão não podem ser excluídas",
+    "createSuccess": "Função criada com sucesso",
+    "createError": "Erro ao criar função",
+    "updateSuccess": "Função atualizada com sucesso",
+    "updateError": "Erro ao atualizar função",
+    "deleteSuccess": "Função excluída com sucesso",
+    "deleteError": "Erro ao excluir função",
+    "duplicateSuccess": "Função duplicada com sucesso",
+    "duplicateError": "Erro ao duplicar função",
+    "church": "Igreja",
+    "churchRequired": "Você deve selecionar uma igreja para funções de igreja",
+    "churchScopeNote": "Funções de igreja devem estar associadas a uma igreja específica.",
+    "scopes": {
+      "system": "Sistema",
+      "church": "Igreja",
+      "all": "Todos"
+    },
+    "types": {
+      "default": "Padrão",
+      "custom": "Personalizado"
+    }
   }
 }

@@ -21,6 +21,7 @@
     "ministries": "Ministries",
     "questions": "Questionnaire",
     "memberships": "Memberships",
+    "roles": "Roles",
     "settings": "Settings"
   },
   "users": {
@@ -127,5 +128,48 @@
     "general": "General",
     "security": "Security",
     "notifications": "Notifications"
+  },
+  "roles": {
+    "title": "Roles & Permissions",
+    "name": "Name",
+    "description": "Description",
+    "scope": "Scope",
+    "permissions": "Permissions",
+    "permissionsCount": "permissions",
+    "type": "Type",
+    "color": "Color",
+    "create": "Create Role",
+    "createTitle": "Create New Role",
+    "editTitle": "Edit Role",
+    "deleteTitle": "Delete Role",
+    "deleteMessage": "Are you sure you want to delete this role? This action cannot be undone.",
+    "duplicate": "Duplicate",
+    "duplicateTitle": "Duplicate Role",
+    "newName": "New Name",
+    "selectPermissions": "Select Permissions",
+    "filterScope": "Filter by scope",
+    "empty": "No roles found",
+    "cannotEditDefault": "Default roles cannot be edited",
+    "cannotDeleteDefault": "Default roles cannot be deleted",
+    "createSuccess": "Role created successfully",
+    "createError": "Error creating role",
+    "updateSuccess": "Role updated successfully",
+    "updateError": "Error updating role",
+    "deleteSuccess": "Role deleted successfully",
+    "deleteError": "Error deleting role",
+    "duplicateSuccess": "Role duplicated successfully",
+    "duplicateError": "Error duplicating role",
+    "church": "Church",
+    "churchRequired": "You must select a church for church-scoped roles",
+    "churchScopeNote": "Church roles must be associated with a specific church.",
+    "scopes": {
+      "system": "System",
+      "church": "Church",
+      "all": "All"
+    },
+    "types": {
+      "default": "Default",
+      "custom": "Custom"
+    }
   }
 }
