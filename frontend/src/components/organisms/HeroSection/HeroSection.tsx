@@ -1,6 +1,9 @@
-import { Box, Container, Typography, Button, alpha, keyframes } from '@mui/material';
+import { Box, Container, Typography, Button, alpha, keyframes, Grid } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+
+// Import historical photos image
+import fotoHistorias from '@/assets/images/foto-historias.png';
 
 // Animations
 const fadeInUp = keyframes`
@@ -29,6 +32,17 @@ const float = keyframes`
   }
   50% {
     transform: translateY(-10px);
+  }
+`;
+
+const fadeInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 `;
 
@@ -178,23 +192,60 @@ const HeroSection = ({
     )}
 
     {/* Content */}
-    <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, py: { xs: 8, md: 12 } }}>
-      <Box
-        sx={{
-          maxWidth: 800,
-          mx: 'auto',
-          textAlign: 'center',
-        }}
-      >
+    <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, py: { xs: 6, md: 12 }, px: { xs: 2, sm: 3, md: 3 } }}>
+      <Grid container spacing={{ xs: 0, sm: 2, md: 4 }} alignItems="center">
+        {/* Left side - Historical Photos */}
+        <Grid size={{ xs: 12, md: 5, lg: 4 }} sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+          <Box
+            sx={{
+              animation: `${fadeInLeft} 1s ease-out`,
+              position: 'relative',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: -10,
+                left: -10,
+                right: 10,
+                bottom: 10,
+                border: `2px solid ${alpha('#D4AF37', 0.3)}`,
+                borderRadius: 2,
+              },
+            }}
+          >
+            <Box
+              component="img"
+              src={fotoHistorias}
+              alt="Historia de Cristo Es La Respuesta"
+              sx={{
+                maxWidth: '100%',
+                height: 'auto',
+                maxHeight: { md: 500, lg: 600 },
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3))',
+                position: 'relative',
+                zIndex: 1,
+              }}
+            />
+          </Box>
+        </Grid>
+
+        {/* Right side - Text Content */}
+        <Grid size={{ xs: 12, md: 7, lg: 8 }}>
+          <Box
+            sx={{
+              textAlign: { xs: 'center', md: 'left' },
+              pl: { xs: 0, md: 4 },
+            }}
+          >
         {/* Crown decoration */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            mb: 3,
-            animation: `${fadeInUp} 0.8s ease-out`,
-          }}
-        >
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: { xs: 'center', md: 'flex-start' },
+                mb: 3,
+                animation: `${fadeInUp} 0.8s ease-out`,
+              }}
+            >
           <Box
             sx={{
               display: 'flex',
@@ -208,6 +259,7 @@ const HeroSection = ({
                 width: 40,
                 height: 1,
                 background: 'linear-gradient(90deg, transparent, #D4AF37)',
+                display: { xs: 'none', sm: 'block' },
               }}
             />
             <Typography
@@ -226,6 +278,7 @@ const HeroSection = ({
                 width: 40,
                 height: 1,
                 background: 'linear-gradient(90deg, #D4AF37, transparent)',
+                display: { xs: 'none', sm: 'block' },
               }}
             />
           </Box>
@@ -237,7 +290,7 @@ const HeroSection = ({
           sx={{
             fontFamily: '"Playfair Display", serif',
             fontWeight: 700,
-            fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
+            fontSize: { xs: '1.75rem', sm: '3rem', md: '4.5rem' },
             lineHeight: 1.1,
             color: '#FFFFFF',
             mb: 2,
@@ -269,7 +322,7 @@ const HeroSection = ({
               fontWeight: 400,
               mb: 2,
               animation: `${fadeInUp} 0.8s ease-out 0.4s both`,
-              fontSize: { xs: '1.1rem', md: '1.35rem' },
+              fontSize: { xs: '0.95rem', sm: '1.1rem', md: '1.35rem' },
             }}
           >
             {subtitle}
@@ -277,32 +330,34 @@ const HeroSection = ({
         )}
 
         {/* Description */}
-        {description && (
-          <Typography
-            variant="body1"
-            sx={{
-              color: alpha('#FFFFFF', 0.7),
-              mb: 4,
-              maxWidth: 600,
-              mx: 'auto',
-              animation: `${fadeInUp} 0.8s ease-out 0.5s both`,
-              lineHeight: 1.8,
-            }}
-          >
-            {description}
-          </Typography>
-        )}
+            {description && (
+              <Typography
+                variant="body1"
+                sx={{
+                  color: alpha('#FFFFFF', 0.7),
+                  mb: 4,
+                  maxWidth: { xs: '100%', md: 600 },
+                  mx: { xs: 'auto', md: 0 },
+                  animation: `${fadeInUp} 0.8s ease-out 0.5s both`,
+                  lineHeight: 1.8,
+                  fontSize: { xs: '0.85rem', sm: '1rem' },
+                }}
+              >
+                {description}
+              </Typography>
+            )}
 
         {/* Action buttons */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: { xs: 2, sm: 3 },
-            flexWrap: 'wrap',
-            animation: `${fadeInUp} 0.8s ease-out 0.6s both`,
-          }}
-        >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                justifyContent: { xs: 'center', md: 'flex-start' },
+                alignItems: { xs: 'center', sm: 'flex-start', md: 'flex-start' },
+                gap: { xs: 2, sm: 3 },
+                animation: `${fadeInUp} 0.8s ease-out 0.6s both`,
+              }}
+            >
           {primaryAction && (
             <Button
               variant="contained"
@@ -314,9 +369,10 @@ const HeroSection = ({
                 color: '#ffffff',
                 px: 4,
                 py: 1.5,
-                fontSize: '1.1rem',
+                fontSize: { xs: '0.9rem', sm: '1.1rem' },
                 fontWeight: 600,
                 borderRadius: 3,
+                minWidth: { xs: 200, sm: 'auto' },
                 '&:hover': {
                   bgcolor: '#E5C76B',
                   transform: 'translateY(-2px)',
@@ -340,8 +396,9 @@ const HeroSection = ({
                 borderWidth: 2,
                 px: 4,
                 py: 1.5,
-                fontSize: '1.1rem',
+                fontSize: { xs: '0.9rem', sm: '1.1rem' },
                 borderRadius: 3,
+                minWidth: { xs: 200, sm: 'auto' },
                 '&:hover': {
                   borderColor: '#FFFFFF',
                   borderWidth: 2,
@@ -352,47 +409,49 @@ const HeroSection = ({
               {secondaryAction.label}
             </Button>
           )}
-        </Box>
-
-        {/* Stats section */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: { xs: 4, sm: 8 },
-            mt: 8,
-            pt: 6,
-            borderTop: `1px solid ${alpha('#D4AF37', 0.2)}`,
-            animation: `${fadeInUp} 0.8s ease-out 0.8s both`,
-          }}
-        >
-          {[
-            { value: '50+', label: 'Iglesias' },
-            { value: '10k+', label: 'Miembros' },
-            { value: '5', label: 'Paises' },
-          ].map((stat) => (
-            <Box key={stat.label} sx={{ textAlign: 'center' }}>
-              <Typography
-                variant="h3"
-                sx={{
-                  color: '#D4AF37',
-                  fontWeight: 700,
-                  fontFamily: '"Playfair Display", serif',
-                  fontSize: { xs: '2rem', md: '2.5rem' },
-                }}
-              >
-                {stat.value}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: alpha('#FFFFFF', 0.7), mt: 0.5 }}
-              >
-                {stat.label}
-              </Typography>
             </Box>
-          ))}
-        </Box>
-      </Box>
+
+            {/* Stats section */}
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: { xs: 'center', md: 'flex-start' },
+                gap: { xs: 4, sm: 6, md: 8 },
+                mt: { xs: 5, md: 8 },
+                pt: { xs: 4, md: 6 },
+                borderTop: `1px solid ${alpha('#D4AF37', 0.2)}`,
+                animation: `${fadeInUp} 0.8s ease-out 0.8s both`,
+              }}
+            >
+              {[
+                { value: '50+', label: 'Iglesias' },
+                { value: '10k+', label: 'Miembros' },
+                { value: '5', label: 'Paises' },
+              ].map((stat) => (
+                <Box key={stat.label} sx={{ textAlign: 'center' }}>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      color: '#D4AF37',
+                      fontWeight: 700,
+                      fontFamily: '"Playfair Display", serif',
+                      fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+                    }}
+                  >
+                    {stat.value}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: alpha('#FFFFFF', 0.7), mt: 0.5 }}
+                  >
+                    {stat.label}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
     </Container>
 
   </Box>
